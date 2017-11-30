@@ -6,6 +6,9 @@ _Date TBD_
 ### New features
 * Display / edit Test Data & Test Procedures
   * Updated activity reports to parse TD & TP as well
+* Change ROLE_ATL_ADMIN to ROLE_ATL
+* Remove ROLE_ACB_STAFF
+* Remove ROLE_ATL_STAFF
 
 ### Bugs fixed
 * Re-enabled SED Task / Participant editing when criteria added with SED
@@ -20,7 +23,7 @@ _20 November 2017_
 
 ---
 
-## Version 9.8.0
+##Version 9.8.0
 _6 November 2017_
 
 ### New features
