@@ -35,6 +35,10 @@
                 payload.forEach((item) => { vm.toggleProduct(item.productId, item.name); });
             });
             $scope.$on('$destroy', compareAll);
+            var addToCompare = $scope.$on('addToCompare', (msg, payload) => {
+                payload.forEach((item) => { addProduct(item.productId, item.name); });
+            });
+            $scope.$on('$destroy', addToCompare);
         }
 
         function clearProducts () {

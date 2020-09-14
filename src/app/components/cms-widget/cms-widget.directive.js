@@ -21,12 +21,14 @@ require('jspdf-autotable');
     }
 
     /** @ngInject */
-    function CmsWidgetController ($analytics, $filter, $localStorage, $log, $rootScope, featureFlags, networkService, utilService) {
+    function CmsWidgetController ($analytics, $filter, $localStorage, $location, $log, $rootScope, featureFlags, networkService, utilService) {
         var vm = this;
 
         vm.addProduct = addProduct;
         vm.clearProducts = clearProducts;
+        vm.addToCompare = addToCompare;
         vm.compare = compare;
+        vm.compareListings = compareListings;
         vm.create = create;
         vm.isInList = isInList;
         vm.generatePdf = generatePdf;
@@ -59,11 +61,26 @@ require('jspdf-autotable');
             setWidget(vm.widget);
         }
 
+        function addToCompare () {
+            const payload = vm.widget.searchResult.products.map((item) => { return { productId: item.productId + '', name: item.name }; });
+            $rootScope.$broadcast('addToCompare', payload);
+            $rootScope.$broadcast('HideWidget');
+            $rootScope.$broadcast('ShowCompareWidget');
+        }
+
         function compare () {
             const payload = vm.widget.searchResult.products.map((item) => { return { productId: item.productId + '', name: item.name }; });
             $rootScope.$broadcast('compareAll', payload);
             $rootScope.$broadcast('HideWidget');
             $rootScope.$broadcast('ShowCompareWidget');
+        }
+
+        function compareListings () {
+            let payload = vm.widget.searchResult.products
+                .map(item => item.productId)
+                .join('&');
+            $location.url('/compare/' + payload);
+            $rootScope.$broadcast('HideWidget');
         }
 
         function create () {
