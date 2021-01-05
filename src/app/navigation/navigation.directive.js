@@ -19,7 +19,7 @@
             scope: { },
             controllerAs: 'vm',
             controller: 'NavigationController',
-        }
+        };
     }
 
     /** @ngInject */
@@ -32,7 +32,7 @@
             scope: { },
             controllerAs: 'vm',
             controller: 'NavigationController',
-        }
+        };
     }
 
     /** @ngInject */
@@ -56,14 +56,14 @@
             vm.loadAnnouncements();
             $rootScope.bodyClass = 'navigation-shown';
 
-            if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
+            if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ONC_STAFF', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
                 vm.toggleNavClosed();
             } else {
                 vm.toggleNavOpen();
             }
             var showCmsWidget = $rootScope.$on('ShowWidget', function () {
                 vm.showCmsWidget(true);
-                if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
+                if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ONC_STAFF', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
                     vm.toggleNavOpen();
                 }
             });
@@ -76,7 +76,7 @@
 
             var showCompareWidget = $rootScope.$on('ShowCompareWidget', function () {
                 vm.showCompareWidget(true);
-                if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
+                if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ONC_STAFF', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
                     vm.toggleNavOpen();
                 }
             });
@@ -92,7 +92,7 @@
                 if (vm.navShown) {
                     vm.toggleNavClosed();
                 }
-            })
+            });
             $scope.$on('$destroy', loggedIn);
 
             var loggedOut = $scope.$on('loggedOut', function () {
@@ -100,26 +100,26 @@
                 if (!vm.navShown) {
                     vm.toggleNavOpen();
                 }
-            })
+            });
             $scope.$on('$destroy', loggedOut);
 
             var impersonating = $scope.$on('impersonating', function () {
                 vm.loadAnnouncements();
-            })
+            });
             $scope.$on('$destroy', impersonating);
 
             var unimpersonating = $scope.$on('unimpersonating', function () {
                 vm.loadAnnouncements();
-            })
+            });
             $scope.$on('$destroy', unimpersonating);
 
             var flags = $rootScope.$on('flags loaded', function () {
-                if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
+                if (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ONC_STAFF', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
                     vm.toggleNavClosed();
                 }
             });
             $scope.$on('$destroy', flags);
-        }
+        };
 
         function clear () {
             $rootScope.$broadcast('ClearResults', {});
@@ -147,7 +147,7 @@
         }
 
         function toggleNavClosed () {
-            vm.navShown = false
+            vm.navShown = false;
             $rootScope.bodyClass = 'navigation-hidden';
         }
 

@@ -1,11 +1,10 @@
 export const ReportsUsersComponent = {
     templateUrl: 'chpl.reports/users/users.html',
     controller: class ReportsUsersComponent {
-        constructor ($filter, $log, $scope, ReportService, networkService, utilService) {
-            'ngInject'
+        constructor ($filter, $log, ReportService, networkService, utilService) {
+            'ngInject';
             this.$filter = $filter;
             this.$log = $log;
-            this.$scope = $scope;
             this.ReportService = ReportService;
             this.networkService = networkService;
             this.utilService = utilService;
@@ -35,7 +34,7 @@ export const ReportsUsersComponent = {
 
         onApplyFilter (filterObj) {
             let f = angular.fromJson(filterObj);
-            this.doFilter(f)
+            this.doFilter(f);
         }
 
         onClearFilter () {
@@ -93,7 +92,7 @@ export const ReportsUsersComponent = {
                 } else if (this.isActivtyConfirmUser(item)) {
                     action = 'User ' + item.newData.subjectName + ' was confirmed.';
                 } else if (item.originalData && item.newData) {
-                    action = 'User ' + item.newData.subjectName + ' was updated.'
+                    action = 'User ' + item.newData.subjectName + ' was updated.';
                     action += this.getUpdateActivity(item);
                 }
 
@@ -209,7 +208,7 @@ export const ReportsUsersComponent = {
                 .then(results => {
                     that.results = results.activities
                         .map(item => that.prepare(item));
-                    that.loadProgress.total = (Math.floor(results.resultSetSize / results.pageSize) + (results.resultSetSize % results.pageSize === 0 ? 0 : 1))
+                    that.loadProgress.total = (Math.floor(results.resultSetSize / results.pageSize) + (results.resultSetSize % results.pageSize === 0 ? 0 : 1));
                     let filter = {};
                     filter.dataFilter = '';
                     filter.tableState = this.tableController.tableState();
@@ -228,7 +227,7 @@ export const ReportsUsersComponent = {
 
         addPageToData (page) {
             let that = this;
-            if (this.isDestroyed) { return }
+            if (this.isDestroyed) { return; }
             this.networkService.getActivityMetadata('beta/users', {pageNum: page, ignoreLoadingBar: true}).then(results => {
                 results.activities.forEach(item => {
                     that.results.push(that.prepare(item));
@@ -241,7 +240,7 @@ export const ReportsUsersComponent = {
             });
         }
     },
-}
+};
 
 angular.module('chpl.reports')
     .component('chplReportsUsers', ReportsUsersComponent);

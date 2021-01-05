@@ -21,14 +21,13 @@
         });
 
     /** @ngInject */
-    function VpManagementController ($log, $uibModal, API, authService, networkService, utilService) {
+    function VpManagementController ($log, $uibModal, API, DateUtil, authService, networkService, utilService) {
         var vm = this;
 
         vm.areResourcesReady = areResourcesReady;
         vm.certificationStatus = utilService.certificationStatus;
         vm.doWork = doWork;
         vm.editCertifiedProduct = editCertifiedProduct;
-        vm.editVersion = editVersion;
         vm.hasAnyRole = authService.hasAnyRole;
         vm.isDeveloperEditable = isDeveloperEditable;
         vm.isDeveloperMergeable = isDeveloperMergeable;
@@ -36,6 +35,7 @@
         vm.isDeveloperBanned = isDeveloperBanned;
         vm.loadCp = loadCp;
         vm.loadSurveillance = loadSurveillance;
+        vm.DateUtil = DateUtil;
         vm.mergeProducts = mergeProducts;
         vm.mergeVersions = mergeVersions;
         vm.refreshDevelopers = refreshDevelopers;
@@ -58,7 +58,7 @@
             if (angular.isUndefined(vm.workType)) {
                 vm.workType = 'manage';
             }
-            vm.mergeType = 'developer';
+            vm.mergeType = 'version';
             vm.resources = {};
             vm.forceRefresh = false;
             vm.refreshDevelopers();
@@ -74,6 +74,8 @@
                 vm.resourcesReady.atls &&
                 vm.resourcesReady.qmsStandards &&
                 vm.resourcesReady.accessibilityStandards &&
+                vm.resourcesReady.measures &&
+                vm.resourcesReady.measureTypes &&
                 vm.resourcesReady.ucdProcesses &&
                 vm.resourcesReady.testProcedures &&
                 vm.resourcesReady.testData &&
@@ -204,27 +206,6 @@
             }
         }
 
-        function editVersion () {
-            vm.modalInstance = $uibModal.open({
-                templateUrl: 'chpl.admin/components/certifiedProduct/version/edit.html',
-                controller: 'EditVersionController',
-                controllerAs: 'vm',
-                animation: false,
-                backdrop: 'static',
-                keyboard: false,
-                resolve: {
-                    activeVersion: function () { return vm.activeVersion; },
-                },
-            });
-            vm.modalInstance.result.then(function (result) {
-                vm.activeVersion = result;
-            }, function (result) {
-                if (result !== 'cancelled') {
-                    vm.versionMessage = result;
-                }
-            });
-        }
-
         function selectCp () {
             if (vm.cpSelect) {
                 vm.activeCP = {};
@@ -300,7 +281,7 @@
             }
             if (cp.certificationEvents) {
                 return (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC']) && (vm.isDeveloperMergeable(vm.activeDeveloper) || vm.isDeveloperBanned(vm.activeDeveloper)))
-                    || ((utilService.certificationStatus(cp) !== 'Suspended by ONC' && utilService.certificationStatus(cp) !== 'Terminated by ONC') &&
+                    || ((cp.currentStatus.status.name !== 'Suspended by ONC' && cp.currentStatus.status.name !== 'Terminated by ONC') &&
                     vm.isDeveloperMergeable(vm.activeDeveloper));
             } else {
                 return (vm.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC']) && (vm.isDeveloperMergeable(vm.activeDeveloper) || vm.isDeveloperBanned(vm.activeDeveloper)))
@@ -332,7 +313,7 @@
                 vm.activeProduct = '';
                 vm.activeVersion = '';
                 vm.activeCP = '';
-                vm.mergeType = 'developer';
+                vm.mergeType = 'version';
                 vm.workType = workType;
             }
         }
@@ -428,6 +409,8 @@
                 atls: false,
                 qmsStandards: false,
                 accessibilityStandards: false,
+                measures: false,
+                measureTypes: false,
                 ucdProcesses: false,
                 testProcedures: false,
                 testData: false,
@@ -463,6 +446,18 @@
                 .then(function (response) {
                     vm.resources.accessibilityStandards = response;
                     vm.resourcesReady.accessibilityStandards = true;
+                });
+
+            networkService.getMeasures()
+                .then(function (response) {
+                    vm.resources.measures = response;
+                    vm.resourcesReady.measures = true;
+                });
+
+            networkService.getMeasureTypes()
+                .then(function (response) {
+                    vm.resources.measureTypes = response;
+                    vm.resourcesReady.measureTypes = true;
                 });
 
             networkService.getUcdProcesses()

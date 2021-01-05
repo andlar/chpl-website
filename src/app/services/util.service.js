@@ -12,7 +12,7 @@
             addressRequired: addressRequired,
             arrayCompare: arrayCompare,
             arrayToCsv: arrayToCsv,
-            certificationStatus: certificationStatus,
+            certificationStatusWhenEditing: certificationStatusWhenEditing,
             extendSelect: extendSelect,
             findModel: findModel,
             isBlank: isBlank,
@@ -139,12 +139,17 @@
 
         }
 
-        function certificationStatus (listing, options) {
+        function certificationStatusWhenEditing (listing) {
             if (listing.certificationEvents && listing.certificationEvents.length > 0) {
-                if (options && options.editing) {
-                    return $filter('orderBy')(listing.certificationEvents.map(event => { event.eventDate = event.statusDateObject.getTime(); return event; }),'-eventDate')[0].status.name;
-                }
-                return $filter('orderBy')(listing.certificationEvents,'-eventDate')[0].status.name;
+                let events = listing.certificationEvents
+                    .map(ce => {
+                        if (ce.statusDateObject) {
+                            ce.eventDate = ce.statusDateObject.getTime();
+                        }
+                        return ce;
+                    })
+                    .sort((a, b) => b.eventDate - a.eventDate);
+                return events[0].status.name;
             }
             return '';
         }
@@ -430,12 +435,12 @@
                 criterion = {
                     'number': cert.name.indexOf(':') > -1 ? cert.name.substring(0, cert.name.indexOf(':')) : cert.name,
                     'title': cert.name.indexOf(':') > -1 ? cert.name.substring(cert.name.indexOf(':') + 1) : '',
-                }
+                };
             } else {
                 criterion = {
                     'number': cert.indexOf(':') > -1 ? cert.substring(0, cert.indexOf(':')) : cert,
                     'title': cert.indexOf(':') > -1 ? cert.substring(cert.indexOf(':') + 1) : '',
-                }
+                };
             }
             return criterion;
         }

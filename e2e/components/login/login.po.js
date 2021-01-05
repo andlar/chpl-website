@@ -32,25 +32,7 @@ class LoginComponent {
     }
 
     openLoginComponent () {
-        this.toggleLoginComponent.click();
-    }
-
-    loginAsACB () {
-        if (!this.usernameInput.isDisplayed()) {
-            this.openLoginComponent();
-        }
-        this.usernameInput.addValue(credentials.usernameACB);
-        this.passwordInput.addValue(credentials.passwordACB);
-        this.loginButton.click();
-    }
-
-    loginAsAdmin () {
-        if (!this.usernameInput.isDisplayed()) {
-            this.openLoginComponent();
-        }
-        this.usernameInput.addValue(credentials.usernameAdmin);
-        this.passwordInput.addValue(credentials.passwordAdmin);
-        this.loginButton.click();
+        this.toggleLoginComponent.scrollAndClick();
     }
 
     logIn (user) {
@@ -58,6 +40,15 @@ class LoginComponent {
             this.openLoginComponent();
         }
         this.usernameInput.addValue(credentials[user].username);
+        this.passwordInput.addValue(credentials[user].password);
+        this.loginButton.scrollAndClick();
+    }
+
+    logInWithEmail (user) {
+        if (!this.usernameInput.isDisplayed()) {
+            this.openLoginComponent();
+        }
+        this.usernameInput.addValue(credentials[user].email);
         this.passwordInput.addValue(credentials[user].password);
         this.loginButton.click();
     }

@@ -22,7 +22,7 @@ export class ReportService {
                             for (k = 0; k < nested.length; k++) {
                                 nested[k].changes = this.utilService.arrayCompare(prev[i][nested[k].key],curr[j][nested[k].key],nested[k].compareId);
                                 if (nested[k].changes.added.length > 0) {
-                                    if (nested[k].countOnly) { obj.changes.push('<li>Added ' + nested[k].changes.added.length + ' ' + nested[k].display + (nested[k].changes.added.length !== 1 ? 's' : '') + '</li>') }
+                                    if (nested[k].countOnly) { obj.changes.push('<li>Added ' + nested[k].changes.added.length + ' ' + nested[k].display + (nested[k].changes.added.length !== 1 ? 's' : '') + '</li>'); }
                                     else {
                                         obj.changes.push('<li>Added ' + nested[k].display + ':<ul>');
                                         for (l = 0; l < nested[k].changes.added.length; l++) {
@@ -32,7 +32,7 @@ export class ReportService {
                                     }
                                 }
                                 if (nested[k].changes.removed.length > 0) {
-                                    if (nested[k].countOnly) { obj.changes.push('<li>Removed ' + nested[k].changes.removed.length + ' ' + nested[k].display + (nested[k].changes.removed.length !== 1 ? 's' : '') + '</li>') }
+                                    if (nested[k].countOnly) { obj.changes.push('<li>Removed ' + nested[k].changes.removed.length + ' ' + nested[k].display + (nested[k].changes.removed.length !== 1 ? 's' : '') + '</li>'); }
                                     else {
                                         obj.changes.push('<li>Removed ' + nested[k].display + ':<ul>');
                                         for (l = 0; l < nested[k].changes.removed.length; l++) {
@@ -152,6 +152,29 @@ export class ReportService {
                 write: m => 'MUU Count of ' + m.muuCount + ' on ' + this.$filter('date')(m.muuDate, 'mediumDate', 'UTC'),
                 compare: (p, c) => p.muuCount !== c.muuCount,
                 change: (p, c) => 'MUU Count changed from ' + p.muuCount + ' to ' + c.muuCount + ' on ' + this.$filter('date')(p.muuDate, 'mediumDate', 'UTC'),
+            };
+        case 'measures':
+            return {
+                sort: (p, c) => {
+                    p.crit = p.associatedCriteria.map(cc => cc.id).join('|');
+                    c.crit = c.associatedCriteria.map(cc => cc.id).join('|');
+                    return p.measureType.id < c.measureType.id ? -1 : p.measureType.id > c.measureType.id ? 1 :
+                        p.measure.id < c.measure.id ? -1 : p.measure.id > c.measure.id ? 1 :
+                        p.measure.crit < c.measure.crit ? -1 : p.measure.crit > c.measure.crit ? 1 :
+                        0;
+                },
+                write: t => 'Measure "' + t.measure.abbreviation + ': ' + t.measure.requiredTest + '", for ' + t.measureType.name + ' with criteria: ' + t.associatedCriteria.map(c => c.number + ': ' + c.title).join(', '),
+                compare: (p, c) => {
+                    p.crit = p.associatedCriteria.map(cc => cc.id).join('|');
+                    c.crit = c.associatedCriteria.map(cc => cc.id).join('|');
+                    return p.measureType.id === c.measureType.id
+                        && p.measure.id === c.measure.id
+                        && p.crit !== c.crit;
+                },
+                change: (p, c) => 'Measure "' + p.measure.abbreviation + ': ' + p.measure.requiredTest
+                    + '", for ' + p.measureType.name + ' changed from criteria: '
+                    + p.associatedCriteria.map(c => c.number + ': ' + c.title).join(', ')
+                    + ' to: ' + c.associatedCriteria.map(c => c.number + ': ' + c.title).join(', '),
             };
         case 'qmsStandards':
             return {

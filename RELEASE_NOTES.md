@@ -1,5 +1,84 @@
 # Release Notes
 
+## Version 11.4.0
+_14 December 2020_
+
+### Features
+* Enable ROLE_ONC_STAFF user type
+* Make "username" not required for new users
+* Let users download Direct Review activity
+* Display and edit updated g1g2 measures
+
+### Bug Fixes
+* Allow users to confirm Listings with acknowledged warnings
+
+---
+
+## Version 11.3.0
+_30 November 2020_
+
+### Features
+* Add upload for Real World Testing
+
+### Flagged Features
+* Allow basic editing of Listing in new UX
+
+### User Interface Updates
+* Rearrange basic information for Listings
+
+---
+
+## Version 11.2.0
+_16 November 2020_
+
+### Features
+* Use updated UI/UX for Announcements Report
+* Remove friendly name for developer and product POC
+* Display information about all Listings on Developer page on load
+
+### User Interface Updates
+* Indicate "Charts" are no longer in beta
+* Add relevant ONC-ACB(s) to Product list on Developer page
+
+### Bug Fixes
+* Redirect to home page if requested Developer doesn't exist
+
+---
+
+## Version 11.1.0
+_19 October 2020_
+
+### Features
+* Add ability to validate and save Real World Testing data
+* Allow Product merge in new UI/UX
+
+### Bug Fixes
+* Display correct chart data for logged in users
+* Display Mandatory Disclosures URL
+
+### Flagged Bug Fixes
+* Display Direct Reviews on appropriate Listing screens
+
+---
+
+## Version 11.0.0
+_5 October 2020_
+
+### User Interface Updates
+* Implement major style upgrade
+
+### Features
+* Enable editing of Version in new UX
+
+### Flagged Features
+* Display message on Direct Reviews when Jira doesn't respond
+
+### Bug Fixes
+* Restore ability to edit friendly name for POC
+* Display errors when editing Users
+
+---
+
 ## Version 10.53.0
 _21 September 2020_
 

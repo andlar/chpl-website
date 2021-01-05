@@ -14,7 +14,7 @@ export const CertificationCriteriaViewComponent = {
     },
     controller: class CertificationCriteriaViewController {
         constructor ($analytics, $log, $uibModal, authService, featureFlags, utilService) {
-            'ngInject'
+            'ngInject';
             this.$analytics = $analytics;
             this.$log = $log;
             this.$uibModal = $uibModal;
@@ -88,21 +88,19 @@ export const CertificationCriteriaViewComponent = {
 
         showViewDetailsLink () {
             return (this.cert.success && this.cert.additionalSoftware !== null) ||
-                ((!this.cert.success) &&
-                 ((this.cert.g1MacraMeasures && this.cert.g1MacraMeasures.length > 0) ||
-                  (this.cert.g2MacraMeasures && this.cert.g2MacraMeasures.length > 0)) ||
-                 this.cert.g1Success !== null ||
-                 this.cert.g2Success !== null);
+                (!this.cert.success &&
+                 (this.cert.g1Success !== null ||
+                  this.cert.g2Success !== null));
         }
 
         toggleCriteria () {
             if (!this.showDetails) {
                 this.$analytics.eventTrack('Viewed criteria details', { category: 'Listing Details', label: this.cert.criterion.number });
             }
-            this.showDetails = !this.showDetails
+            this.showDetails = !this.showDetails;
         }
     },
-}
+};
 
 angular.module('chpl.components')
     .component('chplCertificationCriteria', CertificationCriteriaViewComponent);

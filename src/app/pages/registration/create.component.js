@@ -8,7 +8,7 @@ export const CreateUserComponent = {
     },
     controller: class CreateUserComponent {
         constructor ($location, $log, authService, networkService, utilService) {
-            'ngInject'
+            'ngInject';
             this.$location = $location;
             this.$log = $log;
             this.authService = authService;
@@ -29,15 +29,15 @@ export const CreateUserComponent = {
                 this.userDetails.hash = changes.hash.currentValue;
                 this.authorizeDetails.hash = changes.hash.currentValue;
             }
-            if (this.authService.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
+            if (this.authService.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ONC_STAFF', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER'])) {
                 this.authorizeUser();
             }
         }
 
         authorizeUser () {
-            if ((this.authorizeDetails.userName && this.authorizeDetails.password) || this.authService.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER']) && this.authorizeDetails.hash) {
-                const username = this.authorizeDetails.userName || this.authService.getUsername();
-                this.networkService.authorizeUser(this.authorizeDetails, username)
+            if ((this.authorizeDetails.userName && this.authorizeDetails.password) || this.authService.hasAnyRole(['ROLE_ADMIN', 'ROLE_ONC', 'ROLE_ONC_STAFF', 'ROLE_ACB', 'ROLE_ATL', 'ROLE_CMS_STAFF', 'ROLE_DEVELOPER']) && this.authorizeDetails.hash) {
+                const userId = this.authorizeDetails.userName || this.authService.getUserId();
+                this.networkService.authorizeUser(this.authorizeDetails, userId)
                     .then(() => {
                         this.$location.path('/administration');
                     }, error => {
@@ -68,7 +68,11 @@ export const CreateUserComponent = {
                         this.userDetails = {user: {}};
                         this.changeDisplayMode('CREATE-ACCOUNT-SUCCESS');
                     }, error => {
-                        this.message.value = error.data.errorMessages;
+                        if (error.data.errorMessages) {
+                            this.message.value = error.data.errorMessages;
+                        } else if (error.data.error) {
+                            this.message.value = error.data.error;
+                        }
                     });
             }
         }
@@ -96,7 +100,6 @@ export const CreateUserComponent = {
         validateUser () {
             var valid = true;
             valid = valid && this.userDetails.hash && this.userDetails.hash.length > 0;
-            valid = valid && this.userDetails.user.subjectName && this.userDetails.user.subjectName.length > 0;
             valid = valid && this.userDetails.user.password && this.userDetails.user.password.length > 0;
             valid = valid && this.userDetails.user.fullName && this.userDetails.user.fullName.length > 0;
             valid = valid && this.userDetails.user.email && this.userDetails.user.email.length > 0;
@@ -107,7 +110,6 @@ export const CreateUserComponent = {
 
         setExtras () {
             let vals = ['chpl'];
-            if (this.userDetails.user.subjectName) { vals.push(this.userDetails.user.subjectName); }
             if (this.userDetails.user.fullName) { vals.push(this.userDetails.user.fullName); }
             if (this.userDetails.user.friendlyName) { vals.push(this.userDetails.user.friendlyName); }
             if (this.userDetails.user.email) { vals.push(this.userDetails.user.email); }
@@ -115,7 +117,7 @@ export const CreateUserComponent = {
             this.extras = vals;
         }
     },
-}
+};
 
 angular.module('chpl.registration')
     .component('chplRegistrationCreateUser', CreateUserComponent);

@@ -213,7 +213,7 @@
 
                 it('should resolve elements', function () {
                     var hasIcs = true;
-                    var resources = {}
+                    var resources = {};
                     ctrl.hasIcs = hasIcs;
                     ctrl.resources = resources;
                     ctrl.editCert();
@@ -272,22 +272,6 @@
                         ctrl.cert.g2Success = null;
                         ctrl.cert.g1MacraMeasures = undefined;
                         ctrl.cert.g2MacraMeasures = undefined;
-                    });
-
-                    it('should show if there are g1 macra measures', () => {
-                        expect(ctrl.showViewDetailsLink()).toBe(false);
-                        ctrl.cert.g1MacraMeasures = [];
-                        expect(ctrl.showViewDetailsLink()).toBe(false);
-                        ctrl.cert.g1MacraMeasures = [1];
-                        expect(ctrl.showViewDetailsLink()).toBe(true);
-                    });
-
-                    it('should show if there are g2 macra measures', () => {
-                        expect(ctrl.showViewDetailsLink()).toBe(false);
-                        ctrl.cert.g2MacraMeasures = [];
-                        expect(ctrl.showViewDetailsLink()).toBe(false);
-                        ctrl.cert.g2MacraMeasures = [2];
-                        expect(ctrl.showViewDetailsLink()).toBe(true);
                     });
 
                     it('should show if g1Success is non-null', () => {

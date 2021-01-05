@@ -39,7 +39,7 @@
                 payload.forEach((item) => { addProduct(item.productId, item.name); });
             });
             $scope.$on('$destroy', addToCompare);
-        }
+        };
 
         function clearProducts () {
             vm.compareWidget = {

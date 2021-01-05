@@ -4,18 +4,17 @@ export const ChartsProductComponent = {
         criterionProduct: '<',
     },
     controller: class ChartsProductComponent {
-        constructor ($log, featureFlags, utilService) {
-            'ngInject'
+        constructor ($log, utilService) {
+            'ngInject';
             this.$log = $log;
             this.utilService = utilService;
-            this.isOn = featureFlags.isOn;
             this.criteriaTypes = [
                 'All',
                 2015,
                 '2015 Cures Update',
             ];
             this.chartState = {
-                criteriaType: this.isOn('effective-rule-date-plus-three-months') ? 'All' : 2014,
+                criteriaType: 'All',
             };
         }
 
@@ -111,7 +110,7 @@ export const ChartsProductComponent = {
                         title: 'Number of 2015 Edition Unique Products certified to specific Cures Update Certification Criteria',
                     },
                 },
-            }
+            };
         }
 
         _getCriterionProductCountDataInChartFormat (data, edition) {
@@ -142,7 +141,7 @@ export const ChartsProductComponent = {
                 });
         }
     },
-}
+};
 
 angular.module('chpl.charts')
     .component('chplChartsProduct', ChartsProductComponent);

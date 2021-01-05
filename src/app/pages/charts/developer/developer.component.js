@@ -5,10 +5,9 @@ export const ChartsDeveloperComponent = {
         listingCountData: '<',
     },
     controller: class ChartsDeveloperComponent {
-        constructor ($log, featureFlags) {
-            'ngInject'
+        constructor ($log) {
+            'ngInject';
             this.$log = $log;
-            this.isOn = featureFlags.isOn;
             this.chartState = {
                 isStacked: 'false',
             };
@@ -83,7 +82,7 @@ export const ChartsDeveloperComponent = {
                     return {
                         id: key,
                         name: that.listingCount.edition[key].name,
-                    }
+                    };
                 });
             this.chartState.listingCountType = this.listingCountTypes.find(t => t.name === 'Active');
         }
@@ -114,19 +113,15 @@ export const ChartsDeveloperComponent = {
                         minValue: 0,
                     },
                 },
-            }
+            };
         }
 
         _createListingCountChartClass (data, status) {
             return {
                 type: 'ColumnChart',
                 data: {
-                    cols: this.isOn('effective-rule-date-plus-three-months') ? [
+                    cols: [
                         { label: 'Number of Developers and Products with "' + status + '" Listings', type: 'string'},
-                        { label: 'Certification Edition 2015', type: 'number'},
-                    ] : [
-                        { label: 'Number of Developers and Products with "' + status + '" Listings', type: 'string'},
-                        { label: 'Certification Edition 2014', type: 'number'},
                         { label: 'Certification Edition 2015', type: 'number'},
                     ],
                     rows: this._getListingCountChartClassData(data, status),
@@ -146,7 +141,7 @@ export const ChartsDeveloperComponent = {
                         minValue: 0,
                     },
                 },
-            }
+            };
         }
 
         _getListingCountChartEditionData (data, status) {
@@ -178,7 +173,7 @@ export const ChartsDeveloperComponent = {
                         Object.keys(transformedData.developer)
                             .sort()
                             .map(function (key) {
-                                return { v: transformedData.developer[key]}
+                                return { v: transformedData.developer[key]};
                             })
                     ),
             },{
@@ -187,13 +182,13 @@ export const ChartsDeveloperComponent = {
                         Object.keys(transformedData.product)
                             .sort()
                             .map(function (key) {
-                                return { v: transformedData.product[key]}
+                                return { v: transformedData.product[key]};
                             })
                     ),
             }];
         }
     },
-}
+};
 
 angular.module('chpl.charts')
     .component('chplChartsDeveloper', ChartsDeveloperComponent);
