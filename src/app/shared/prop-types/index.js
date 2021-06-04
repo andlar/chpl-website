@@ -10,6 +10,7 @@ import qmsStandard from './qms-standard';
 import reliedUponSoftware from './relied-upon-software';
 import resources from './resources';
 import { optionalStandard, selectedOptionalStandard } from './optional-standard';
+import surveillance from './surveillance';
 import { svap, selectedSvap } from './svap';
 import { testData, selectedTestData } from './test-data';
 import { testFunctionality, selectedTestFunctionality } from './test-functionality';
@@ -37,6 +38,7 @@ export {
   selectedTestStandard,
   selectedTestTool,
   selectedSvap,
+  surveillance,
   svap,
   testFunctionality,
   testProcedure,

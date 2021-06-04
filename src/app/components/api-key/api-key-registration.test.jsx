@@ -46,7 +46,7 @@ describe('the ChplApiKeyRegistration component', () => {
       render(<ChplApiKeyRegistration />);
     });
 
-    it.skip('should disable the Register button', async () => {
+    it('should enable the Register button', async () => {
       const registerButton = screen.getByRole('button', { name: /Register/i });
 
       await waitFor(() => expect(registerButton).toBeEnabled());
