@@ -82,7 +82,6 @@ describe('when logged in', () => {
   describe('as ONC-STAFF', () => {
     beforeEach(() => {
       login.logIn('oncstaff');
-      login.logoutButton.waitForDisplayed();
     });
 
     it('should have specific options under surveillance', () => {
