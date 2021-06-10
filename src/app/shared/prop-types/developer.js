@@ -1,9 +1,13 @@
-import { bool, number, oneOfType, shape, string } from 'prop-types';
-import { address, contact } from './';
+/* eslint-disable import/no-extraneous-dependencies */
+import {
+  bool, number, oneOfType, shape, string,
+} from 'prop-types';
+import address from './address';
+import contact from './contact';
 
 const developer = shape({
-  address: address,
-  contact: contact,
+  address,
+  contact,
   developerCode: string,
   developerId: oneOfType([number, string]),
   name: string,
@@ -11,4 +15,4 @@ const developer = shape({
   website: string,
 });
 
-export { developer };
+export default developer;
