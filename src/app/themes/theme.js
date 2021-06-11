@@ -56,11 +56,14 @@ const theme = createMuiTheme({
     },
     body2: {
       fontSize: '0.875em',
+<<<<<<< HEAD
     },
     subtitle1: {
       fontWeight: 800,
       textTransform: 'uppercase',
       fontSize: '1em',
+=======
+>>>>>>> OCD-3656
     },
     subtitle2: {
       fontWeight: 800,
