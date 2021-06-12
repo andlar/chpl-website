@@ -5,6 +5,7 @@ import ChplLink from './chpl-link';
 import ChplNonProdIndicator from './non-prod-indicator';
 import ChplTextField from './chpl-text-field';
 import { ChplTooltip } from './chpl-tooltip';
+import { getAngularService } from '../../services/angular-react-helper';
 
 export {
   ChplCriterionTitle,
@@ -14,4 +15,5 @@ export {
   ChplNonProdIndicator,
   ChplTextField,
   ChplTooltip,
+  getAngularService,
 };
