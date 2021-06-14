@@ -42,7 +42,7 @@ function ChplEllipsis(props) {
   );
 }
 
-export { ChplEllipsis };
+export default ChplEllipsis;
 
 ChplEllipsis.propTypes = {
   text: string,
