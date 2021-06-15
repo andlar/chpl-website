@@ -59,6 +59,8 @@ function ChplTestDataEdit(props) {
   const classes = useStyles();
   /* eslint-enable react/destructuring-assignment */
 
+  let addNew;
+
   const formik = useFormik({
     initialValues: {
       td: '',
@@ -77,7 +79,7 @@ function ChplTestDataEdit(props) {
     props.onChange({ key: 'testDataUsed', data: updated });
   };
 
-  const addNew = () => {
+  addNew = () => {
     const updated = [
       ...testDataUsed,
       {
@@ -118,7 +120,7 @@ function ChplTestDataEdit(props) {
                   <TableCell><Typography variant="body2">Name</Typography></TableCell>
                   <TableCell><Typography variant="body2">Version</Typography></TableCell>
                   <TableCell><Typography variant="body2">Alteration</Typography></TableCell>
-                  <TableCell />
+                  <TableCell><Typography variant="srOnly">Actions</Typography></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -138,6 +140,7 @@ function ChplTestDataEdit(props) {
                         && (
                           <IconButton
                             onClick={() => removeItem(item)}
+                            aria-label="Remove item"
                           >
                             <CloseIcon
                               color="primary"
