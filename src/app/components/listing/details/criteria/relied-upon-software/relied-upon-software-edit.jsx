@@ -56,12 +56,17 @@ function ChplReliedUponSoftwareEdit(props) {
   const classes = useStyles();
   /* eslint-enable react/destructuring-assignment */
 
+  let addNew;
+
   const formik = useFormik({
     initialValues: {
       name: '',
       version: '',
       certifiedProductNumber: '',
       grouping: '',
+    },
+    onSubmit: () => {
+      addNew();
     },
     validationSchema,
     validateOnChange: false,
@@ -72,7 +77,7 @@ function ChplReliedUponSoftwareEdit(props) {
     props.onChange({ key: 'additionalSoftware', data: updated });
   };
 
-  const addNew = () => {
+  addNew = () => {
     const updated = [
       ...software,
       {
@@ -83,9 +88,9 @@ function ChplReliedUponSoftwareEdit(props) {
         key: (new Date()).getTime(),
       },
     ];
-    setSoftware(updated);
-    formik.resetForm();
     setAdding(false);
+    formik.resetForm();
+    setSoftware(updated);
     update(updated);
   };
 
@@ -112,7 +117,7 @@ function ChplReliedUponSoftwareEdit(props) {
                   <TableCell><Typography variant="body2">Version</Typography></TableCell>
                   <TableCell><Typography variant="body2">CHPL ID</Typography></TableCell>
                   <TableCell><Typography variant="body2">Group</Typography></TableCell>
-                  <TableCell />
+                  <TableCell><Typography variant="srOnly">Actions</Typography></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -135,6 +140,7 @@ function ChplReliedUponSoftwareEdit(props) {
                         && (
                           <IconButton
                             onClick={() => removeItem(item)}
+                            aria-label="Remove item"
                           >
                             <CloseIcon
                               color="primary"
@@ -216,7 +222,7 @@ function ChplReliedUponSoftwareEdit(props) {
                 className={classes.dataEntryActions}
               >
                 <Button
-                  onClick={addNew}
+                  onClick={formik.handleSubmit}
                   aria-label="Confirm adding item"
                   id="relied-upon-software-check-item"
                 >

@@ -60,6 +60,8 @@ function ChplSvapsEdit(props) {
   const classes = useStyles();
   /* eslint-enable react/destructuring-assignment */
 
+  let addNew;
+
   const formik = useFormik({
     initialValues: {
       svap: '',
@@ -76,7 +78,7 @@ function ChplSvapsEdit(props) {
     props.onChange({ key: 'svaps', data: updated });
   };
 
-  const addNew = () => {
+  addNew = () => {
     const updated = [
       ...svaps,
       {
@@ -114,7 +116,7 @@ function ChplSvapsEdit(props) {
                 <TableRow>
                   <TableCell><Typography variant="body2">Regulatory Text Citation</Typography></TableCell>
                   <TableCell><Typography variant="body2">Approved Standard Version</Typography></TableCell>
-                  <TableCell />
+                  <TableCell><Typography variant="srOnly">Actions</Typography></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -131,6 +133,7 @@ function ChplSvapsEdit(props) {
                         && (
                           <IconButton
                             onClick={() => removeItem(item)}
+                            aria-label="Remove item"
                           >
                             <CloseIcon
                               color="primary"

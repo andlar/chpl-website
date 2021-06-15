@@ -69,13 +69,25 @@ function ChplTestStandardsEdit(props) {
     }
   }, []);
 
-  let formik;
+  let addNew;
+
+  const formik = useFormik({
+    initialValues: {
+      ts: '',
+    },
+    onSubmit: () => {
+      addNew();
+    },
+    validationSchema,
+    validateOnChange: false,
+    validateOnMount: true,
+  });
 
   const update = (updated) => {
     props.onChange({ key: 'testStandards', data: updated });
   };
 
-  const addNew = () => {
+  addNew = () => {
     const updated = [
       ...testStandards,
       {
@@ -112,18 +124,6 @@ function ChplTestStandardsEdit(props) {
     update(updated);
   };
 
-  formik = useFormik({
-    initialValues: {
-      ts: '',
-    },
-    onSubmit: () => {
-      addNew();
-    },
-    validationSchema,
-    validateOnChange: false,
-    validateOnMount: true,
-  });
-
   return (
     <Container className={classes.container}>
       { testStandards.length > 0
@@ -133,7 +133,7 @@ function ChplTestStandardsEdit(props) {
               <TableHead>
                 <TableRow>
                   <TableCell><Typography variant="body2">Name</Typography></TableCell>
-                  <TableCell />
+                  <TableCell><Typography variant="srOnly">Actions</Typography></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -147,6 +147,7 @@ function ChplTestStandardsEdit(props) {
                         && (
                           <IconButton
                             onClick={() => removeItem(item)}
+                            aria-label="Remove item"
                           >
                             <CloseIcon
                               color="primary"
