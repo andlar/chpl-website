@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { ChplTooltip } from '../../../util/chpl-tooltip';
+import { ChplTooltip } from '../../../util';
 import { getAngularService } from '.';
 import ChplCriterionTitle from '../../../util/criterion-title';
 import ChplSurveillanceNonconformity from './nonconformity/nonconformity-view';

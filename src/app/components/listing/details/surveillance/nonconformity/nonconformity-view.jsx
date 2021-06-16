@@ -19,7 +19,7 @@ import {
 } from '@material-ui/core';
 
 import ChplCriterionTitle from '../../../../util/criterion-title';
-import { ChplTooltip } from '../../../../util/chpl-tooltip';
+import { ChplTooltip } from '../../../../util';
 import { getAngularService } from '.';
 import requirementPropType from '../../../../../shared/prop-types/surveillance-requirement';
 import nonconformityPropType from '../../../../../shared/prop-types/surveillance-nonconformity';
