@@ -5,7 +5,6 @@ import { ChplConfirmation, ChplEllipsis, ChplLink, ChplNonProdIndicator } from '
 import { ChplFuzzyType } from './fuzzy-type';
 import { ChplSurveillanceActivityReportingDateSelector } from './surveillance/manage';
 import ChplSurveillanceView from './listing/details/surveillance/surveillance-view';
-import { ChplSurveillanceActivityReportingDateSelector } from './surveillance/manage';
 import { ChplUploadListings, ChplUploadMeaningfulUse, ChplUploadSurveillance } from './upload';
 import { ChplUsers } from './user';
 import { reactToAngularComponent } from '../services/angular-react-helper';
