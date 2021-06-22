@@ -8,7 +8,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   Container,
-  Grid,
   Paper,
   Table,
   TableBody,
@@ -27,6 +26,12 @@ import surveillancePropType from '../../../../../shared/prop-types/surveillance'
 import theme from '../../../../../themes/theme';
 
 const useStyles = makeStyles(() => ({
+  nonconformityAccordionSummaryGrid: {
+    display: 'grid',
+    gridTemplateColumns: '3fr 1fr',
+    gridRowGap: '8px',
+    width: '100%',
+  },
   nonconformityAccordion: {
     backgroundColor: '#f9f9f9',
     borderRadius: '8px',
@@ -39,12 +44,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
+function ChplNonconformityView(props) {
+  /* eslint-disable react/destructuring-assignment */
   const DateUtil = getAngularService('DateUtil');
-  const currentSurveillance = useState(surveillance)[0];
-  const currentRequirement = useState(requirement)[0];
-  const currentNonconformity = useState(nonconformity)[0];
-  const dateFormat = 'MMM d, y';
+  const [currentSurveillance] = useState(props.surveillance);
+  const [currentRequirement] = useState(props.requirement);
+  const [currentNonconformity] = useState(props.nonconformity);
+  /* eslint-enable react/destructuring-assignment */
 
   const classes = useStyles();
 
@@ -55,15 +61,15 @@ function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
           expandIcon={<ExpandMoreIcon color="primary" fontSize="large" />}
           data-testid="nonconformity-accordion-header"
         >
-          <Grid container spacing={4}>
-            <Grid item xs={9}>
+          <div className={classes.nonconformityAccordionSummaryGrid}>
+            <div>
               <ChplCriterionTitle criterion={currentNonconformity.criterion} />
               { ` ${currentRequirement.result.name}` }
-            </Grid>
-            <Grid item xs={3} className={classes.nonconformityAccordionSummaryStatus}>
-              { nonconformity.status.name }
-            </Grid>
-          </Grid>
+            </div>
+            <div className={classes.nonconformityAccordionSummaryStatus}>
+              { currentNonconformity.status.name }
+            </div>
+          </div>
         </AccordionSummary>
         <AccordionDetails>
           <Container>
@@ -89,7 +95,7 @@ function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
                         />
                       </ChplTooltip>
                     </TableCell>
-                    <TableCell>{ DateUtil.timestampToString(currentNonconformity.dateOfDetermination, dateFormat) }</TableCell>
+                    <TableCell>{ DateUtil.getDisplayDateFormat(currentNonconformity.dateOfDetermination) }</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
@@ -100,7 +106,7 @@ function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
                         />
                       </ChplTooltip>
                     </TableCell>
-                    <TableCell>{ DateUtil.timestampToString(currentNonconformity.capApprovalDate, dateFormat) }</TableCell>
+                    <TableCell>{ DateUtil.getDisplayDateFormat(currentNonconformity.capApprovalDate) }</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
@@ -111,7 +117,7 @@ function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
                         />
                       </ChplTooltip>
                     </TableCell>
-                    <TableCell>{ DateUtil.timestampToString(currentNonconformity.capStartDate, dateFormat) }</TableCell>
+                    <TableCell>{ DateUtil.getDisplayDateFormat(currentNonconformity.capStartDate) }</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
@@ -122,7 +128,7 @@ function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
                         />
                       </ChplTooltip>
                     </TableCell>
-                    <TableCell>{ DateUtil.timestampToString(currentNonconformity.capMustCompleteDate, dateFormat) }</TableCell>
+                    <TableCell>{ DateUtil.getDisplayDateFormat(currentNonconformity.capMustCompleteDate) }</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
@@ -133,7 +139,7 @@ function ChplNonconformityView({ surveillance, requirement, nonconformity }) {
                         />
                       </ChplTooltip>
                     </TableCell>
-                    <TableCell>{ DateUtil.timestampToString(currentNonconformity.capEndDate, dateFormat) }</TableCell>
+                    <TableCell>{ DateUtil.getDisplayDateFormat(currentNonconformity.capEndDate) }</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">

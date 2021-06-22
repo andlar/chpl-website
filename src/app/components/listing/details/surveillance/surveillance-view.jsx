@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -14,6 +13,7 @@ import {
 } from '@material-ui/core';
 
 import { ChplTooltip } from '../../../util';
+// eslint-disable-next-line import/no-cycle
 import { getAngularService } from '.';
 import ChplCriterionTitle from '../../../util/criterion-title';
 import ChplSurveillanceNonconformity from './nonconformity/nonconformity-view';
@@ -34,25 +34,18 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const getSurveillanceResults = (surv) => {
-  const results = [];
-  surv.requirements.forEach((req) => req.nonconformities.forEach((nc) => {
-    const result = {
-      id: req.id,
-      statusName: nc.status.name,
-      criterion: req.criterion,
-      requirement: req.requirement,
-    };
-    results.push(result);
-  }));
-  return results;
-};
+const getSurveillanceResults = (surv) => surv.requirements.map((req) => req.nonconformities.map((nc) => ({
+  id: req.id,
+  statusName: nc.status.name,
+  criterion: req.criterion,
+  requirement: req.requirement,
+})))
+  .flat();
 
 function ChplSurveillanceView({ surveillance }) {
   const DateUtil = getAngularService('DateUtil');
   const [currentSurveillance] = useState(surveillance);
   const [surveillanceResults, setSurveillanceResults] = useState([]);
-  const dateFormat = 'MMM d, y';
 
   const classes = useStyles();
 
@@ -63,7 +56,7 @@ function ChplSurveillanceView({ surveillance }) {
   return (
     <ThemeProvider theme={theme}>
       <TableContainer component={Paper}>
-        <Table size="small" aria-label="Surveillance Table" data-testid="surveillance-attributes-table">
+        <Table size="small" aria-label="Surveillance Table">
           <TableHead>
             <TableRow>
               <TableCell
@@ -84,7 +77,7 @@ function ChplSurveillanceView({ surveillance }) {
                   />
                 </ChplTooltip>
               </TableCell>
-              <TableCell>{ DateUtil.timestampToString(currentSurveillance.startDate, dateFormat) }</TableCell>
+              <TableCell>{ DateUtil.getDisplayDateFormat(currentSurveillance.startDate) }</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
@@ -95,7 +88,7 @@ function ChplSurveillanceView({ surveillance }) {
                   />
                 </ChplTooltip>
               </TableCell>
-              <TableCell>{ DateUtil.timestampToString(currentSurveillance.endDate, dateFormat) }</TableCell>
+              <TableCell>{ DateUtil.getDisplayDateFormat(currentSurveillance.endDate) }</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
@@ -123,7 +116,7 @@ function ChplSurveillanceView({ surveillance }) {
                     <ul className={classes.unindentedData}>
                       { currentSurveillance.requirements.map((req) => (
                         <li key={req.id}>
-                          { `${req.type.name} ${req.criterion ? ': ' : ''}` }
+                          { `${req.type.name} ${req.criterion && ': '}` }
                           <ChplCriterionTitle criterion={req.criterion} useRemovedClass />
                         </li>
                       ))}
@@ -168,7 +161,7 @@ function ChplSurveillanceView({ surveillance }) {
           <div data-testid="non-conformity-component-container">
             { currentSurveillance.requirements.map((requirement) => (
               requirement.nonconformities.map((nonconformity) => (
-                <ChplSurveillanceNonconformity key={requirement.id} surveillance={currentSurveillance} requirement={requirement} nonconformity={nonconformity} data-testid="non-conformity-component"/>
+                <ChplSurveillanceNonconformity key={requirement.id} surveillance={currentSurveillance} requirement={requirement} nonconformity={nonconformity} data-testid="non-conformity-component" />
               ))
             ))}
           </div>
