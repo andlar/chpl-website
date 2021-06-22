@@ -38,7 +38,6 @@ angular
   .component('chplNonProdIndicatorBridge', reactToAngularComponent(ChplNonProdIndicator))
   .component('chplSurveillanceActivityReportingDateSelectorBridge', reactToAngularComponent(ChplSurveillanceActivityReportingDateSelector))
   .component('chplSurveillanceViewBridge', reactToAngularComponent(ChplSurveillanceView))
-  .component('chplSurveillanceActivityReportingDateSelectorBridge', reactToAngularComponent(ChplSurveillanceActivityReportingDateSelector))
   .component('chplUploadListingsBridge', reactToAngularComponent(ChplUploadListings))
   .component('chplUploadMeaningfulUseBridge', reactToAngularComponent(ChplUploadMeaningfulUse))
   .component('chplUsersBridge', reactToAngularComponent(ChplUsers))
