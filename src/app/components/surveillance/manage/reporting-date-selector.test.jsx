@@ -8,6 +8,7 @@ import { when } from 'jest-when';
 import { LocalDate } from '@js-joda/core';
 import * as angularReactHelper from '../../../services/angular-react-helper';
 import { ChplSurveillanceActivityReportingDateSelector } from './reporting-date-selector';
+import selectMaterialUiSelectOption from '../../../test/testing-utils';
 
 // These need to be mocked outside the tests due how Jest works
 const networkServiceMock = {
