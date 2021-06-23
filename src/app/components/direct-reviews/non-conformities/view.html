@@ -4,10 +4,8 @@
   </div>
 </div>
 <div class="non-conformities" ng-if="$ctrl.nonConformities && $ctrl.nonConformities.length > 0">
-  <div class="non-conformities__gridtable-header">
-    <div class="non-conformities__requirements-header">Direct Review Requirements</div>
-    Requirements Reviewed
-  </div>
+  <div class="non-conformities__gridtable-header non-conformities__gridtable-header--requirements">Direct Review Requirements</div>
+  <div class="non-conformities__gridtable-header">Requirements Reviewed</div>
   <div class="non-conformities__gridtable-header">Non-Conformity Summary</div>
   <div class="non-conformities__gridtable-header">Direct Review Result</div>
   <div ng-repeat-start="nc in $ctrl.nonConformities" class="non-conformity__header" ng-class="nc.nonConformityStatus === 'Open' ? 'non-conformity__gridtable-header--open' : 'non-conformity__gridtable-header--closed'" ng-click="nc.open = !nc.open">
