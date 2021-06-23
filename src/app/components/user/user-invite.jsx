@@ -22,6 +22,9 @@ const useStyles = makeStyles(() => ({
     display: 'grid',
     gap: '8px',
   },
+  iconSpacing: {
+    marginLeft: '4px',
+  },
 }));
 
 const validationSchema = yup.object({
@@ -38,6 +41,7 @@ function ChplUserInvite(props) {
   /* eslint-enable react/destructuring-assignment */
 
   const [open, setOpen] = React.useState(false);
+
   const classes = useStyles();
   let formik;
 
@@ -86,6 +90,8 @@ function ChplUserInvite(props) {
         </Button>
       </ChplTooltip>
       <Dialog
+        fullWidth
+        maxWidth="md"
         onClose={handleClose}
         aria-labelledby="user-invitation-title"
         open={open}
@@ -134,12 +140,13 @@ function ChplUserInvite(props) {
         <DialogActions>
           <Button
             id="invite-user-button"
-            aria-label="Send invitation to new user"
             color="primary"
+            variant="contained"
             onClick={formik.handleSubmit}
             disabled={!formik.isValid}
           >
-            <EmailIcon />
+            Send Invite
+            <EmailIcon className={classes.iconSpacing} />
           </Button>
         </DialogActions>
       </Dialog>

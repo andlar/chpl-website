@@ -8,16 +8,25 @@ import {
   ThemeProvider,
   makeStyles,
 } from '@material-ui/core';
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import SaveIcon from '@material-ui/icons/Save';
 
 import theme from '../../themes/theme';
 
 const useStyles = makeStyles(() => ({
+  buttons: {
+    minWidth: '15vw',
+  },
   deleteButton: {
     backgroundColor: '#c44f65',
     color: '#ffffff',
     '&:hover': {
       backgroundColor: '#853544',
     },
+  },
+  iconSpacing: {
+    marginLeft: '4px',
   },
 }));
 
@@ -113,35 +122,47 @@ function ChplActionBar(props) {
             </>
           )}
         <div className="action-bar__buttons">
-          <ButtonGroup>
+          <ButtonGroup
+            color="primary"
+            variant="contained"
+          >
+            <Button
+              id="action-bar-cancel"
+              variant="outlined"
+              onClick={() => act('cancel')}
+              className={classes.buttons}
+            >
+              Cancel
+              <CloseOutlinedIcon
+                className={classes.iconSpacing}
+              />
+            </Button>
+            <Button
+              id="action-bar-save"
+              onClick={() => act('save')}
+              disabled={isDisabled}
+              onMouseOver={() => act('mouseover')}
+              className={classes.buttons}
+            >
+              Save
+              <SaveIcon
+                className={classes.iconSpacing}
+              />
+            </Button>
             { canDelete
               && (
                 <Button
                   id="action-bar-delete"
-                  className={classes.deleteButton}
+                  size="medium"
+                  className={`${classes.buttons} ${classes.deleteButton}`}
                   onClick={() => act('delete')}
                 >
                   Delete
+                  <DeleteOutlinedIcon
+                    className={classes.iconSpacing}
+                  />
                 </Button>
               )}
-            <Button
-              id="action-bar-cancel"
-              color="primary"
-              variant="outlined"
-              onClick={() => act('cancel')}
-            >
-              Cancel
-            </Button>
-            <Button
-              id="action-bar-save"
-              color="primary"
-              variant="contained"
-              onClick={() => act('save')}
-              disabled={isDisabled}
-              onMouseOver={() => act('mouseover')}
-            >
-              Save
-            </Button>
           </ButtonGroup>
         </div>
       </div>
