@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { arrayOf } from 'prop-types';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import {
-  Button,
   Paper,
   Table,
   TableBody,

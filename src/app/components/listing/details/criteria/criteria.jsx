@@ -11,7 +11,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Container,
   makeStyles,
 } from '@material-ui/core';
 
@@ -101,7 +100,6 @@ function ChplCriteria(props) {
                 </ChplTooltip>
               </AccordionSummary>
               <AccordionDetails>
-                <Container>
                   { criteria.filter((cc) => cc.criterion.removed && (cc.success || props.viewAll))
                     .sort((a, b) => sortCerts(a, b))
                     .map((cc) => (
@@ -115,7 +113,6 @@ function ChplCriteria(props) {
                         qmsStandards={props.qmsStandards}
                       />
                     ))}
-                </Container>
               </AccordionDetails>
             </Accordion>
           )}

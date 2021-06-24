@@ -7,7 +7,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  Container,
   Collapse,
   Divider,
   FormControlLabel,
@@ -48,6 +47,12 @@ const validationSchema = yup.object({
 const useStyles = makeStyles(() => ({
   subtitleSpacing: {
     marginBottom: '8px',
+  },
+
+  notStyledCard:{
+    padding: '0,',
+    border: 'none',
+    boxShadow:'none',
   },
 }));
 
@@ -115,8 +120,7 @@ function ChplCriterionDetailsEdit(props) {
   };
 
   return (
-    <Container>
-      <Card>
+      <Card className={classes.notStyledCard}>
         <CardContent>
           <Typography
             variant="subtitle1"
@@ -630,7 +634,6 @@ function ChplCriterionDetailsEdit(props) {
           </Button>
         </CardActions>
       </Card>
-    </Container>
   );
 }
 

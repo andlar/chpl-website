@@ -179,6 +179,7 @@ const theme = createMuiTheme({
       root: {
         color: '#c2c6ca',
         margin: '8px 0',
+        height:'.5px'
       },
     },
     MuiDialogActions: {
