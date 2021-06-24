@@ -117,6 +117,11 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiAccordionDetails:{
+      root:{
+        padding:'8px 0',
+      },
+    },
     MuiCard: {
       root: {
         boxShadow: 'rgba(149, 157, 165, 0.1) 0px 4px 8px',
