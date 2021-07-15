@@ -14,7 +14,7 @@ class Hooks {
   waitForSpinnerToAppear () {
     browser.waitUntil( () => $('#loading-bar-spinner').isDisplayed());
   }
-  
+
   getCellValue(row, col) {
     return $(`//tbody/tr[${row}]/td[${col}]`).getText();
   }
@@ -26,6 +26,7 @@ class Hooks {
   getTableRows() {
     return $('table').$('tbody').$$('tr');
   }
+
 }
 
 export default Hooks;
