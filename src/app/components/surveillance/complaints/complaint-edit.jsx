@@ -344,7 +344,7 @@ function ChplComplaintEdit(props) {
             )}
           <div className={classes.content}>
             <div className={classes.dataEntry}>
-              <Typography variant="subtitle1">Complaint Info</Typography>
+              <Typography variant="subtitle1">General Info</Typography>
               <ChplTextField
                 type="date"
                 id="received-date"
@@ -389,9 +389,6 @@ function ChplComplaintEdit(props) {
                 error={formik.touched.oncComplaintId && !!formik.errors.oncComplaintId}
                 helperText={formik.touched.oncComplaintId && formik.errors.oncComplaintId}
               />
-            </div>
-            <div className={classes.dataEntry}>
-              <Typography variant="subtitle1">Description</Typography>
               <ChplTextField
                 select
                 id="complainant-type"
@@ -409,19 +406,22 @@ function ChplComplaintEdit(props) {
                 ))}
               </ChplTextField>
               { formik.values.complainantType.name === 'Other - [Please Describe]'
-            && (
-            <ChplTextField
-              id="complainant-type-other"
-              name="complainantTypeOther"
-              label="Complainant Type - Other Description"
-              required
-              value={formik.values.complainantTypeOther}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.complainantTypeOther && !!formik.errors.complainantTypeOther}
-              helperText={formik.touched.complainantTypeOther && formik.errors.complainantTypeOther}
-            />
-            )}
+                && (
+                <ChplTextField
+                  id="complainant-type-other"
+                  name="complainantTypeOther"
+                  label="Complainant Type - Other Description"
+                  required
+                  value={formik.values.complainantTypeOther}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.complainantTypeOther && !!formik.errors.complainantTypeOther}
+                  helperText={formik.touched.complainantTypeOther && formik.errors.complainantTypeOther}
+                />
+                )}
+            </div>
+            <div className={classes.dataEntry}>
+              <Typography variant="subtitle1">Summary and Actions</Typography>
               <ChplTextField
                 id="summary"
                 name="summary"
@@ -434,9 +434,20 @@ function ChplComplaintEdit(props) {
                 error={formik.touched.summary && !!formik.errors.summary}
                 helperText={formik.touched.summary && formik.errors.summary}
               />
+              <ChplTextField
+                id="actions"
+                name="actions"
+                label="Actions/Response"
+                multiline
+                value={formik.values.actions}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.actions && !!formik.errors.actions}
+                helperText={formik.touched.actions && formik.errors.actions}
+              />
             </div>
             <div className={classes.dataEntry}>
-              <Typography variant="subtitle1">Associated Components</Typography>
+              <Typography variant="subtitle1">Review Info</Typography>
 
               {complaint.criteria?.length > 0
            && (
@@ -544,36 +555,24 @@ function ChplComplaintEdit(props) {
            </>
            )}
               {surveillances.length > 0
-           && (
-             <ChplTextField
-               select
-               id="surveillances"
-               name="surveillances"
-               label="Add Associated Surveillance Activity"
-               value={surveillanceToAdd}
-               onChange={addAssociatedSurveillance}
-             >
-               {surveillances
-                 .map((item) => (
-                   <MenuItem value={item} key={item.id}>{`${item.chplProductNumber}: ${item.friendlyId}`}</MenuItem>
-                 ))}
-             </ChplTextField>
-           )}
-
-              <ChplTextField
-                id="actions"
-                name="actions"
-                label="Actions/Response"
-                multiline
-                value={formik.values.actions}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.actions && !!formik.errors.actions}
-                helperText={formik.touched.actions && formik.errors.actions}
-              />
+                && (
+                  <ChplTextField
+                    select
+                    id="surveillances"
+                    name="surveillances"
+                    label="Add Associated Surveillance Activity"
+                    value={surveillanceToAdd}
+                    onChange={addAssociatedSurveillance}
+                  >
+                    {surveillances
+                      .map((item) => (
+                        <MenuItem value={item} key={item.id}>{`${item.chplProductNumber}: ${item.friendlyId}`}</MenuItem>
+                      ))}
+                  </ChplTextField>
+                )}
             </div>
             <div className={classes.dataEntry}>
-              <Typography variant="subtitle1">Follow-Up</Typography>
+              <Typography variant="subtitle1">Parties Contacted</Typography>
               <FormControlLabel
                 control={(
                   <Switch
