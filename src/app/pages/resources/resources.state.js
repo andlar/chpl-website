@@ -40,6 +40,14 @@ const states = [
     },
     component: 'chplNotFoundBridge',
     data: { title: 'Error: page not found' },
+  }, {
+    name: 'attestations',
+    url: '/attestations',
+    component: 'chplAttestationsBridge',
+    data: {
+      title: 'CHPL Attestations',
+      roles: ['ROLE_ADMIN'],
+    },
   },
 ];
 
