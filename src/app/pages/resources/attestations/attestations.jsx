@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Container,
+  Divider,
   FormControlLabel,
   Radio,
   RadioGroup,
@@ -14,23 +15,38 @@ import {
   TableRow,
   ThemeProvider,
   Typography,
+  makeStyles,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import theme from '../../../themes/theme';
 
+const useStyles = makeStyles(() => ({
+  content: {
+    backgroundColor:'#f2f2f2',
+    padding:'32px',
+    marginBottom:'-100px',
+  },
+}));
+
 function ChplAttestations() {
+  const classes = useStyles();
   return (
+    <div className={classes.content}>
     <Container>
       <ThemeProvider theme={theme}>
-        <Typography>
-          This is a block of header text. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+        <Typography gutterBottom variant="h1">
+          This is a block of header text.
+        </Typography>
+        <Divider></Divider>
+        <Typography gutterBottom variant="subtitle1">
+         Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
         </Typography>
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon fontSize="large" color="primary"/>}
           >
-            <Typography>Condition: API</Typography>
+            <Typography variant="h2"><b>Condition:</b> API</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Table>
@@ -49,9 +65,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary"/>} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -62,10 +78,10 @@ function ChplAttestations() {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                    <RadioGroup color="primary"> 
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -85,9 +101,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -104,9 +120,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -127,9 +143,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -146,9 +162,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -160,9 +176,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -174,9 +190,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -198,9 +214,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -217,9 +233,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -240,9 +256,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -260,9 +276,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -280,9 +296,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -298,9 +314,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -312,9 +328,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -326,9 +342,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -338,9 +354,9 @@ function ChplAttestations() {
         </Accordion>
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon  fontSize="large" color="primary"/>}
           >
-            <Typography>Condition: Assurances</Typography>
+            <Typography variant="h2"><b>Condition:</b> Assurances</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Table>
@@ -359,9 +375,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -373,9 +389,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -387,9 +403,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -401,9 +417,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -419,9 +435,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -433,9 +449,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -447,9 +463,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -459,9 +475,9 @@ function ChplAttestations() {
         </Accordion>
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon  fontSize="large" color="primary"/>}
           >
-            <Typography>Condition: Communication</Typography>
+            <Typography variant="h2" ><b>Condition:</b> Communication</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Table>
@@ -486,9 +502,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -500,9 +516,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -521,9 +537,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -535,9 +551,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -549,9 +565,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -563,9 +579,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -577,9 +593,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -589,9 +605,9 @@ function ChplAttestations() {
         </Accordion>
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon  fontSize="large" color="primary"/>}
           >
-            <Typography>Condition: Information Blocking</Typography>
+            <Typography variant="h2"><b>Condition:</b> Information Blocking</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Table>
@@ -610,9 +626,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -622,9 +638,9 @@ function ChplAttestations() {
         </Accordion>
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon  fontSize="large" color="primary"/>}
           >
-            <Typography>Condition: Real World Testing</Typography>
+            <Typography variant="h2"><b>Condition:</b> Real World Testing</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Table>
@@ -643,9 +659,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -657,9 +673,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -671,9 +687,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -685,9 +701,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -708,9 +724,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -722,9 +738,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -744,9 +760,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -762,9 +778,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -780,9 +796,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -798,9 +814,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -816,9 +832,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -834,9 +850,9 @@ function ChplAttestations() {
                   </TableCell>
                   <TableCell>
                     <RadioGroup>
-                      <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" control={<Radio />} label="No" />
-                      <FormControlLabel value="Not Applicable" control={<Radio />} label="Not Applicable" />
+                      <FormControlLabel value="Yes" control={<Radio color="primary" />} label="Yes" />
+                      <FormControlLabel value="No" control={<Radio color="primary" />} label="No" />
+                      <FormControlLabel value="Not Applicable" control={<Radio color="primary" />} label="Not Applicable" />
                     </RadioGroup>
                   </TableCell>
                 </TableRow>
@@ -845,7 +861,8 @@ function ChplAttestations() {
           </AccordionDetails>
         </Accordion>
       </ThemeProvider>
-    </Container>
+      </Container>
+    </div>
   );
 }
 

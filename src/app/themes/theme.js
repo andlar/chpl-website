@@ -9,7 +9,7 @@ const theme = createMuiTheme({
 
   palette: {
     background: {
-      default: '#f9f9f9',
+      default: '#f2f2f2',
     },
     primary: {
       light: '#599bde',
@@ -155,6 +155,9 @@ const theme = createMuiTheme({
       },
     },
     MuiTableCell: {
+      root:{
+        fontSize:'1em',
+      },
       head: {
         color: '#156dac',
         fontWeight: 800,
@@ -201,6 +204,11 @@ const theme = createMuiTheme({
         width: '100%',
       },
     },
+    MuiTypography:{
+      gutterBottom:{
+        marginBottom:'16px',
+      }
+    }
   },
 });
 
