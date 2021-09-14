@@ -15,6 +15,7 @@ export const JobsScheduledTriggerComponent = {
       this.$log = $log;
       this.selectedDateTime = new Date();
       this.parameters = [];
+      this.handleDispatch = this.handleDispatch.bind(this);
     }
 
     $onInit () {
@@ -51,6 +52,10 @@ export const JobsScheduledTriggerComponent = {
       if (this.acbs && !this.selectedAcb) {
         this.selectedAcb = this.acbs;
       }
+    }
+
+    handleDispatch (cron) {
+      this.trigger.cronSchedule = cron;
     }
 
     save () {
