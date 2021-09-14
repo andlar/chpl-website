@@ -27,9 +27,10 @@ function ChplCronGen(props) {
         <code>{cron}</code>
       </div>
       <ReCron
-        tabs={[Tab.MINUTES, Tab.HOURS, Tab.DAY, Tab.MONTH, Tab.YEAR]}
         value={cron}
         onChange={handleChange}
+        cssClassPrefix="chpl-"
+        tabs={[Tab.MINUTES, Tab.HOURS, Tab.DAY, Tab.MONTH, Tab.YEAR]}
       />
     </>
   );
