@@ -28,6 +28,10 @@ $prefix: ".chpl";
     margin: 0 .2rem;
 }
 
+#{$prefix}-form-group {
+    padding: 8px 0;
+}
+
 #{$prefix}-form-check-label {
     padding-left: .4rem;
 }
