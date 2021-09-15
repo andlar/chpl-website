@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { ReCron, Tab } from '@sbzen/re-cron';
+import { makeStyles, Divider } from '@material-ui/core';
 import {
   func, string,
 } from 'prop-types';
 
+const useStyles = makeStyles({
+  divider: {
+    margin: '8px 0px',
+  },
+  codeText: {
+    fontSize: '1.125em',
+    paddingTop: '8px',
+  },
+  codeVariables: {
+    color: '#156dac',
+    backgroundColor: '#599bde15',
+    borderRadius: '32px',
+    padding: '8px',
+    marginLeft:'8px',
+  },
+});
+
 function ChplCronGen(props) {
+  const classes = useStyles();
   const { dispatch } = props;
   const [cron, setCron] = useState(props.value); // eslint-disable-line react/destructuring-assignment
   const [tabs, setTabs] = useState([Tab.MINUTES, Tab.HOURS, Tab.DAY, Tab.MONTH, Tab.YEAR]);
@@ -61,10 +80,11 @@ function ChplCronGen(props) {
 
   return (
     <>
-      <div>
+      <Divider className={classes.divider} />
+      <div className={classes.codeText}>
         Cron value:
         {' '}
-        <code>{cron}</code>
+        <code className={classes.codeVariables}>{cron}</code>
       </div>
       <ReCron
         activeTab={Tab.DAY}
