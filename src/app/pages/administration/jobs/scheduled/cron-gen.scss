@@ -9,15 +9,19 @@ $prefix: ".chpl";
     }
 
     #{$prefix}-col-2 {
-        width: calc(100% / 6);
+        width: calc(100% / 3);
         float: left;
     }
 }
 
 #{$prefix}-form-inline {
     display: flex;
+    gap: 8px;
     flex-direction: row;
     padding: 8px 0;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-wrap: wrap;
 }
 
 #{$prefix}-form-control {
@@ -69,14 +73,4 @@ $prefix: ".chpl";
     padding: 16px;
     border-radius: 4px;
     margin: 16px 0;
-}
-
-.c-increment-option-label2 {
-    padding-top: 4px;
-    padding-left: 8px;
-}
-
-.c-range-option-label2 {
-    padding-top: 4px;
-    padding-left: 8px;
 }
