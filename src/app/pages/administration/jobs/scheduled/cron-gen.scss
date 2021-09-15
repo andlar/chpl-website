@@ -17,6 +17,7 @@ $prefix: ".chpl";
 #{$prefix}-form-inline {
     display: flex;
     flex-direction: row;
+    padding: 8px 0;
 }
 
 #{$prefix}-form-control {
@@ -25,4 +26,57 @@ $prefix: ".chpl";
 
 #{$prefix}-form-check-label {
     padding-left: .4rem;
+}
+
+#{$prefix}-form-check-label {
+    padding-left: .4rem;
+}
+
+#{$prefix}-nav-link {
+    border: 1px solid #156dac;
+    background-color: #ffffff;
+    color: #156dac;
+    padding: 4px 8px;
+    text-transform: uppercase;
+}
+
+#{$prefix}-nav-link.MINUTES.c-tab {
+    border-radius: 4px 0 0 4px;
+}
+
+#{$prefix}-nav-link.YEAR.c-tab {
+    border-radius: 0 4px 4px 0;
+}
+
+#{$prefix}-nav-link:active {
+    background-color: #eeeeee;
+}
+
+#{$prefix}-nav-link:focus {
+    background-color: #eeeeee;
+}
+
+#{$prefix}-nav-link:hover {
+    background-color: #eeeeee;
+}
+
+.c-tabs {
+    padding-inline: 0;
+}
+
+.c-host {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 4px;
+    margin: 16px 0;
+}
+
+.c-increment-option-label2 {
+    padding-top: 4px;
+    padding-left: 8px;
+}
+
+.c-range-option-label2 {
+    padding-top: 4px;
+    padding-left: 8px;
 }
