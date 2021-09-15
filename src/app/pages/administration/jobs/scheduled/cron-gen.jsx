@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReCron, Tab } from '@sbzen/re-cron';
 import {
-  bool, func, string,
+  func, string,
 } from 'prop-types';
 
 function ChplCronGen(props) {
@@ -21,15 +21,15 @@ function ChplCronGen(props) {
   }, [props.value]); // eslint-disable-line react/destructuring-assignment
 
   useEffect(() => {
-    let updated = [Tab.MONTH, Tab.YEAR];
+    const updated = [Tab.MONTH, Tab.YEAR];
     if (!props.frequency || props.frequency === 'WEEKLY' || props.frequency === 'DAILY' || props.frequency === 'HOURLY') {
       updated.unshift(Tab.DAY);
     }
     if (!props.frequency || props.frequency === 'DAILY' || props.frequency === 'HOURLY') {
-      //updated.unshift(Tab.HOURS);
+      // updated.unshift(Tab.HOURS);
     }
     if (!props.frequency || props.frequency === 'HOURLY') {
-      //updated.unshift(Tab.MINUTES);
+      // updated.unshift(Tab.MINUTES);
     }
     setTabs(updated);
   }, [props.frequency]); // eslint-disable-line react/destructuring-assignment
@@ -40,7 +40,7 @@ function ChplCronGen(props) {
   };
 
   const handleHour = (event) => {
-    const value = event.target.value;
+    const { value } = event.target;
     setHour(value);
     if (value.length > 0) {
       const parts = cron.split(' ');
@@ -50,7 +50,7 @@ function ChplCronGen(props) {
   };
 
   const handleMinute = (event) => {
-    const value = event.target.value;
+    const { value } = event.target;
     setMinute(value);
     if (value.length > 0) {
       const parts = cron.split(' ');
