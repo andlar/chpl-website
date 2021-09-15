@@ -47,7 +47,6 @@ export const JobsScheduledTriggerComponent = {
         if (this.trigger.job.jobDataMap.parameters) {
           this.parameters = JSON.parse(this.trigger.job.jobDataMap.parameters);
         }
-        this.schConfig = this._getScheduleConfig();
       }
       if (this.acbs && !this.selectedAcb) {
         this.selectedAcb = this.acbs;
@@ -105,41 +104,6 @@ export const JobsScheduledTriggerComponent = {
           //daily at 4am UTC
           ret = '0 0 4 1/1 * ? *';
           break;
-        }
-      }
-      return ret;
-    }
-
-    _getScheduleConfig () {
-      return Object.assign(
-        this._getTimingRestrictions(this.trigger.job),
-        {
-          formInputClass: '',
-          formSelectClass: '',
-          formRadioClass: '',
-          formCheckboxClass: '',
-          //use24HourTime: true,
-        });
-    }
-
-    _getTimingRestrictions (job) {
-      let ret = {
-        hideSeconds: true,
-        hideMinutesTab: false,
-        hideHourlyTab: false,
-        hideDailyTab: false,
-      };
-      if (job && job.frequency) {
-        switch (job.frequency) {
-        case 'WEEKLY':
-          ret.hideDailyTab = true;
-          //falls through
-        case 'DAILY':
-          ret.hideHourlyTab = true;
-          //falls through
-        case 'HOURLY':
-          ret.hideMinutesTab = true;
-                    //no default
         }
       }
       return ret;
