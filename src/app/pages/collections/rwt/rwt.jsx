@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardActions,
   Divider,
+  InputBase,
   Paper,
   Table,
   TableBody,
@@ -14,6 +15,7 @@ import {
   TableContainer,
   TableRow,
   TablePagination,
+  Toolbar,
   ThemeProvider,
   Typography,
   makeStyles,
@@ -27,6 +29,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
+import SearchIcon from '@material-ui/icons/Search';
+import RestoreIcon from '@material-ui/icons/Restore';
+import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 
 const useStyles = makeStyles({
   content: {
@@ -86,6 +91,40 @@ const useStyles = makeStyles({
   },
   iconSpacing: {
     marginLeft: '4px',
+  },
+  goButton: {
+    margin: '-8px',
+    borderRadius: '0px 8px 8px 0px',
+  },
+  searchIcon: {
+    fontSize: '2em',
+  },
+  searchInput: {
+    flexGrow: 1,
+  },
+  searchBarContainer: {
+    flexGrow: 1,
+    backgroundColor: '#ffffff',
+    padding: '8px',
+    borderRadius: '8px',
+  },
+  searchBar: {
+    display: 'grid',
+    gridTemplateColumns: '11fr auto',
+  },
+  searchContainer: {
+    backgroundColor: '#C6D5E5',
+    padding: '16px',
+    display: 'grid',
+    gap: '16px',
+    gridTemplateColumns: 'auto 8fr 2fr auto',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  chplLogo: {
+    maxWidth: '300px',
+    padding: '4px',
   },
 });
 
@@ -317,6 +356,23 @@ function rwt() {
         </div>
         </div>
         <div className={classes.table}>
+          <Toolbar className={classes.searchContainer}>
+            <div><SearchIcon className={classes.searchIcon} color="primary" fontSize="large" /></div>
+            <div className={classes.searchBarContainer}>
+              <div className={classes.searchBar}>
+                <InputBase
+                  className={classes.searchInput}
+                  placeholder="Search by Developer, Product, or ONC-ACB/CHPL ID..."
+                />
+                <Button className={classes.goButton} size="medium" variant="contained" color="primary">Go</Button>
+              </div></div>
+            <Button variant="outlined" color="primary">Browse All<ExploreOutlinedIcon className={classes.iconSpacing} /></Button>
+            <div>
+              <ButtonGroup variant="text" size="medium">
+                <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
+              </ButtonGroup>
+            </div>
+          </Toolbar>
       <TableContainer>
             <div className={classes.tableActionContainer} component={Paper}>
           <ButtonGroup>
