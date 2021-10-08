@@ -50,6 +50,14 @@ const states = [
       title: 'CHPL Style Guide',
       roles: ['ROLE_ADMIN'],
     },
+  }, {
+  name: 'rwt',
+  url: '/rwt',
+  component: 'rwt',
+  data: {
+    title: 'Real World Testing Colletions',
+    roles: ['ROLE_ADMIN'],
+  },
   },
 ];
 
