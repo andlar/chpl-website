@@ -6,6 +6,7 @@ import {
   CardContent,
   CardHeader,
   CardActions,
+  Chip,
   Divider,
   InputBase,
   Paper,
@@ -23,6 +24,8 @@ import {
 
 import theme from '../../../themes/theme';
 import ChplSortableHeaders from '../../../components/util/chpl-sortable-headers';
+import SgAdvancedSearch from '../../../pages/resources/style-guide/sg-advanced-search';
+
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -39,6 +42,14 @@ const useStyles = makeStyles({
     gap: '16px',
     gridTemplateColumns: '1fr 1fr',
     alignItems: 'start',
+  },
+  chipsSubContainer: {
+    alignItems:'center',
+    display: 'flex',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    padding: '8px 0px',
   },
   rowHeader: {
     display: 'grid',
@@ -60,7 +71,7 @@ const useStyles = makeStyles({
     display: 'grid',
     gridTemplateColumns: '1fr',
     alignItems: 'start',
-    padding: '32px 32px ',
+    padding: '0 32px ',
     backgroundColor: '#f9f9f9',
   },
   container: {
@@ -80,9 +91,13 @@ const useStyles = makeStyles({
     border: '.5px solid #c2c6ca',
   },
   tableActionContainer: {
-    display: 'grid',
-    justifyContent: 'end',
-    paddingBottom:'8px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap:'wrap',
+    paddingBottom: '8px',
+    paddingTop: '8px',
+    gap: '8px',
   },
   widgetContainer: {
     gap: '8px',
@@ -130,6 +145,9 @@ const useStyles = makeStyles({
 
 function rwt() {
   const classes = useStyles();
+  const handleDelete = () => {
+    console.info('You clicked the delete icon.');
+  };
   const [listings, setListings] = useState([
     {
       id: 1,
@@ -137,8 +155,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Infection Control Antimicrobial Use and Resistance Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -147,8 +165,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Syndromic Surveillance Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -157,8 +175,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -167,8 +185,8 @@ function rwt() {
       developer: 'Carefluence',
       product: 'Carefluence Open API',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -177,8 +195,8 @@ function rwt() {
       developer: 'ModuleMD',
       product: 'ModuleMD WISE™',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -187,8 +205,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts TouchWorks EHR',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -197,8 +215,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts Sunrise Acute Care',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -207,8 +225,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts Sunrise Ambulatory Care',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -217,8 +235,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'EpicCare Ambulatory EHR Suite',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -227,8 +245,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'EpicCare Inpatient EHR Suite',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -237,8 +255,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beacon Cancer Registry Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -247,8 +265,8 @@ function rwt() {
       developer: 'Dynamic Health IT, Inc',
       product: 'CQMsolution',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -256,7 +274,8 @@ function rwt() {
       chplProductNumber: '15.07.07.1447.BE01.02.01.1.161014',
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
-      version: 'Epic 2015',
+      rwtPlansUrl: 'Epic 2015',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -265,8 +284,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -275,8 +294,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -285,20 +304,20 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      version: 'Epic 2017',
-      certifcationDate: 'July, 2021',
+      rwtPlansUrl: 'Epic 2017',
+      rwtResultsUrl: 'July, 2021',
       status: 'CLOSED',
       actions: 'Y | N',
     },
   ]);
 
   const headers = [
-    { text: 'CHPL Product Number', property: 'chplProductNumber', sortable: true },
-    { text: 'Developer', property: 'developer', sortable: true },
+    { text: 'CHPL Product Number', property: 'chplProductNumber', sortable: true},
     { text: 'Product', property: 'product', sortable: true },
     { text: 'Edition', property: 'edition', sortable: true },
-    { text: 'Version', property: 'version', sortable: true },
-    { text: 'Certification Date', property: 'certificationDate', sortable: true },
+    { text: 'Developer', property: 'developer', sortable: true },
+    { text: 'RWT Plans Url', property: 'rwtPlansUrl', sortable: true },
+    { text: 'RWT Results Url', property: 'rwtResultsUrl', sortable: true },
     { text: 'Status', property: 'status', sortable: true },
     { text: 'Actions', property: 'actions', invisible: true, sortable: false },
   ];
@@ -319,41 +338,43 @@ function rwt() {
   const handleTableSort = (event, property, orderDirection) => {
     setListings(listings.sort(listingSortComparator(orderDirection + property)).map((listing) => listing));
   };
-
-
   return (
     <ThemeProvider theme={theme}>
-    <div className={classes.container}>
-      <div className={classes.rowHeader}>
-        <Typography variant="h1">Collections Page</Typography>
-      </div>
-      <div className={classes.rowBody}>
-        <Typography variant="h2">Real World Testing</Typography>
-        <Divider />
-        <div className={classes.content}>
-          <div>
-            <Typography
-              variant="h6"
-              gutterBottom
-            >
-              Ut volutpat mi ligula, sit amet pulvinar felis tincidunt in. Nam libero dui, molestie in volutpat eu, faucibus et urna. Vestibulum vitae leo rhoncus, interdum leo non, euismod erat. Proin vitae ex risus. Integer ac dapibus est, ut ullamcorper mauris. Morbi tincidunt ac ante id vulputate. Sed ut facilisis dui. Nunc ac fermentum libero. Ut sed ligula sit amet eros accumsan placerat.                    Ut volutpat mi ligula, sit amet pulvinar felis tincidunt in. Nam libero dui, molestie in volutpat eu, faucibus et urna. Vestibulum vitae leo rhoncus, interdum leo non, euismod erat. Proin vitae ex risus. Integer ac dapibus est, ut ullamcorper mauris. Morbi tincidunt ac ante id vulputate. Sed ut facilisis dui. Nunc ac fermentum libero. Ut sed ligula sit amet eros accumsan placerat.
-            </Typography>
-          </div>
-          <Card>
-            <CardHeader title="Download All Real Word Testing Data">
-            </CardHeader>
-            <CardContent>
-              <div>
-                <Typography variant="body1">
-                    Please note the All RWT file contains information for all certified product listings and is not filtered based on search results.
-                </Typography>
-              </div>
-            </CardContent>
-            <CardActions>
-              <Button color="primary" variant="contained">Download Details</Button>
-            </CardActions>
-          </Card>
+      <div className={classes.container}>
+        <div className={classes.rowHeader}>
+          <Typography variant="h1">Collections Page</Typography>
         </div>
+        <div className={classes.rowBody}>
+          <Typography variant="h2">Real World Testing</Typography>
+          <Divider />
+          <div className={classes.content}>
+            <div>
+              <Typography
+                variant="h6"
+                gutterBottom
+              >
+                Ut volutpat mi ligula, sit amet pulvinar felis tincidunt in. Nam libero dui, molestie in volutpat eu, faucibus et urna. Vestibulum vitae leo rhoncus, interdum leo non, euismod erat. Proin vitae ex risus. Integer ac dapibus est, ut ullamcorper mauris. Morbi tincidunt ac ante id vulputate. Sed ut facilisis dui. Nunc ac fermentum libero. Ut sed ligula sit amet eros accumsan placerat.                    Ut volutpat mi ligula, sit amet pulvinar felis tincidunt in. Nam libero dui, molestie in volutpat eu, faucibus et urna. Vestibulum vitae leo rhoncus, interdum leo non, euismod erat. Proin vitae ex risus. Integer ac dapibus est, ut ullamcorper mauris. Morbi tincidunt ac ante id vulputate. Sed ut facilisis dui. Nunc ac fermentum libero. Ut sed ligula sit amet eros accumsan placerat.
+              </Typography>
+              <Typography>
+                For more information <a href="#">visit here</a>
+              </Typography>
+            </div>
+            <Card>
+              <CardHeader title="Download All Real Word Testing Data">
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Typography variant="body1">
+                    Please note the All RWT file contains information for all certified product listings and is not filtered based on search results.
+                  </Typography>
+                </div>
+              </CardContent>
+              <CardActions>
+                <Button color="primary" variant="contained">Download Details</Button>
+              </CardActions>
+            </Card>
+          </div>
+          <Divider />
         </div>
         <div className={classes.table}>
           <Toolbar className={classes.searchContainer}>
@@ -370,70 +391,80 @@ function rwt() {
             <div>
               <ButtonGroup variant="text" size="medium">
                 <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
+                <SgAdvancedSearch />
               </ButtonGroup>
             </div>
           </Toolbar>
-      <TableContainer>
+          <TableContainer>
             <div className={classes.tableActionContainer} component={Paper}>
-          <ButtonGroup>
-            <Button fullWidth color="secondary" variant="contained">Download
-              <GetAppIcon className={classes.iconSpacing} />
-            </Button>
-            <Button fullWidth color="secondary" variant="contained">Columns Settings
-              <SettingsIcon className={classes.iconSpacing} />
-            </Button>
-            <Button fullWidth color="secondary" variant="contained">Add
-              <PlaylistAddIcon className={classes.iconSpacing} />
-            </Button>
-          </ButtonGroup>
-        </div>
-      </TableContainer>
-      <TableContainer className={classes.tableContainer} component={Paper}>
-        <Table stickyHeader>
-          <ChplSortableHeaders
-            headers={headers}
-            onTableSort={handleTableSort}
+              <div className={classes.chipsSubContainer}>
+                <Typography gutterBottom>Filters Applied:</Typography>
+                <div><Chip label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip label="Suspended (ONC)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip label="Suspended (ACB)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip label="2015 Cures Editiion" onDelete={handleDelete} color="primary" variant="outlined"/></div>
+                <div><Chip label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              </div>
+
+              <ButtonGroup>
+                <Button fullWidth color="secondary" variant="contained">Download
+                  <GetAppIcon className={classes.iconSpacing} />
+                </Button>
+                <Button fullWidth color="secondary" variant="contained">Columns Settings
+                  <SettingsIcon className={classes.iconSpacing} />
+                </Button>
+                <Button fullWidth color="secondary" variant="contained">Add
+                  <PlaylistAddIcon className={classes.iconSpacing} />
+                </Button>
+              </ButtonGroup>
+            </div>
+          </TableContainer>
+          <TableContainer className={classes.tableContainer} component={Paper}>
+            <Table stickyHeader>
+              <ChplSortableHeaders
+                headers={headers}
+                onTableSort={handleTableSort}
+              />
+              <TableBody>
+                {listings
+                  .map((listing) => (
+                    <TableRow key={listing.id}>
+                      <TableCell className={classes.stickyColumn}>
+                        <Button color="primary" variant="contained">
+                          {listing.chplProductNumber}
+                          <ArrowForwardIcon className={classes.iconSpacing} />
+                        </Button>
+                      </TableCell>
+                      <TableCell>{listing.product}</TableCell>
+                      <TableCell>{listing.edition}</TableCell>
+                      <TableCell>
+                        <a href='#'>{listing.developer}</a>
+                      </TableCell>
+                      <TableCell><a href='#'>{listing.rwtPlansUrl}</a></TableCell>
+                      <TableCell><a href='#'>{listing.rwtResultsUrl}</a></TableCell>
+                      <TableCell>{listing.status}</TableCell>
+                      <TableCell align="right">
+                        <Button fullWidth color="secondary" variant="contained">
+                          CERT ID
+                          <AssignmentOutlinedIcon className={classes.iconSpacing} />
+                        </Button>
+                        <Button fullWidth color="secondary" variant="contained">
+                          Compare
+                          <CompareArrowsIcon className={classes.iconSpacing} />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
+            component="div"
           />
-          <TableBody>
-            {listings
-              .map((listing) => (
-                <TableRow key={listing.id}>
-                  <TableCell className={classes.stickyColumn}>
-                    <Button color="primary" variant="contained">
-                      {listing.chplProductNumber}
-                      <ArrowForwardIcon className={classes.iconSpacing} />
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <a href='#'>{listing.developer}</a>
-                  </TableCell>
-                  <TableCell>{listing.product}</TableCell>
-                  <TableCell>{listing.edition}</TableCell>
-                  <TableCell>{listing.version}</TableCell>
-                  <TableCell>{listing.certifcationDate}</TableCell>
-                  <TableCell>{listing.status}</TableCell>
-                  <TableCell align="right">
-                    <Button fullWidth color="secondary" variant="contained">
-                      CERT ID
-                      <AssignmentOutlinedIcon className={classes.iconSpacing} />
-                    </Button>
-                    <Button fullWidth color="secondary" variant="contained">
-                      Compare
-                      <CompareArrowsIcon className={classes.iconSpacing} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
-        component="div"
-      />
+        </div>
       </div>
-      </div>
-      </ThemeProvider>
+    </ThemeProvider>
   );
 }
 
