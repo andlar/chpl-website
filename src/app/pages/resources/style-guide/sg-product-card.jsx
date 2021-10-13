@@ -61,7 +61,41 @@ const useStyles = makeStyles({
     activeStatus: {
         color: '#66926d',
         marginLeft: '4px',
-    },
+  },
+  cardcontainer: {
+    display: 'grid',
+    gridTemplateColumns: '3fr 9fr',
+    gap: '32px',
+    overflowY: 'scroll',
+  },
+  productsContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '16px',
+    padding: '8px 0px',
+  },
+  chipsSubContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    padding: '8px 0px',
+  },
+  productHeaderContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  resultsContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    alignItems: 'center',
+  },
 });
 
 function SgProductCard() {

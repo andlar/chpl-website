@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Avatar,
   Button,
   ButtonGroup,
   Card,
@@ -25,8 +26,10 @@ import {
 import theme from '../../../themes/theme';
 import ChplSortableHeaders from '../../../components/util/chpl-sortable-headers';
 import SgAdvancedSearch from '../../../pages/resources/style-guide/sg-advanced-search';
+import SgDefaultFilter from '../../../pages/resources/style-guide/sg-default-filter';
+import SgProductCard from '../../../pages/resources/style-guide/sg-product-card'
 
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import BeenhereIcon from '@material-ui/icons/Beenhere';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -43,7 +46,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr 1fr',
     alignItems: 'start',
   },
-  chipsSubContainer: {
+  chipsTableSubContainer: {
     alignItems:'center',
     display: 'flex',
     gap: '8px',
@@ -140,6 +143,84 @@ const useStyles = makeStyles({
   chplLogo: {
     maxWidth: '300px',
     padding: '4px',
+  },
+  productCard: {
+    paddingBottom: '8px',
+  },
+  productCardHeaderContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'auto 11fr',
+    padding: '16px',
+    gap: '16px',
+    alignItems: 'center',
+  },
+  subProductCardHeaderContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+  },
+  versionProductCardHeaderContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto auto auto 1fr',
+    gap: '8px',
+    alignItems: 'center',
+  },
+  widgetProductContainer: {
+    alignContent: 'space-between',
+    display: 'grid',
+    gap: '8px',
+  },
+  content: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto auto',
+    gap: '8px',
+  },
+  subcontent: {
+    display: 'grid',
+    gap: '8px',
+  },
+  developerAvatar: {
+    color: '#156dac',
+    backgroundColor: '#f5f9fd',
+  },
+  activeStatus: {
+    color: '#66926d',
+    marginLeft: '4px',
+  },
+  cardContainer: {
+    display: 'grid',
+    gridTemplateColumns: '3fr 9fr',
+    gap: '32px',
+    padding: '32px',
+    backgroundColor:'#f9f9f9',
+    overflowY: 'scroll',
+  },
+  productsContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '16px',
+    padding: '8px 0px',
+  },
+  chipsSubContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    padding: '8px 0px',
+  },
+  productHeaderContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  resultsContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    alignItems: 'center',
   },
 });
 
@@ -340,6 +421,7 @@ function rwt() {
   };
   return (
     <ThemeProvider theme={theme}>
+      {/*Table View*/}
       <div className={classes.container}>
         <div className={classes.rowHeader}>
           <Typography variant="h1">Collections Page</Typography>
@@ -370,7 +452,7 @@ function rwt() {
                 </div>
               </CardContent>
               <CardActions>
-                <Button color="primary" variant="contained">Download Details</Button>
+                <Button color="primary" variant="contained">Download ALL <GetAppIcon className={classes.iconSpacing}/></Button>
               </CardActions>
             </Card>
           </div>
@@ -383,7 +465,7 @@ function rwt() {
               <div className={classes.searchBar}>
                 <InputBase
                   className={classes.searchInput}
-                  placeholder="Search by Developer, Product, or ONC-ACB/CHPL ID..."
+                  placeholder="Search by Developer, Product, or CHPL ID..."
                 />
                 <Button className={classes.goButton} size="medium" variant="contained" color="primary">Go</Button>
               </div></div>
@@ -397,7 +479,7 @@ function rwt() {
           </Toolbar>
           <TableContainer>
             <div className={classes.tableActionContainer} component={Paper}>
-              <div className={classes.chipsSubContainer}>
+              <div className={classes.chipsTableSubContainer}>
                 <Typography gutterBottom>Filters Applied:</Typography>
                 <div><Chip label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip label="Suspended (ONC)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
@@ -405,16 +487,16 @@ function rwt() {
                 <div><Chip label="2015 Cures Editiion" onDelete={handleDelete} color="primary" variant="outlined"/></div>
                 <div><Chip label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
-
+              <div className={classes.chipsTableSubContainer}>
+              <Typography variant='h3'>Search Results:</Typography>
+                <Typography variant='h4'>(189 Results)</Typography>
+              </div>
               <ButtonGroup>
-                <Button fullWidth color="secondary" variant="contained">Download
+                <Button fullWidth color="secondary" variant="contained">Download Results
                   <GetAppIcon className={classes.iconSpacing} />
                 </Button>
-                <Button fullWidth color="secondary" variant="contained">Columns Settings
+                <Button fullWidth color="secondary" variant="contained">View Mode
                   <SettingsIcon className={classes.iconSpacing} />
-                </Button>
-                <Button fullWidth color="secondary" variant="contained">Add
-                  <PlaylistAddIcon className={classes.iconSpacing} />
                 </Button>
               </ButtonGroup>
             </div>
@@ -462,6 +544,279 @@ function rwt() {
             rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
             component="div"
           />
+        </div>
+      </div>
+
+      {/*Card View*/}
+      <div className={classes.container}>
+      <div className={classes.cardContainer}>
+        <div>
+          <Typography gutterBottom variant='h3'>Filters Applied:</Typography>
+          <div className={classes.chipsSubContainer}>
+              <div><Chip label="Active" onDelete={handleDelete} color="primary" variant="outlined"/></div>
+              <div><Chip label="Suspended (ONC)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip label="Suspended (ACB)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip label="2015 Cures Editiion" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+          </div>
+          <br />
+          <Divider />
+        </div>
+        <div>
+          <div className={classes.productHeaderContainer}>
+            <div className={classes.resultsContainer}>
+              <Typography variant='h3'>Search Results:</Typography>
+              <Typography variant='h4'>(189 Results)</Typography>
+            </div>
+              <ButtonGroup>
+                <Button fullWidth color="secondary" variant="contained">Download Results
+                  <GetAppIcon className={classes.iconSpacing} />
+                </Button>
+                <Button fullWidth color="secondary" variant="contained">View Mode
+                  <SettingsIcon className={classes.iconSpacing} />
+                </Button>
+                <Button fullWidth color="secondary" variant="contained">Sort
+                  <SettingsIcon className={classes.iconSpacing} />
+                </Button>
+              </ButtonGroup>
+          </div>
+          <div className={classes.productsContainer}>
+              <Card className={classes.productCard} >
+                <div className={classes.productCardHeaderContainer}>
+                  <Avatar className={classes.developerAvatar}>EPIC</Avatar>
+                  <div className={classes.subProductCardHeaderContainer}>
+                    <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
+                    <div className={classes.versionProductCardHeaderContainer}>
+                      <Typography variant='subtitle2'> Version:</Typography>
+                      <Typography variant='body1'>May 2021</Typography>|
+                      <Typography variant='subtitle2'> Developer:</Typography>
+                      <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
+                    </div>
+                  </div>
+                </div>
+                <Divider />
+                <CardContent className={classes.content}>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        CHPL ID{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        15.04.04.1447.Beac.AU.08.1.200220
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Certification Data{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        May 12, 2021
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Status{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        Active <BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.widgetProductContainer}>
+                    <div>
+                      <Button color='secondary' variant='contained' fullWidth>
+                        CERT ID
+                        <AssignmentOutlinedIcon className={classes.iconSpacing}
+                        />
+                      </Button>
+                    </div>
+                    <div>
+                      <Button color='secondary' variant='contained' fullWidth>
+                        COMPARE
+                        <CompareArrowsIcon className={classes.iconSpacing}
+                        />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className={classes.productCard} >
+                <div className={classes.productCardHeaderContainer}>
+                  <Avatar className={classes.developerAvatar}>EPIC</Avatar>
+                  <div className={classes.subProductCardHeaderContainer}>
+                    <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
+                    <div className={classes.versionProductCardHeaderContainer}>
+                      <Typography variant='subtitle2'> Version:</Typography>
+                      <Typography variant='body1'>May 2021</Typography>|
+                      <Typography variant='subtitle2'> Developer:</Typography>
+                      <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
+                    </div>
+                  </div>
+                </div>
+                <Divider />
+                <CardContent className={classes.content}>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        CHPL ID{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        15.04.04.1447.Beac.AU.08.1.200220
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Certification Data{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        May 12, 2021
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Status{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        Active <BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Suspended by ONC<BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Suspended by ONC-ACB<BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Terminated by ONC<BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Withdrawn by ONC-ACB<BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Withdrawn by Developer Under Surveillance/Review	 <BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Withdrawn by Developer<BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                      <Typography variant='body1'>
+                        Retired<BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.widgetProductContainer}>
+                    <div>
+                      <Button color='secondary' variant='contained' fullWidth>
+                        CERT ID
+                        <AssignmentOutlinedIcon className={classes.iconSpacing}
+                        />
+                      </Button>
+                    </div>
+                    <div>
+                      <Button color='secondary' variant='contained' fullWidth>
+                        COMPARE
+                        <CompareArrowsIcon className={classes.iconSpacing}
+                        />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className={classes.productCard} >
+                <div className={classes.productCardHeaderContainer}>
+                  <Avatar className={classes.developerAvatar}>EPIC</Avatar>
+                  <div className={classes.subProductCardHeaderContainer}>
+                    <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
+                    <div className={classes.versionProductCardHeaderContainer}>
+                      <Typography variant='subtitle2'> Version:</Typography>
+                      <Typography variant='body1'>May 2021</Typography>|
+                      <Typography variant='subtitle2'> Developer:</Typography>
+                      <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
+                    </div>
+                  </div>
+                </div>
+                <Divider />
+                <CardContent className={classes.content}>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        CHPL ID{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        15.04.04.1447.Beac.AU.08.1.200220
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Certification Data{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        May 12, 2021
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Status{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        Active <BeenhereIcon className={classes.activeStatus} />
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.widgetProductContainer}>
+                    <div>
+                      <Button color='secondary' variant='contained' fullWidth>
+                        CERT ID
+                        <AssignmentOutlinedIcon className={classes.iconSpacing}
+                        />
+                      </Button>
+                    </div>
+                    <div>
+                      <Button color='secondary' variant='contained' fullWidth>
+                        COMPARE
+                        <CompareArrowsIcon className={classes.iconSpacing}
+                        />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+             <TablePagination
+            rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
+            component="div"
+          />
+        </div>
+        </div>
         </div>
       </div>
     </ThemeProvider>
