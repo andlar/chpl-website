@@ -23,12 +23,14 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
+{/*Component Imports*/}
 import theme from '../../../themes/theme';
 import ChplSortableHeaders from '../../../components/util/chpl-sortable-headers';
 import SgAdvancedSearch from '../../../pages/resources/style-guide/sg-advanced-search';
 import SgDefaultFilter from '../../../pages/resources/style-guide/sg-default-filter';
 import SgProductCard from '../../../pages/resources/style-guide/sg-product-card'
 
+{/*Icons*/}
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -52,7 +54,7 @@ const useStyles = makeStyles({
     alignItems: 'start',
   },
   chipsTableSubContainer: {
-    alignItems:'center',
+    alignItems: 'center',
     display: 'flex',
     gap: '8px',
     justifyContent: 'start',
@@ -102,7 +104,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexWrap:'wrap',
+    flexWrap: 'wrap',
     paddingBottom: '16px',
     paddingTop: '16px',
     gap: '8px',
@@ -201,7 +203,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '3fr 9fr',
     gap: '32px',
     padding: '32px',
-    backgroundColor:'#f9f9f9',
+    backgroundColor: '#f9f9f9',
     overflowY: 'scroll',
   },
   productsContainer: {
@@ -403,7 +405,7 @@ function rwt() {
   ]);
 
   const headers = [
-    { text: 'CHPL Product Number', property: 'chplProductNumber', sortable: true},
+    { text: 'CHPL Product Number', property: 'chplProductNumber', sortable: true },
     { text: 'Product', property: 'product', sortable: true },
     { text: 'Edition', property: 'edition', sortable: true },
     { text: 'Developer', property: 'developer', sortable: true },
@@ -429,11 +431,12 @@ function rwt() {
   };
   return (
     <ThemeProvider theme={theme}>
-      {/*Table View*/}
+      {/*Page Container*/}
       <div className={classes.container}>
         <div className={classes.rowHeader}>
           <Typography variant="h1">Collections Page</Typography>
         </div>
+        {/*Download All Card*/}
         <div className={classes.rowBody}>
           <Typography variant="h2">Real World Testing</Typography>
           <Divider />
@@ -460,13 +463,15 @@ function rwt() {
                 </div>
               </CardContent>
               <CardActions>
-                <Button color="primary" variant="contained">Download ALL <GetAppIcon className={classes.iconSpacing}/></Button>
+                <Button color="primary" variant="contained">Download ALL <GetAppIcon className={classes.iconSpacing} /></Button>
               </CardActions>
             </Card>
+            {/*End of Download All Card*/}
           </div>
           <Divider />
         </div>
         <div className={classes.table}>
+          {/*Search Bar*/}
           <Toolbar className={classes.searchContainer}>
             <div><SearchIcon className={classes.searchIcon} color="primary" fontSize="large" /></div>
             <div className={classes.searchBarContainer}>
@@ -481,34 +486,43 @@ function rwt() {
             <div>
               <ButtonGroup variant="text" size="medium">
                 <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
+                {/*Advanced Search in found in style guide*/}
                 <SgAdvancedSearch />
               </ButtonGroup>
             </div>
           </Toolbar>
+          {/*End of Search Bar*/}
+
+          {/*Table View*/}
           <TableContainer>
             <div className={classes.tableActionContainer} component={Paper}>
+              {/*Table Filters*/}
               <div className={classes.chipsTableSubContainer}>
                 <Typography variant='subtitle1' gutterBottom>Filters Applied:</Typography>
-                <div><Chip icon={<AssignmentTurnedInOutlinedIcon/>}label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<AssignmentTurnedInOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<BookmarkBorderOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
+              {/*End of Table Filters*/}
+              {/*Results & Table Actions*/}
               <div className={classes.chipsTableSubContainer}>
                 <Typography variant='subtitle1'>Search Results:</Typography>
                 <Typography variant='body1'>(189 Results)</Typography>
-              <ButtonGroup>
-                <Button fullWidth color="secondary" variant="contained">Download Results
-                  <GetAppIcon className={classes.iconSpacing} />
-                </Button>
-                <Button fullWidth color="secondary" variant="contained">View Mode
-                  <SettingsIcon className={classes.iconSpacing} />
-                </Button>
+                <ButtonGroup>
+                  <Button fullWidth color="secondary" variant="contained">Download Results
+                    <GetAppIcon className={classes.iconSpacing} />
+                  </Button>
+                  <Button fullWidth color="secondary" variant="contained">View Mode
+                    <SettingsIcon className={classes.iconSpacing} />
+                  </Button>
                 </ButtonGroup>
               </div>
+              {/*End Results & Table Actions*/}
             </div>
           </TableContainer>
+          {/*Data Table*/}
           <TableContainer className={classes.tableContainer} component={Paper}>
             <Table stickyHeader>
               <ChplSortableHeaders
@@ -536,34 +550,38 @@ function rwt() {
               </TableBody>
             </Table>
           </TableContainer>
+          {/*End of Data Table*/}
+          {/*Replace with CHPL Pagination*/}
           <TablePagination
             rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
             component="div"
           />
         </div>
       </div>
+      {/*End of Table View*/}
 
       {/*Card View*/}
       <div className={classes.container}>
-      <div className={classes.cardContainer}>
-        <div>
+        <div className={classes.cardContainer}>
+          <div>
+            {/*Filters Card View*/}
             <Typography gutterBottom variant='subtitle1'>Filters Applied:</Typography>
-          <div className={classes.chipsSubContainer}>
+            <div className={classes.chipsSubContainer}>
               <div><Chip icon={<AssignmentTurnedInOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<BookmarkBorderOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-          </div>
-          <br />
-          <Divider />
-        </div>
-        <div>
-          <div className={classes.productHeaderContainer}>
-            <div className={classes.resultsContainer}>
-              <Typography variant='subtitle1'>Search Results:</Typography>
-              <Typography variant='body1'>(189 Results)</Typography>
             </div>
+            {/*End of Filter CardView*/}
+          </div>
+          {/*Results & Card Actions*/}
+          <div>
+            <div className={classes.productHeaderContainer}>
+              <div className={classes.resultsContainer}>
+                <Typography variant='subtitle1'>Search Results:</Typography>
+                <Typography variant='body1'>(189 Results)</Typography>
+              </div>
               <ButtonGroup>
                 <Button fullWidth color="secondary" variant="contained">Download Results
                   <GetAppIcon className={classes.iconSpacing} />
@@ -575,60 +593,10 @@ function rwt() {
                   <ImportExportOutlinedIcon className={classes.iconSpacing} />
                 </Button>
               </ButtonGroup>
-          </div>
-          <div className={classes.productsContainer}>
-              <Card className={classes.productCard} >
-                <div className={classes.productCardHeaderContainer}>
-                  <Avatar className={classes.developerAvatar}>EPIC</Avatar>
-                  <div className={classes.subProductCardHeaderContainer}>
-                    <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
-                    <div className={classes.versionProductCardHeaderContainer}>
-                      <Typography variant='subtitle2'> Developer:</Typography>
-                      <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
-                    </div>
-                  </div>
-                </div>
-                <Divider />
-                <CardContent className={classes.cardContentTwo}>
-                  <div className={classes.subcontent}>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        Edition{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        2015
-                      </Typography>
-                    </div>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        CHPL Product Number{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        <a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a>
-                      </Typography>
-                    </div>
-                  </div>
-                  <div className={classes.subcontent}>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        RWT Plans URL{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        <a href='#'>Access Here </a>
-                      </Typography>
-                    </div>
-                    <div>
-                      <Typography variant='subtitle1'>
-                          RWT Plans URL{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        <a href='#'>Access Here </a>
-                      </Typography>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
+            </div>
+            {/*End Results & Card Actions*/}
+            <div className={classes.productsContainer}>
+              {/*Card Example 1*/}
               <Card className={classes.productCard} >
                 <div className={classes.productCardHeaderContainer}>
                   <Avatar className={classes.developerAvatar}>EPIC</Avatar>
@@ -680,7 +648,9 @@ function rwt() {
                   </div>
                 </CardContent>
               </Card>
+              {/*End Card Example 1*/}
 
+              {/*Card Example 2*/}
               <Card className={classes.productCard} >
                 <div className={classes.productCardHeaderContainer}>
                   <Avatar className={classes.developerAvatar}>EPIC</Avatar>
@@ -720,7 +690,7 @@ function rwt() {
                         Certification Data{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        Access Here 
+                        Access Here
                       </Typography>
                     </div>
                     <div>
@@ -771,12 +741,14 @@ function rwt() {
                   </div>
                 </CardContent>
               </Card>
-             <TablePagination
-            rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
-            component="div"
-          />
-        </div>
-        </div>
+              {/*End of Card Example 2*/}
+
+              <TablePagination
+                rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
+                component="div"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </ThemeProvider>
