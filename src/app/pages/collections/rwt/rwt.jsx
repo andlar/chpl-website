@@ -32,12 +32,17 @@ import SgProductCard from '../../../pages/resources/style-guide/sg-product-card'
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ImportExportOutlinedIcon from '@material-ui/icons/ImportExportOutlined';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
+import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
+import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
+import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
 const useStyles = makeStyles({
   content: {
@@ -98,8 +103,8 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap:'wrap',
-    paddingBottom: '8px',
-    paddingTop: '8px',
+    paddingBottom: '16px',
+    paddingTop: '16px',
     gap: '8px',
   },
   widgetContainer: {
@@ -165,11 +170,16 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   widgetProductContainer: {
-    alignContent: 'space-between',
+    alignContent: 'flex-start',
     display: 'grid',
     gap: '8px',
   },
-  content: {
+  cardContentTwo: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto',
+    gap: '8px',
+  },
+  cardContentThree: {
     display: 'grid',
     gridTemplateColumns: 'auto auto auto',
     gap: '8px',
@@ -236,8 +246,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Infection Control Antimicrobial Use and Resistance Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -246,8 +256,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Syndromic Surveillance Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -256,8 +266,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -266,8 +276,8 @@ function rwt() {
       developer: 'Carefluence',
       product: 'Carefluence Open API',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -276,8 +286,8 @@ function rwt() {
       developer: 'ModuleMD',
       product: 'ModuleMD WISE™',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -286,8 +296,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts TouchWorks EHR',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -296,8 +306,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts Sunrise Acute Care',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -306,8 +316,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts Sunrise Ambulatory Care',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -316,8 +326,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'EpicCare Ambulatory EHR Suite',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -326,8 +336,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'EpicCare Inpatient EHR Suite',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -336,8 +346,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beacon Cancer Registry Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -346,8 +356,8 @@ function rwt() {
       developer: 'Dynamic Health IT, Inc',
       product: 'CQMsolution',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -355,8 +365,8 @@ function rwt() {
       chplProductNumber: '15.07.07.1447.BE01.02.01.1.161014',
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
-      rwtPlansUrl: 'Epic 2015',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -365,8 +375,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -375,8 +385,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -385,8 +395,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Epic 2017',
-      rwtResultsUrl: 'July, 2021',
+      rwtPlansUrl: 'Access Here',
+      rwtResultsUrl: 'Access Here',
       status: 'CLOSED',
       actions: 'Y | N',
     },
@@ -397,10 +407,8 @@ function rwt() {
     { text: 'Product', property: 'product', sortable: true },
     { text: 'Edition', property: 'edition', sortable: true },
     { text: 'Developer', property: 'developer', sortable: true },
-    { text: 'RWT Plans Url', property: 'rwtPlansUrl', sortable: true },
-    { text: 'RWT Results Url', property: 'rwtResultsUrl', sortable: true },
-    { text: 'Status', property: 'status', sortable: true },
-    { text: 'Actions', property: 'actions', invisible: true, sortable: false },
+    { text: 'RWT Plans URL', property: 'rwtPlansUrl', sortable: true },
+    { text: 'RWT Results URL', property: 'rwtResultsUrl', sortable: true },
   ];
 
   const listingSortComparator = (property) => {
@@ -480,17 +488,16 @@ function rwt() {
           <TableContainer>
             <div className={classes.tableActionContainer} component={Paper}>
               <div className={classes.chipsTableSubContainer}>
-                <Typography gutterBottom>Filters Applied:</Typography>
-                <div><Chip label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-                <div><Chip label="Suspended (ONC)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-                <div><Chip label="Suspended (ACB)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-                <div><Chip label="2015 Cures Editiion" onDelete={handleDelete} color="primary" variant="outlined"/></div>
-                <div><Chip label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <Typography variant='subtitle1' gutterBottom>Filters Applied:</Typography>
+                <div><Chip icon={<AssignmentTurnedInOutlinedIcon/>}label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<BookmarkBorderOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
               <div className={classes.chipsTableSubContainer}>
-              <Typography variant='h3'>Search Results:</Typography>
-                <Typography variant='h4'>(189 Results)</Typography>
-              </div>
+                <Typography variant='subtitle1'>Search Results:</Typography>
+                <Typography variant='body1'>(189 Results)</Typography>
               <ButtonGroup>
                 <Button fullWidth color="secondary" variant="contained">Download Results
                   <GetAppIcon className={classes.iconSpacing} />
@@ -498,7 +505,8 @@ function rwt() {
                 <Button fullWidth color="secondary" variant="contained">View Mode
                   <SettingsIcon className={classes.iconSpacing} />
                 </Button>
-              </ButtonGroup>
+                </ButtonGroup>
+              </div>
             </div>
           </TableContainer>
           <TableContainer className={classes.tableContainer} component={Paper}>
@@ -512,10 +520,9 @@ function rwt() {
                   .map((listing) => (
                     <TableRow key={listing.id}>
                       <TableCell className={classes.stickyColumn}>
-                        <Button color="primary" variant="contained">
-                          {listing.chplProductNumber}
-                          <ArrowForwardIcon className={classes.iconSpacing} />
-                        </Button>
+                        <Typography color="primary" variant="subtitle1">
+                          <a href='#'>{listing.chplProductNumber}</a>
+                        </Typography>
                       </TableCell>
                       <TableCell>{listing.product}</TableCell>
                       <TableCell>{listing.edition}</TableCell>
@@ -524,17 +531,6 @@ function rwt() {
                       </TableCell>
                       <TableCell><a href='#'>{listing.rwtPlansUrl}</a></TableCell>
                       <TableCell><a href='#'>{listing.rwtResultsUrl}</a></TableCell>
-                      <TableCell>{listing.status}</TableCell>
-                      <TableCell align="right">
-                        <Button fullWidth color="secondary" variant="contained">
-                          CERT ID
-                          <AssignmentOutlinedIcon className={classes.iconSpacing} />
-                        </Button>
-                        <Button fullWidth color="secondary" variant="contained">
-                          Compare
-                          <CompareArrowsIcon className={classes.iconSpacing} />
-                        </Button>
-                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
@@ -551,13 +547,13 @@ function rwt() {
       <div className={classes.container}>
       <div className={classes.cardContainer}>
         <div>
-          <Typography gutterBottom variant='h3'>Filters Applied:</Typography>
+            <Typography gutterBottom variant='subtitle1'>Filters Applied:</Typography>
           <div className={classes.chipsSubContainer}>
-              <div><Chip label="Active" onDelete={handleDelete} color="primary" variant="outlined"/></div>
-              <div><Chip label="Suspended (ONC)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-              <div><Chip label="Suspended (ACB)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-              <div><Chip label="2015 Cures Editiion" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-              <div><Chip label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<AssignmentTurnedInOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<BookmarkBorderOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
           </div>
           <br />
           <Divider />
@@ -565,8 +561,8 @@ function rwt() {
         <div>
           <div className={classes.productHeaderContainer}>
             <div className={classes.resultsContainer}>
-              <Typography variant='h3'>Search Results:</Typography>
-              <Typography variant='h4'>(189 Results)</Typography>
+              <Typography variant='subtitle1'>Search Results:</Typography>
+              <Typography variant='body1'>(189 Results)</Typography>
             </div>
               <ButtonGroup>
                 <Button fullWidth color="secondary" variant="contained">Download Results
@@ -576,7 +572,7 @@ function rwt() {
                   <SettingsIcon className={classes.iconSpacing} />
                 </Button>
                 <Button fullWidth color="secondary" variant="contained">Sort
-                  <SettingsIcon className={classes.iconSpacing} />
+                  <ImportExportOutlinedIcon className={classes.iconSpacing} />
                 </Button>
               </ButtonGroup>
           </div>
@@ -587,15 +583,13 @@ function rwt() {
                   <div className={classes.subProductCardHeaderContainer}>
                     <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
                     <div className={classes.versionProductCardHeaderContainer}>
-                      <Typography variant='subtitle2'> Version:</Typography>
-                      <Typography variant='body1'>May 2021</Typography>|
                       <Typography variant='subtitle2'> Developer:</Typography>
                       <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
                     </div>
                   </div>
                 </div>
                 <Divider />
-                <CardContent className={classes.content}>
+                <CardContent className={classes.cardContentTwo}>
                   <div className={classes.subcontent}>
                     <div>
                       <Typography variant='subtitle1'>
@@ -607,45 +601,81 @@ function rwt() {
                     </div>
                     <div>
                       <Typography variant='subtitle1'>
-                        CHPL ID{' '}
+                        CHPL Product Number{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        15.04.04.1447.Beac.AU.08.1.200220
+                        <a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a>
                       </Typography>
                     </div>
                   </div>
                   <div className={classes.subcontent}>
                     <div>
                       <Typography variant='subtitle1'>
-                        Certification Data{' '}
+                        RWT Plans URL{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        May 12, 2021
+                        <a href='#'>Access Here </a>
                       </Typography>
                     </div>
                     <div>
                       <Typography variant='subtitle1'>
-                        Status{' '}
+                          RWT Plans URL{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        Active <BeenhereIcon className={classes.activeStatus} />
+                        <a href='#'>Access Here </a>
                       </Typography>
                     </div>
                   </div>
-                  <div className={classes.widgetProductContainer}>
+                </CardContent>
+              </Card>
+
+              <Card className={classes.productCard} >
+                <div className={classes.productCardHeaderContainer}>
+                  <Avatar className={classes.developerAvatar}>EPIC</Avatar>
+                  <div className={classes.subProductCardHeaderContainer}>
+                    <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
+                    <div className={classes.versionProductCardHeaderContainer}>
+                      <Typography variant='subtitle2'> Developer:</Typography>
+                      <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
+                    </div>
+                  </div>
+                </div>
+                <Divider />
+                <CardContent className={classes.cardContentTwo}>
+                  <div className={classes.subcontent}>
                     <div>
-                      <Button color='secondary' variant='contained' fullWidth>
-                        CERT ID
-                        <AssignmentOutlinedIcon className={classes.iconSpacing}
-                        />
-                      </Button>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
                     </div>
                     <div>
-                      <Button color='secondary' variant='contained' fullWidth>
-                        COMPARE
-                        <CompareArrowsIcon className={classes.iconSpacing}
-                        />
-                      </Button>
+                      <Typography variant='subtitle1'>
+                        CHPL Product Number{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a>
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.subcontent}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Plans URL{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>Access Here </a>
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Plans URL{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>Access Here </a>
+                      </Typography>
                     </div>
                   </div>
                 </CardContent>
@@ -665,7 +695,7 @@ function rwt() {
                   </div>
                 </div>
                 <Divider />
-                <CardContent className={classes.content}>
+                <CardContent className={classes.cardContentThree}>
                   <div className={classes.subcontent}>
                     <div>
                       <Typography variant='subtitle1'>
@@ -690,7 +720,7 @@ function rwt() {
                         Certification Data{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        May 12, 2021
+                        Access Here 
                       </Typography>
                     </div>
                     <div>
@@ -720,76 +750,6 @@ function rwt() {
                       </Typography>
                       <Typography variant='body1'>
                         Retired<BeenhereIcon className={classes.activeStatus} />
-                      </Typography>
-                    </div>
-                  </div>
-                  <div className={classes.widgetProductContainer}>
-                    <div>
-                      <Button color='secondary' variant='contained' fullWidth>
-                        CERT ID
-                        <AssignmentOutlinedIcon className={classes.iconSpacing}
-                        />
-                      </Button>
-                    </div>
-                    <div>
-                      <Button color='secondary' variant='contained' fullWidth>
-                        COMPARE
-                        <CompareArrowsIcon className={classes.iconSpacing}
-                        />
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className={classes.productCard} >
-                <div className={classes.productCardHeaderContainer}>
-                  <Avatar className={classes.developerAvatar}>EPIC</Avatar>
-                  <div className={classes.subProductCardHeaderContainer}>
-                    <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
-                    <div className={classes.versionProductCardHeaderContainer}>
-                      <Typography variant='subtitle2'> Version:</Typography>
-                      <Typography variant='body1'>May 2021</Typography>|
-                      <Typography variant='subtitle2'> Developer:</Typography>
-                      <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
-                    </div>
-                  </div>
-                </div>
-                <Divider />
-                <CardContent className={classes.content}>
-                  <div className={classes.subcontent}>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        Edition{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        2015
-                      </Typography>
-                    </div>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        CHPL ID{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        15.04.04.1447.Beac.AU.08.1.200220
-                      </Typography>
-                    </div>
-                  </div>
-                  <div className={classes.subcontent}>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        Certification Data{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        May 12, 2021
-                      </Typography>
-                    </div>
-                    <div>
-                      <Typography variant='subtitle1'>
-                        Status{' '}
-                      </Typography>
-                      <Typography variant='body1'>
-                        Active <BeenhereIcon className={classes.activeStatus} />
                       </Typography>
                     </div>
                   </div>

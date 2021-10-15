@@ -168,7 +168,19 @@ const theme = createMuiTheme({
         fontSize: '.8em',
       },
       outlinedPrimary: {
-        backgroundColor:'#ffffff',
+        backgroundColor: '#ffffff',
+      },
+      deleteIcon: {
+        width: '16px',
+        height: '16px',
+        '&$hover': {
+          color: '#c44f65',
+        },
+      },
+      deleteIconOutlinedColorPrimary: {
+        '&$hover': {
+          color: '#c44f65',
+        },
       },
     },
     MuiDialogActions: {
