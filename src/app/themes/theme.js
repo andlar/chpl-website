@@ -169,16 +169,16 @@ const theme = createMuiTheme({
       },
       outlinedPrimary: {
         backgroundColor: '#ffffff',
+        fontWeight:'600',
       },
       deleteIcon: {
         width: '16px',
         height: '16px',
-        '&$hover': {
-          color: '#c44f65',
-        },
+        color: '#bbb',
       },
-      deleteIconOutlinedColorPrimary: {
-        '&$hover': {
+      deleteIconOutlinedColorPrimary:{
+        color: '#bbb',
+        '&:hover, selected': {
           color: '#c44f65',
         },
       },

@@ -42,6 +42,8 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
 const useStyles = makeStyles({
@@ -183,8 +185,8 @@ const useStyles = makeStyles({
     gap: '8px',
     gridTemplateColumns: '1fr',
     [theme.breakpoints.up('md')]: {
-    gridTemplateColumns: 'auto auto auto',
-  },
+      gridTemplateColumns: 'auto auto auto',
+    },
   },
   chipsSubContainer: {
     display: 'grid',
@@ -249,7 +251,7 @@ const useStyles = makeStyles({
     display: 'grid',
     gap: '8px',
   },
-  wrap:{
+  wrap: {
     flexFlow: 'wrap',
   },
 });
@@ -517,9 +519,9 @@ function rwt() {
               {/*Table Filters*/}
               <div className={classes.chipsTableSubContainer}>
                 <Typography variant='subtitle1' gutterBottom>Filters Applied:</Typography>
-                <div><Chip icon={<AssignmentTurnedInOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<HelpOutlineOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-                <div><Chip icon={<BookmarkBorderOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<BookOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
@@ -575,22 +577,23 @@ function rwt() {
             component="div"
           />
         </div>
-      {/*End of Table View*/}
-      {/*Card View*/}
+        {/*End of Table View*/}
+        {/*Card View*/}
         <div className={classes.cardContainer}>
           <div>
             {/*Filters Card View*/}
             <Typography gutterBottom variant='subtitle1'>Filters Applied:</Typography>
             <div className={classes.chipsSubContainer}>
-              <div><Chip icon={<AssignmentTurnedInOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<HelpOutlineOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-              <div><Chip icon={<BookmarkBorderOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+              <div><Chip icon={<BookOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
             </div>
             {/*End of Filter CardView*/}
           </div>
           {/*Results & Card Actions*/}
+          
           <div>
             <div className={classes.productHeaderContainer}>
               <div className={`${classes.resultsContainer} ${classes.wrap}`}>

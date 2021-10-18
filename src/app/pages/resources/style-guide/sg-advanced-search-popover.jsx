@@ -14,7 +14,20 @@ import {
     makeStyles,
 } from '@material-ui/core';
 
+import AccessibilityNewOutlinedIcon from '@material-ui/icons/AccessibilityNewOutlined';
+import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
+import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
+import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined';
+import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import DynamicFeedOutlinedIcon from '@material-ui/icons/DynamicFeedOutlined';
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
+import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import SearchIcon from '@material-ui/icons/Search';
+import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
+
 
 const useStyles = makeStyles({
 
@@ -78,6 +91,9 @@ const useStyles = makeStyles({
     iconSpacing: {
         marginLeft: '4px',
     },
+    iconSpacingRight:{
+        marginRight: '4px',
+    }
 });
 
 function SgAdvancedSearchPopover(props) {
@@ -157,16 +173,17 @@ function SgAdvancedSearchPopover(props) {
                                 }>
                                 <div className={classes.filterSubHeaderContainer}>
                                     <div className={classes.filterContainer}>
-                                        <Button color="primary">Certification Criteria</Button>
-                                        <Button color="primary">Certification Status</Button>
-                                        <Button color="primary">Certification Edition</Button>
-                                        <Button color="primary">Clinical Quality Measures</Button>
+                                        <Button color="primary"><BookOutlinedIcon className={classes.iconSpacingRight}/>Certification Criteria </Button>
+                                        <Button color="primary"><HelpOutlineOutlinedIcon  className={classes.iconSpacingRight}/>Certification Status</Button>
+                                        <Button color="primary"><CollectionsBookmarkOutlinedIcon className={classes.iconSpacingRight}/> Certification Edition</Button>
+                                        <Button color="primary"><AssessmentOutlinedIcon className={classes.iconSpacingRight}/>Clinical Quality Measures </Button>
                                     </div>
                                     <div className={classes.filterContainer}>
-                                        <Button color="primary">Certification Date</Button>
-                                        <Button color="primary">ONC-ACBs</Button>
-                                        <Button color="primary">Patient Type</Button>
-                                        <Button color="primary">Surveillance Activity</Button>
+                                        <Button color="primary"><DateRangeIcon className={classes.iconSpacingRight}/>Certification Date </Button>
+                                        <Button color="primary"><PeopleAltOutlinedIcon className={classes.iconSpacingRight}/>ONC-ACBs <BookmarkBorderOutlinedIcon className={classes.iconSpacingRight}/></Button>
+                                        <Button color="primary"><AccessibilityNewOutlinedIcon className={classes.iconSpacingRight}/>Patient Type</Button>
+                                        <Button color="primary"><GavelOutlinedIcon className={classes.iconSpacingRight}/>Surveillance Activity </Button>
+                                        <Button color="primary"><TuneOutlinedIcon className={classes.iconSpacingRight}/>Other </Button>
                                     </div>
                                 </div>
                             </List>
