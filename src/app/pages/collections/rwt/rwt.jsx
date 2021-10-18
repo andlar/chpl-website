@@ -80,6 +80,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     alignItems: 'start',
     padding: '16px 32px',
+    backgroundColor: '#f9f9f9',
   },
   //Table View Styling
   table: {
@@ -168,6 +169,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     gap: '32px',
     padding: '32px',
+    backgroundColor: '#f9f9f9',
     [theme.breakpoints.up('md')]: {
       gridTemplateColumns: '3fr 9fr',
     },
@@ -507,7 +509,7 @@ function rwt() {
               <ButtonGroup fullWidth variant="text" size="medium">
                 <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
                 {/*Advanced Search in found in style guide*/}
-                <SgAdvancedSearch />
+                <Button color="primary" fullWidth><SgAdvancedSearch /></Button>
               </ButtonGroup>
             </div>
           </Toolbar>
@@ -593,7 +595,7 @@ function rwt() {
             {/*End of Filter CardView*/}
           </div>
           {/*Results & Card Actions*/}
-          
+
           <div>
             <div className={classes.productHeaderContainer}>
               <div className={`${classes.resultsContainer} ${classes.wrap}`}>

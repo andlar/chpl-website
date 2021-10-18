@@ -12,16 +12,17 @@ import {
     Switch,
     Typography,
     makeStyles,
+    ThemeProvider,
 } from '@material-ui/core';
+
+import theme from '../../../themes/theme';
 
 import AccessibilityNewOutlinedIcon from '@material-ui/icons/AccessibilityNewOutlined';
 import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
-import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import DynamicFeedOutlinedIcon from '@material-ui/icons/DynamicFeedOutlined';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
 import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
@@ -30,12 +31,14 @@ import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 
 
 const useStyles = makeStyles({
-
     advancedSearchContainer: {
         background: '#E7F0F8',
         display: 'grid',
-        gridTemplateColumns: '6fr 2fr 4fr',
+        gridTemplateColumns: '1fr',
         padding: '16px',
+        [theme.breakpoints.up('md')]: {
+            gridTemplateColumns: '6fr 2fr 4fr',
+        },
     },
     filterContainer: {
         display: 'grid',
@@ -67,9 +70,12 @@ const useStyles = makeStyles({
     },
     filterSubHeaderContainer: {
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
+        gridTemplateColumns: '1fr',
         justifyItems: 'start',
         gap: '8px',
+        [theme.breakpoints.up('sm')]: {
+            gridTemplateColumns: 'auto auto',
+        },
     },
     searchInput: {
         flexGrow: 1,
@@ -123,7 +129,7 @@ function SgAdvancedSearchPopover(props) {
                 onClick={handleClick}>
                 {anchor}
             </div>
-
+            <ThemeProvider theme={theme}>
             <Popover
                 id={id}
                 open={open}
@@ -180,7 +186,7 @@ function SgAdvancedSearchPopover(props) {
                                     </div>
                                     <div className={classes.filterContainer}>
                                         <Button color="primary"><DateRangeIcon className={classes.iconSpacingRight}/>Certification Date </Button>
-                                        <Button color="primary"><PeopleAltOutlinedIcon className={classes.iconSpacingRight}/>ONC-ACBs <BookmarkBorderOutlinedIcon className={classes.iconSpacingRight}/></Button>
+                                        <Button color="primary"><PeopleAltOutlinedIcon className={classes.iconSpacingRight}/>ONC-ACBs</Button>
                                         <Button color="primary"><AccessibilityNewOutlinedIcon className={classes.iconSpacingRight}/>Patient Type</Button>
                                         <Button color="primary"><GavelOutlinedIcon className={classes.iconSpacingRight}/>Surveillance Activity </Button>
                                         <Button color="primary"><TuneOutlinedIcon className={classes.iconSpacingRight}/>Other </Button>
@@ -315,6 +321,7 @@ function SgAdvancedSearchPopover(props) {
                     </div>
                 </div>
             </Popover>
+            </ThemeProvider>
         </>
     );
 }
