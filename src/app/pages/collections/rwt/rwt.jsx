@@ -23,14 +23,12 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
-{/*Component Imports*/}
+{/*Component Imports*/ }
 import theme from '../../../themes/theme';
 import ChplSortableHeaders from '../../../components/util/chpl-sortable-headers';
 import SgAdvancedSearch from '../../../pages/resources/style-guide/sg-advanced-search';
-import SgDefaultFilter from '../../../pages/resources/style-guide/sg-default-filter';
-import SgProductCard from '../../../pages/resources/style-guide/sg-product-card'
 
-{/*Icons*/}
+{/*Icons*/ }
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -47,19 +45,24 @@ import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
 const useStyles = makeStyles({
+  //Page Styling
+  container: {
+    display: "grid",
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '1fr',
+    backgroundColor: '#f9f9f9',
+  },
   content: {
     display: 'grid',
     gap: '16px',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr',
     alignItems: 'start',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
   },
-  chipsTableSubContainer: {
-    alignItems: 'center',
-    display: 'flex',
-    gap: '8px',
-    justifyContent: 'start',
-    gridTemplateColumns: 'auto auto',
-    padding: '8px 0px',
+  iconSpacing: {
+    marginLeft: '4px',
   },
   rowHeader: {
     display: 'grid',
@@ -75,8 +78,8 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     alignItems: 'start',
     padding: '16px 32px',
-    backgroundColor: '#f9f9f9',
   },
+  //Table View Styling
   table: {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -84,10 +87,14 @@ const useStyles = makeStyles({
     padding: '0 32px ',
     backgroundColor: '#f9f9f9',
   },
-  container: {
-    display: "grid",
-    gridTemplateColumns: "1fr",
-    gridTemplateRows: "1fr",
+  chipsTableSubContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    padding: '8px 0px',
+    flexFlow: 'wrap',
   },
   stickyColumn: {
     position: 'sticky',
@@ -114,9 +121,7 @@ const useStyles = makeStyles({
     display: 'grid',
     alignContent: 'space-between',
   },
-  iconSpacing: {
-    marginLeft: '4px',
-  },
+  //Search Bar Styling
   goButton: {
     margin: '-8px',
     borderRadius: '0px 8px 8px 0px',
@@ -141,29 +146,97 @@ const useStyles = makeStyles({
     backgroundColor: '#C6D5E5',
     padding: '16px',
     display: 'grid',
+    gridTemplateColumns: '1fr',
     gap: '16px',
-    gridTemplateColumns: 'auto 8fr 2fr auto',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: 'auto 8fr 2fr auto',
+    },
   },
-  title: {
-    flexGrow: 1,
+  //Card View Styling
+  activeStatus: {
+    color: '#66926d',
+    marginLeft: '4px',
   },
-  chplLogo: {
-    maxWidth: '300px',
-    padding: '4px',
+  developerAvatar: {
+    color: '#156dac',
+    backgroundColor: '#f5f9fd',
+  },
+  cardContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '32px',
+    padding: '32px',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '3fr 9fr',
+    },
+  },
+  cardContentOne: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '8px',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: 'auto auto',
+    },
+  },
+  cardContentTwo: {
+    display: 'grid',
+    gap: '8px',
+    gridTemplateColumns: '1fr',
+    [theme.breakpoints.up('md')]: {
+    gridTemplateColumns: 'auto auto auto',
+  },
+  },
+  chipsSubContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    padding: '8px 0px',
   },
   productCard: {
     paddingBottom: '8px',
   },
   productCardHeaderContainer: {
     display: 'grid',
-    gridTemplateColumns: 'auto 11fr',
+    gridTemplateColumns: '1fr',
     padding: '16px',
     gap: '16px',
     alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'auto 11fr',
+    },
+  },
+  productsContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '16px',
+    padding: '8px 0px',
+  },
+  productHeaderContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: '1fr',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'auto auto',
+    },
+  },
+  subContent: {
+    display: 'grid',
+    gap: '8px',
   },
   subProductCardHeaderContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr',
+  },
+  resultsContainer: {
+    display: 'grid',
+    gap: '8px',
+    justifyContent: 'start',
+    gridTemplateColumns: 'auto auto',
+    alignItems: 'center',
   },
   versionProductCardHeaderContainer: {
     display: 'grid',
@@ -176,63 +249,8 @@ const useStyles = makeStyles({
     display: 'grid',
     gap: '8px',
   },
-  cardContentTwo: {
-    display: 'grid',
-    gridTemplateColumns: 'auto auto',
-    gap: '8px',
-  },
-  cardContentThree: {
-    display: 'grid',
-    gridTemplateColumns: 'auto auto auto',
-    gap: '8px',
-  },
-  subcontent: {
-    display: 'grid',
-    gap: '8px',
-  },
-  developerAvatar: {
-    color: '#156dac',
-    backgroundColor: '#f5f9fd',
-  },
-  activeStatus: {
-    color: '#66926d',
-    marginLeft: '4px',
-  },
-  cardContainer: {
-    display: 'grid',
-    gridTemplateColumns: '3fr 9fr',
-    gap: '32px',
-    padding: '32px',
-    backgroundColor: '#f9f9f9',
-    overflowY: 'scroll',
-  },
-  productsContainer: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gap: '16px',
-    padding: '8px 0px',
-  },
-  chipsSubContainer: {
-    display: 'grid',
-    gap: '8px',
-    justifyContent: 'start',
-    gridTemplateColumns: 'auto auto',
-    padding: '8px 0px',
-  },
-  productHeaderContainer: {
-    display: 'grid',
-    gap: '8px',
-    justifyContent: 'start',
-    gridTemplateColumns: 'auto auto',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  resultsContainer: {
-    display: 'grid',
-    gap: '8px',
-    justifyContent: 'start',
-    gridTemplateColumns: 'auto auto',
-    alignItems: 'center',
+  wrap:{
+    flexFlow: 'wrap',
   },
 });
 
@@ -484,7 +502,7 @@ function rwt() {
               </div></div>
             <Button variant="outlined" color="primary">Browse All<ExploreOutlinedIcon className={classes.iconSpacing} /></Button>
             <div>
-              <ButtonGroup variant="text" size="medium">
+              <ButtonGroup fullWidth variant="text" size="medium">
                 <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
                 {/*Advanced Search in found in style guide*/}
                 <SgAdvancedSearch />
@@ -510,7 +528,7 @@ function rwt() {
               <div className={classes.chipsTableSubContainer}>
                 <Typography variant='subtitle1'>Search Results:</Typography>
                 <Typography variant='body1'>(189 Results)</Typography>
-                <ButtonGroup>
+                <ButtonGroup className={classes.wrap}>
                   <Button fullWidth color="secondary" variant="contained">Download Results
                     <GetAppIcon className={classes.iconSpacing} />
                   </Button>
@@ -557,11 +575,8 @@ function rwt() {
             component="div"
           />
         </div>
-      </div>
       {/*End of Table View*/}
-
       {/*Card View*/}
-      <div className={classes.container}>
         <div className={classes.cardContainer}>
           <div>
             {/*Filters Card View*/}
@@ -578,11 +593,11 @@ function rwt() {
           {/*Results & Card Actions*/}
           <div>
             <div className={classes.productHeaderContainer}>
-              <div className={classes.resultsContainer}>
+              <div className={`${classes.resultsContainer} ${classes.wrap}`}>
                 <Typography variant='subtitle1'>Search Results:</Typography>
                 <Typography variant='body1'>(189 Results)</Typography>
               </div>
-              <ButtonGroup>
+              <ButtonGroup className={classes.wrap}>
                 <Button fullWidth color="secondary" variant="contained">Download Results
                   <GetAppIcon className={classes.iconSpacing} />
                 </Button>
@@ -609,8 +624,8 @@ function rwt() {
                   </div>
                 </div>
                 <Divider />
-                <CardContent className={classes.cardContentTwo}>
-                  <div className={classes.subcontent}>
+                <CardContent className={classes.cardContentOne}>
+                  <div className={classes.subContent}>
                     <div>
                       <Typography variant='subtitle1'>
                         Edition{' '}
@@ -628,7 +643,7 @@ function rwt() {
                       </Typography>
                     </div>
                   </div>
-                  <div className={classes.subcontent}>
+                  <div className={classes.subContent}>
                     <div>
                       <Typography variant='subtitle1'>
                         RWT Plans URL{' '}
@@ -665,8 +680,8 @@ function rwt() {
                   </div>
                 </div>
                 <Divider />
-                <CardContent className={classes.cardContentThree}>
-                  <div className={classes.subcontent}>
+                <CardContent className={classes.cardContentTwo}>
+                  <div className={classes.subContent}>
                     <div>
                       <Typography variant='subtitle1'>
                         Edition{' '}
@@ -684,7 +699,7 @@ function rwt() {
                       </Typography>
                     </div>
                   </div>
-                  <div className={classes.subcontent}>
+                  <div className={classes.subContent}>
                     <div>
                       <Typography variant='subtitle1'>
                         Certification Data{' '}

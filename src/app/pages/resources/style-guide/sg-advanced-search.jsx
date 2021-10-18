@@ -19,7 +19,7 @@ function SgAdvancedSearch() {
   return (
     <SgAdvancedSearchPopover
       anchor={
-        <Button color="primary">
+        <Button fullWidth color="primary">
           Advanced Search
           <FilterListIcon className={classes.iconSpacing}
           />
