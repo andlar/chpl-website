@@ -270,8 +270,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Infection Control Antimicrobial Use and Resistance Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/getting-started/usage/',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -280,8 +280,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Syndromic Surveillance Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/getting-started/usage/',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -290,8 +290,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/getting-started/usage/',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -300,8 +300,8 @@ function rwt() {
       developer: 'Carefluence',
       product: 'Carefluence Open API',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com',
       status: 'OPEN',
       actions: 'Y | N',
     }, {
@@ -310,8 +310,8 @@ function rwt() {
       developer: 'ModuleMD',
       product: 'ModuleMD WISE™',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -320,8 +320,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts TouchWorks EHR',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -330,8 +330,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts Sunrise Acute Care',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -340,8 +340,8 @@ function rwt() {
       developer: 'Allscripts',
       product: 'Allscripts Sunrise Ambulatory Care',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -350,8 +350,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'EpicCare Ambulatory EHR Suite',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -360,8 +360,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'EpicCare Inpatient EHR Suite',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -370,8 +370,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beacon Cancer Registry Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -380,8 +380,8 @@ function rwt() {
       developer: 'Dynamic Health IT, Inc',
       product: 'CQMsolution',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -389,8 +389,8 @@ function rwt() {
       chplProductNumber: '15.07.07.1447.BE01.02.01.1.161014',
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -399,8 +399,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -409,8 +409,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     }, {
@@ -419,8 +419,8 @@ function rwt() {
       developer: 'Epic Systems Corporation',
       product: 'Beaker Reportable Labs Reporting',
       edition: '2015',
-      rwtPlansUrl: 'Access Here',
-      rwtResultsUrl: 'Access Here',
+      rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
+      rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
       status: 'CLOSED',
       actions: 'Y | N',
     },
@@ -654,7 +654,7 @@ function rwt() {
                         RWT Plans URL{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        <a href='#'>Access Here </a>
+                        <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
                       </Typography>
                     </div>
                     <div>
@@ -662,7 +662,7 @@ function rwt() {
                         RWT Plans URL{' '}
                       </Typography>
                       <Typography variant='body1'>
-                        <a href='#'>Access Here </a>
+                        <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
                       </Typography>
                     </div>
                   </div>
