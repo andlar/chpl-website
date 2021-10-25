@@ -9,6 +9,7 @@ import {
   CardActions,
   Chip,
   Divider,
+  IconButton,
   InputBase,
   Paper,
   Table,
@@ -26,6 +27,7 @@ import {
 {/*Component Imports*/ }
 import theme from '../../../themes/theme';
 import ChplSortableHeaders from '../../../components/util/chpl-sortable-headers';
+import ChplTooltip from '../../../components/util/chpl-tooltip';
 import SgAdvancedSearch from '../../../pages/resources/style-guide/sg-advanced-search';
 
 {/*Icons*/ }
@@ -33,6 +35,7 @@ import BeenhereIcon from '@material-ui/icons/Beenhere';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ImportExportOutlinedIcon from '@material-ui/icons/ImportExportOutlined';
+import InfoIcon from '@material-ui/icons/Info';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import SearchIcon from '@material-ui/icons/Search';
@@ -146,7 +149,7 @@ const useStyles = makeStyles({
   },
   searchContainer: {
     backgroundColor: '#C6D5E5',
-    padding: '16px',
+    padding: '16px 32px',
     display: 'grid',
     gridTemplateColumns: '1fr',
     gap: '16px',
@@ -197,14 +200,19 @@ const useStyles = makeStyles({
     borderRight: '1px solid #bbb',
     borderBottom: '1px solid #bbb',
     boxShadow: 'rgba(149, 157, 165, 0.1) 8px 0px 8px',
-    padding: '32px 0px 32px 32px',
+    padding: '32px 8px 32px 32px',
     backgroundColor: '#ffffff',
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'start',
   },
   chipsSubContainer: {
     display: 'grid',
     gap: '16px',
+    paddingBottom:'16px',
     justifyContent: 'start',
     gridTemplateColumns: 'auto',
+    borderTop: '1px solid #bbb',
   },
   chipsSubCategory: {
     display: 'flex',
@@ -518,10 +526,12 @@ function rwt() {
                   placeholder="Search by Developer, Product, or CHPL ID..."
                 />
                 <Button className={classes.goButton} size="medium" variant="contained" color="primary">Go</Button>
-              </div></div>
-            <Button variant="outlined" color="primary">Browse All<ExploreOutlinedIcon className={classes.iconSpacing} /></Button>
+              </div>
+            </div>
+            <div><Button fullWidth variant="outlined" color="primary">Browse All<ExploreOutlinedIcon className={classes.iconSpacing} /></Button>
+            </div>
             <div>
-              <ButtonGroup fullWidth variant="text" size="medium">
+              <ButtonGroup fullWidth variant="text">
                 <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
                 {/*Advanced Search in found in style guide*/}
                 <Button color="primary" fullWidth><SgAdvancedSearch /></Button>
@@ -533,11 +543,17 @@ function rwt() {
           <div className={classes.cardView}>
             <div className={classes.chipsContainer}>
               {/*Filters Card View*/}
-              <Typography gutterBottom variant='subtitle1'>Filters Applied:</Typography>
-              <Divider />
+              <Typography gutterBottom variant='subtitle1'>Filters Applied:
+              <IconButton color='primary'>
+                <InfoIcon/>
+              </IconButton>
+              </Typography>
               <div className={classes.chipsSubContainer}>
                 <div>
-                  <Typography gutterBottom variant='subtitle2'>Status:</Typography>
+                  <Typography gutterBottom variant='subtitle2'>Status:
+                  <IconButton color='primary'>
+                <HelpOutlineOutlinedIcon/>
+              </IconButton></Typography>
                   <div className={classes.chipsSubCategory}>
                     <Chip icon={<HelpOutlineOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" />
                     <Chip icon={<HelpOutlineOutlinedIcon />} label="Suspended by ONC" onDelete={handleDelete} color="primary" variant="outlined" />
@@ -550,7 +566,7 @@ function rwt() {
                 </div>
                 <div>
                   <Typography gutterBottom variant='subtitle2'>Criteria:</Typography>
-                  <Chip icon={<BookOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" />
+                  <Chip icon={<BookOutlinedIcon />} label="170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" />
                 </div>
                 <div>
                   <Typography gutterBottom variant='subtitle2'>Surveillance</Typography>
@@ -558,8 +574,9 @@ function rwt() {
                 </div>
                 <div>
                   <Typography gutterBottom variant='subtitle2'>Other:</Typography>
-                  <Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                  <Chip icon={<TuneOutlinedIcon />} label="Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
+              <Button fullWidth>Clear All Filters</Button>
               {/*End of Filter CardView*/}
             </div>
             {/*Results & Card Actions*/}
@@ -569,14 +586,14 @@ function rwt() {
                   <Typography variant='subtitle2'>Search Results:</Typography>
                   <Typography variant='body2'>(1-25 of 75 Results)</Typography>
                 </div>
-                <ButtonGroup className={classes.wrap}>
-                  <Button fullWidth color="secondary" variant="contained">Download Results
+                <ButtonGroup color="primary" variant="outlined" className={classes.wrap}>
+                  <Button fullWidth>Download Results
                     <GetAppIcon className={classes.iconSpacing} />
                   </Button>
-                  <Button fullWidth color="secondary" variant="contained">View Mode
+                  <Button fullWidth>View Mode
                     <SettingsIcon className={classes.iconSpacing} />
                   </Button>
-                  <Button fullWidth color="secondary" variant="contained">Sort
+                  <Button fullWidth>Sort
                     <ImportExportOutlinedIcon className={classes.iconSpacing} />
                   </Button>
                 </ButtonGroup>
