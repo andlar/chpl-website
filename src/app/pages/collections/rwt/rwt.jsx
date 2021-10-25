@@ -111,14 +111,15 @@ const useStyles = makeStyles({
     maxHeight: "800px",
     overflowWrap: 'normal',
     border: '.5px solid #c2c6ca',
+    margin:'32px',
+    width:'auto',
   },
   tableActionContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
-    paddingBottom: '16px',
-    paddingTop: '16px',
+    padding: '8px 32px',
     gap: '8px',
   },
   widgetContainer: {
@@ -200,7 +201,7 @@ const useStyles = makeStyles({
     borderRight: '1px solid #bbb',
     borderBottom: '1px solid #bbb',
     boxShadow: 'rgba(149, 157, 165, 0.1) 8px 0px 8px',
-    padding: '32px 8px 32px 32px',
+    padding: '32px 32px',
     backgroundColor: '#ffffff',
     display:'flex',
     flexDirection:'column',
@@ -576,7 +577,7 @@ function rwt() {
                   <Typography gutterBottom variant='subtitle2'>Other:</Typography>
                   <Chip icon={<TuneOutlinedIcon />} label="Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
-              <Button fullWidth>Clear All Filters</Button>
+              <Button variant="contained" color="default" fullWidth>Clear All Filters</Button>
               {/*End of Filter CardView*/}
             </div>
             {/*Results & Card Actions*/}
@@ -809,6 +810,34 @@ function rwt() {
               </div>
             </div>
           </div>
+          <br/>
+          <br/>
+          {/*Table View Is Below with Additional Search Bar for real life example*/}
+          <br/>
+          <br/>
+            {/*Search Bar*/}
+            <Toolbar className={classes.searchContainer}>
+            <div><SearchIcon className={classes.searchIcon} color="primary" fontSize="large" /></div>
+            <div className={classes.searchBarContainer}>
+              <div className={classes.searchBar}>
+                <InputBase
+                  className={classes.searchInput}
+                  placeholder="Search by Developer, Product, or CHPL ID..."
+                />
+                <Button className={classes.goButton} size="medium" variant="contained" color="primary">Go</Button>
+              </div>
+            </div>
+            <div><Button fullWidth variant="outlined" color="primary">Browse All<ExploreOutlinedIcon className={classes.iconSpacing} /></Button>
+            </div>
+            <div>
+              <ButtonGroup fullWidth variant="text">
+                <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
+                {/*Advanced Search in found in style guide*/}
+                <Button color="primary" fullWidth><SgAdvancedSearch /></Button>
+              </ButtonGroup>
+            </div>
+          </Toolbar>
+          {/*End of Search Bar*/}
           {/*Table View*/}
           <TableContainer>
             <div className={classes.tableActionContainer} component={Paper}>

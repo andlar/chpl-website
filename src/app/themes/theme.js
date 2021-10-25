@@ -246,6 +246,7 @@ const theme = createMuiTheme({
     MuiListSubheader: {
       root: {
         fontSize: '0.875em',
+        color:'#000',
       },
       gutters: {
         paddingLeft: '8px',
