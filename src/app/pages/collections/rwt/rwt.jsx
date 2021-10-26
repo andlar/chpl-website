@@ -60,7 +60,7 @@ const useStyles = makeStyles({
   },
   content: {
     display: 'grid',
-    gap: '16px',
+    gap: '32px',
     gridTemplateColumns: '1fr',
     alignItems: 'start',
     [theme.breakpoints.up('md')]: {
@@ -175,7 +175,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     gap: '16px',
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: 'auto 5fr 2fr 3fr',
+      gridTemplateColumns: 'auto 6fr 2fr 3fr',
     },
   },
   //Card View Styling
@@ -234,7 +234,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'start',
-    gap:'8px',
+    gap: '8px',
   },
   chipsSubContainer: {
     display: 'grid',
@@ -244,7 +244,7 @@ const useStyles = makeStyles({
     justifyContent: 'start',
     gridTemplateColumns: 'auto',
     borderTop: '1px solid #bbb',
-    
+
   },
   chipsSubCategory: {
     display: 'flex',
@@ -547,6 +547,8 @@ function rwt() {
             {/*End of Download All Card*/}
           </div>
         </div>
+        <br/>
+        <br/>
         <div className={classes.table}>
           {/*Search Bar*/}
           <Toolbar className={classes.searchContainer}>
@@ -564,9 +566,9 @@ function rwt() {
             </div>
             <div>
               <ButtonGroup fullWidth variant="text">
-                <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
+                <Button fullWidth color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
                 {/*Advanced Search in found in style guide*/}
-                <Button color="primary"><SgAdvancedSearch /></Button>
+                <Button fullWidth color="primary"><SgAdvancedSearch /></Button>
               </ButtonGroup>
             </div>
           </Toolbar>
@@ -615,7 +617,7 @@ function rwt() {
                   <Typography variant='subtitle2'>Search Results:</Typography>
                   <Typography variant='body2'>(1-25 of 75 Results)</Typography>
                 </div>
-                <ButtonGroup className={classes.wrap}>
+                <ButtonGroup size='small' className={classes.wrap}>
                   <Button color="secondary" variant="contained" fullWidth>Download Results
                     <GetAppIcon className={classes.iconSpacing} />
                   </Button>
@@ -904,7 +906,7 @@ function rwt() {
                 <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <Button variant="contained" size="small" color="default" >Clear All Filters <ClearIcon className={classes.iconSpacing} /></Button>
-              </div>              
+              </div>
               {/*End of Table Filters*/}
             </div>
           </TableContainer>
@@ -915,7 +917,7 @@ function rwt() {
               <Typography variant='subtitle2'>Search Results:</Typography>
               <Typography variant='body2'>(1-25 of 75 Results)</Typography>
             </div>
-            <ButtonGroup className={classes.wrap}>
+            <ButtonGroup size='small' className={classes.wrap}>
               <Button color="secondary" variant="contained" fullWidth>Download Results
                 <GetAppIcon className={classes.iconSpacing} />
               </Button>
@@ -958,11 +960,11 @@ function rwt() {
             rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
             component="div"
           />
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
         {/*End of Table View*/}
 
