@@ -175,7 +175,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     gap: '16px',
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: 'auto 8fr 2fr auto',
+      gridTemplateColumns: 'auto 5fr 2fr 3fr',
     },
   },
   //Card View Styling
@@ -566,7 +566,7 @@ function rwt() {
               <ButtonGroup fullWidth variant="text">
                 <Button color="primary">Restore Search <RestoreIcon className={classes.iconSpacing} /></Button>
                 {/*Advanced Search in found in style guide*/}
-                <Button color="primary" fullWidth><SgAdvancedSearch /></Button>
+                <Button color="primary"><SgAdvancedSearch /></Button>
               </ButtonGroup>
             </div>
           </Toolbar>
@@ -903,7 +903,8 @@ function rwt() {
                 <div><Chip icon={<BookOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-              </div>
+                <Button variant="contained" size="small" color="default" >Clear All Filters <ClearIcon className={classes.iconSpacing} /></Button>
+              </div>              
               {/*End of Table Filters*/}
             </div>
           </TableContainer>
@@ -957,6 +958,11 @@ function rwt() {
             rowsPerPageOptions={[50, 100, 200, { label: 'All' }]}
             component="div"
           />
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
         </div>
         {/*End of Table View*/}
 
