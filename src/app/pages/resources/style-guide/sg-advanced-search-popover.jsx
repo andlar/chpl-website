@@ -32,10 +32,10 @@ import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 
 const useStyles = makeStyles({
     advancedSearchContainer: {
-        background: '#f4faff',
+        background: '#fafdff',
         display: 'grid',
         gridTemplateColumns: '1fr',
-        padding: '16px',
+        padding: '8px 16px',
         [theme.breakpoints.up('md')]: {
             gridTemplateColumns: '6fr 2fr 4fr',
         },
@@ -145,8 +145,8 @@ function SgAdvancedSearchPopover(props) {
                 }}
                 PaperProps={{
                     style: {
-                        height: '22vw',
-                        background: '#f4faff',
+                        height: '26vw',
+                        backgroundColor:'#fff',
                         display: 'grid',
                         width: '100%',
                         marginTop: '27px',

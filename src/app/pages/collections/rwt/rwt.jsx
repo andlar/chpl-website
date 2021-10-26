@@ -31,6 +31,7 @@ import ChplTooltip from '../../../components/util/chpl-tooltip';
 import SgAdvancedSearch from '../../../pages/resources/style-guide/sg-advanced-search';
 
 {/*Icons*/ }
+import ClearIcon from '@material-ui/icons/Clear';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -66,6 +67,10 @@ const useStyles = makeStyles({
       gridTemplateColumns: '1fr 1fr',
     },
   },
+  dividerSpacing: {
+    marginLeft: '4px 0px',
+  },
+
   iconSpacing: {
     marginLeft: '4px',
   },
@@ -111,8 +116,8 @@ const useStyles = makeStyles({
     maxHeight: "800px",
     overflowWrap: 'normal',
     border: '.5px solid #c2c6ca',
-    margin:'32px',
-    width:'auto',
+    margin: '0px 32px',
+    width: 'auto',
   },
   tableActionContainer: {
     display: 'flex',
@@ -121,6 +126,21 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
     padding: '8px 32px',
     gap: '8px',
+    backgroundColor: '#fafdff',
+    borderBottom: '1px solid #bbb',
+    boxShadow: 'rgba(149, 157, 165, 0.1) 8px 0px 8px',
+  },
+  tableResultsHeaderContainer: {
+    display: 'grid',
+    gap: '8px',
+    margin: '16px 32px',
+    justifyContent: 'start',
+    gridTemplateColumns: '1fr',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'auto auto',
+    },
   },
   widgetContainer: {
     gap: '8px',
@@ -176,6 +196,9 @@ const useStyles = makeStyles({
       gridTemplateColumns: '3fr 9fr',
     },
   },
+  cardHeader: {
+    fontWeight: '600',
+  },
   cardContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -185,8 +208,13 @@ const useStyles = makeStyles({
     display: 'grid',
     gridTemplateColumns: '1fr',
     gap: '8px',
+    padding: '8px 16px',
+    "&:last-child": {
+      paddingBottom: '8px',
+    },
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: 'auto auto',
+      gridTemplateColumns: '1fr 1fr 1fr',
+      overflowWrap: 'anywhere',
     },
   },
   cardContentTwo: {
@@ -202,18 +230,21 @@ const useStyles = makeStyles({
     borderBottom: '1px solid #bbb',
     boxShadow: 'rgba(149, 157, 165, 0.1) 8px 0px 8px',
     padding: '32px 32px',
-    backgroundColor: '#ffffff',
-    display:'flex',
-    flexDirection:'column',
-    justifyContent:'start',
+    backgroundColor: '#fafdff',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'start',
+    gap:'8px',
   },
   chipsSubContainer: {
     display: 'grid',
     gap: '16px',
-    paddingBottom:'16px',
+    paddingBottom: '16px',
+    paddingTop: '8px',
     justifyContent: 'start',
     gridTemplateColumns: 'auto',
     borderTop: '1px solid #bbb',
+    
   },
   chipsSubCategory: {
     display: 'flex',
@@ -243,7 +274,7 @@ const useStyles = makeStyles({
   productHeaderContainer: {
     display: 'grid',
     gap: '8px',
-    margin:'8px 0px',
+    margin: '8px 0px',
     justifyContent: 'start',
     gridTemplateColumns: '1fr',
     alignItems: 'center',
@@ -544,17 +575,14 @@ function rwt() {
           <div className={classes.cardView}>
             <div className={classes.chipsContainer}>
               {/*Filters Card View*/}
-              <Typography gutterBottom variant='subtitle1'>Filters Applied:
-              <IconButton color='primary'>
-                <InfoIcon/>
-              </IconButton>
+              <Typography variant='subtitle1'>Filters Applied:
+                <InfoIcon className={classes.iconSpacing} color='primary' />
               </Typography>
               <div className={classes.chipsSubContainer}>
                 <div>
                   <Typography gutterBottom variant='subtitle2'>Status:
-                  <IconButton color='primary'>
-                <HelpOutlineOutlinedIcon/>
-              </IconButton></Typography>
+                    <HelpOutlineOutlinedIcon className={classes.iconSpacing} color='primary' />
+                  </Typography>
                   <div className={classes.chipsSubCategory}>
                     <Chip icon={<HelpOutlineOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" />
                     <Chip icon={<HelpOutlineOutlinedIcon />} label="Suspended by ONC" onDelete={handleDelete} color="primary" variant="outlined" />
@@ -577,7 +605,7 @@ function rwt() {
                   <Typography gutterBottom variant='subtitle2'>Other:</Typography>
                   <Chip icon={<TuneOutlinedIcon />} label="Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
-              <Button variant="contained" color="default" fullWidth>Clear All Filters</Button>
+              <Button variant="contained" color="default" fullWidth>Clear All Filters <ClearIcon className={classes.iconSpacing} /></Button>
               {/*End of Filter CardView*/}
             </div>
             {/*Results & Card Actions*/}
@@ -587,14 +615,14 @@ function rwt() {
                   <Typography variant='subtitle2'>Search Results:</Typography>
                   <Typography variant='body2'>(1-25 of 75 Results)</Typography>
                 </div>
-                <ButtonGroup color="primary" variant="outlined" className={classes.wrap}>
-                  <Button fullWidth>Download Results
+                <ButtonGroup className={classes.wrap}>
+                  <Button color="secondary" variant="contained" fullWidth>Download Results
                     <GetAppIcon className={classes.iconSpacing} />
                   </Button>
-                  <Button fullWidth>View Mode
+                  <Button color="secondary" variant="contained" fullWidth>View Mode
                     <SettingsIcon className={classes.iconSpacing} />
                   </Button>
-                  <Button fullWidth>Sort
+                  <Button color="secondary" variant="contained" fullWidth>Sort
                     <ImportExportOutlinedIcon className={classes.iconSpacing} />
                   </Button>
                 </ButtonGroup>
@@ -606,50 +634,41 @@ function rwt() {
                   <div className={classes.productCardHeaderContainer}>
                     <Avatar className={classes.developerAvatar}>EPIC</Avatar>
                     <div className={classes.subProductCardHeaderContainer}>
-                      <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
+                      <Typography className={classes.cardHeader} variant='h5'>Infection Control Antimicrobial Use and Resistance Reporting</Typography>
                       <div className={classes.versionProductCardHeaderContainer}>
                         <Typography variant='subtitle2'> Developer:</Typography>
-                        <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
+                        <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>|
+                        <Typography variant='subtitle2'>CHPL Product Number:</Typography>
+                        <Typography variant='body1'><a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a></Typography>
                       </div>
                     </div>
                   </div>
                   <Divider />
                   <CardContent className={classes.cardContentOne}>
-                    <div className={classes.subContent}>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          Edition{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          2015
-                        </Typography>
-                      </div>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          CHPL Product Number{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          <a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a>
-                        </Typography>
-                      </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
                     </div>
-                    <div className={classes.subContent}>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          RWT Plans URL{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
-                        </Typography>
-                      </div>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          RWT Plans URL{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
-                        </Typography>
-                      </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Plans URL
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Results URL
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
+                      </Typography>
+
                     </div>
                   </CardContent>
                 </Card>
@@ -660,62 +679,97 @@ function rwt() {
                   <div className={classes.productCardHeaderContainer}>
                     <Avatar className={classes.developerAvatar}>EPIC</Avatar>
                     <div className={classes.subProductCardHeaderContainer}>
-                      <Typography variant='h5'><a href='#'>Infection Control App</a></Typography>
+                      <Typography className={classes.cardHeader} variant='h5'>Infection Control App</Typography>
                       <div className={classes.versionProductCardHeaderContainer}>
                         <Typography variant='subtitle2'> Developer:</Typography>
-                        <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>
+                        <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>|
+                        <Typography variant='subtitle2'>CHPL Product Number:</Typography>
+                        <Typography variant='body1'><a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a></Typography>
                       </div>
                     </div>
                   </div>
                   <Divider />
                   <CardContent className={classes.cardContentOne}>
-                    <div className={classes.subContent}>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          Edition{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          2015
-                        </Typography>
-                      </div>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          CHPL Product Number{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          <a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a>
-                        </Typography>
-                      </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
                     </div>
-                    <div className={classes.subContent}>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          RWT Plans URL{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
-                        </Typography>
-                      </div>
-                      <div>
-                        <Typography variant='subtitle1'>
-                          RWT Plans URL{' '}
-                        </Typography>
-                        <Typography variant='body1'>
-                          <a href='#'>https://mui.com/components/icons/#heading-material-icons </a>
-                        </Typography>
-                      </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Plans URL
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>https://epic.com/infection/app </a>
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Results URL
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>https://epic.com/infection/app/rwt </a>
+                      </Typography>
+
                     </div>
                   </CardContent>
                 </Card>
                 {/*End Card Example 1*/}
 
+                {/*Card Example 1*/}
+                <Card className={classes.productCard} >
+                  <div className={classes.productCardHeaderContainer}>
+                    <Avatar className={classes.developerAvatar}>EPIC</Avatar>
+                    <div className={classes.subProductCardHeaderContainer}>
+                      <Typography className={classes.cardHeader} variant='h5'>Syndromic Surveillance Reporting</Typography>
+                      <div className={classes.versionProductCardHeaderContainer}>
+                        <Typography variant='subtitle2'> Developer:</Typography>
+                        <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>|
+                        <Typography variant='subtitle2'>CHPL Product Number:</Typography>
+                        <Typography variant='body1'><a href='#'>15.04.04.1447.Nati.21.07.1.210825	</a></Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <Divider />
+                  <CardContent className={classes.cardContentOne}>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        Edition{' '}
+                      </Typography>
+                      <Typography variant='body1'>
+                        2015
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Plans URL
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>https://epic.com/infection/app </a>
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography variant='subtitle1'>
+                        RWT Results URL
+                      </Typography>
+                      <Typography variant='body1'>
+                        <a href='#'>https://epic.com/infection/app/rwt </a>
+                      </Typography>
+
+                    </div>
+                  </CardContent>
+                </Card>
+                {/*End Card Example 1*/}
 
                 {/*Card Example 2*/}
                 <Card className={classes.productCard} >
                   <div className={classes.productCardHeaderContainer}>
                     <Avatar className={classes.developerAvatar}>EPIC</Avatar>
                     <div className={classes.subProductCardHeaderContainer}>
-                      <Typography variant='h5'><a href='#'>Infection Control Antimicrobial Use and Resistance Reporting</a></Typography>
+                      <Typography variant='h5'>Epic Card1</Typography>
                       <div className={classes.versionProductCardHeaderContainer}>
                         <Typography variant='subtitle2'> Version:</Typography>
                         <Typography variant='body1'>May 2021</Typography>|
@@ -810,13 +864,13 @@ function rwt() {
               </div>
             </div>
           </div>
-          <br/>
-          <br/>
+          <br />
+          <br />
           {/*Table View Is Below with Additional Search Bar for real life example*/}
-          <br/>
-          <br/>
-            {/*Search Bar*/}
-            <Toolbar className={classes.searchContainer}>
+          <br />
+          <br />
+          {/*Search Bar*/}
+          <Toolbar className={classes.searchContainer}>
             <div><SearchIcon className={classes.searchIcon} color="primary" fontSize="large" /></div>
             <div className={classes.searchBarContainer}>
               <div className={classes.searchBar}>
@@ -851,23 +905,25 @@ function rwt() {
                 <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
               </div>
               {/*End of Table Filters*/}
-              {/*Results & Table Actions*/}
-              <div className={classes.chipsTableSubContainer}>
-                <Typography variant='subtitle1'>Search Results:</Typography>
-                <Typography variant='body1'>(189 Results)</Typography>
-                <ButtonGroup className={classes.wrap}>
-                  <Button fullWidth color="secondary" variant="contained">Download Results
-                    <GetAppIcon className={classes.iconSpacing} />
-                  </Button>
-                  <Button fullWidth color="secondary" variant="contained">View Mode
-                    <SettingsIcon className={classes.iconSpacing} />
-                  </Button>
-                </ButtonGroup>
-              </div>
-              {/*End Results & Table Actions*/}
             </div>
           </TableContainer>
           {/*Data Table*/}
+          {/*Results & Table Actions*/}
+          <div className={classes.tableResultsHeaderContainer}>
+            <div className={`${classes.resultsContainer} ${classes.wrap}`}>
+              <Typography variant='subtitle2'>Search Results:</Typography>
+              <Typography variant='body2'>(1-25 of 75 Results)</Typography>
+            </div>
+            <ButtonGroup className={classes.wrap}>
+              <Button color="secondary" variant="contained" fullWidth>Download Results
+                <GetAppIcon className={classes.iconSpacing} />
+              </Button>
+              <Button color="secondary" variant="contained" fullWidth>View Mode
+                <SettingsIcon className={classes.iconSpacing} />
+              </Button>
+            </ButtonGroup>
+          </div>
+          {/*End Results & Table Actions*/}
           <TableContainer className={classes.tableContainer} component={Paper}>
             <Table stickyHeader>
               <ChplSortableHeaders
