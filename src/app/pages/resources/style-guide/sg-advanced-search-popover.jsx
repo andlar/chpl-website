@@ -24,10 +24,11 @@ import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookm
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
-import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
+import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
+
 
 
 const useStyles = makeStyles({
@@ -188,7 +189,7 @@ function SgAdvancedSearchPopover(props) {
                                         <Button color="primary"><DateRangeIcon className={classes.iconSpacingRight}/>Certification Date </Button>
                                         <Button color="primary"><PeopleAltOutlinedIcon className={classes.iconSpacingRight}/>ONC-ACBs</Button>
                                         <Button color="primary"><AccessibilityNewOutlinedIcon className={classes.iconSpacingRight}/>Patient Type</Button>
-                                        <Button color="primary"><GavelOutlinedIcon className={classes.iconSpacingRight}/>Surveillance Activity </Button>
+                                        <Button color="primary"><VerifiedUserOutlinedIcon className={classes.iconSpacingRight}/>Surveillance Activity </Button>
                                         <Button color="primary"><TuneOutlinedIcon className={classes.iconSpacingRight}/>Other </Button>
                                     </div>
                                 </div>
