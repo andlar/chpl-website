@@ -43,12 +43,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
+import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
-import GavelOutlinedIcon from '@material-ui/icons/GavelOutlined';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
-import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
 const useStyles = makeStyles({
   //Page Styling
@@ -328,7 +326,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/getting-started/usage/',
-      status: 'OPEN',
+      version: '1.5',
       actions: 'Y | N',
     }, {
       id: 2,
@@ -338,7 +336,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/getting-started/usage/',
-      status: 'OPEN',
+      version: '1.7',
       actions: 'Y | N',
     }, {
       id: 3,
@@ -348,17 +346,17 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/getting-started/usage/',
-      status: 'OPEN',
+      version: '1.3',
       actions: 'Y | N',
     }, {
       id: 4,
       chplProductNumber: '15.04.04.2657.Care.01.00.0.160701',
       developer: 'Carefluence',
-      product: 'Carefluence Open API',
+      product: 'Carefluence 2.3 API',
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com',
-      status: 'OPEN',
+      version: '2.8',
       actions: 'Y | N',
     }, {
       id: 5,
@@ -368,7 +366,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 6,
@@ -378,7 +376,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 7,
@@ -388,7 +386,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 8,
@@ -398,7 +396,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 9,
@@ -408,7 +406,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 10,
@@ -418,7 +416,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 11,
@@ -428,7 +426,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 12,
@@ -438,7 +436,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 13,
@@ -447,7 +445,7 @@ function rwt() {
       product: 'Beaker Reportable Labs Reporting',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 14,
@@ -457,7 +455,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 15,
@@ -467,7 +465,7 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     }, {
       id: 16,
@@ -477,16 +475,17 @@ function rwt() {
       edition: '2015',
       rwtPlansUrl: 'https://mui.com/components/icons/#heading-material-icons',
       rwtResultsUrl: 'https://mui.com/components/icons/#heading-material-icons',
-      status: 'CLOSED',
+      version: '1',
       actions: 'Y | N',
     },
   ]);
 
   const headers = [
-    { text: 'CHPL Product Number', property: 'chplProductNumber', sortable: true },
-    { text: 'Product', property: 'product', sortable: true },
+    { text: 'CHPL Product ID', property: 'chplProductNumber', sortable: true },
     { text: 'Edition', property: 'edition', sortable: true },
     { text: 'Developer', property: 'developer', sortable: true },
+    { text: 'Product', property: 'product', sortable: true },
+    { text: 'Version', property: 'version', sortable: true },
     { text: 'RWT Plans URL', property: 'rwtPlansUrl', sortable: true },
     { text: 'RWT Results URL', property: 'rwtResultsUrl', sortable: true },
   ];
@@ -601,7 +600,7 @@ function rwt() {
                 </div>
                 <div>
                   <Typography gutterBottom variant='subtitle2'>Surveillance</Typography>
-                  <Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" />
+                  <Chip icon={<VerifiedUserOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" />
                 </div>
                 <div>
                   <Typography gutterBottom variant='subtitle2'>Other:</Typography>
@@ -640,7 +639,7 @@ function rwt() {
                       <div className={classes.versionProductCardHeaderContainer}>
                         <Typography variant='subtitle2'> Developer:</Typography>
                         <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>|
-                        <Typography variant='subtitle2'>CHPL Product Number:</Typography>
+                        <Typography variant='subtitle2'>CHPL Product ID:</Typography>
                         <Typography variant='body1'><a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a></Typography>
                       </div>
                     </div>
@@ -685,7 +684,7 @@ function rwt() {
                       <div className={classes.versionProductCardHeaderContainer}>
                         <Typography variant='subtitle2'> Developer:</Typography>
                         <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>|
-                        <Typography variant='subtitle2'>CHPL Product Number:</Typography>
+                        <Typography variant='subtitle2'>CHPL Product ID:</Typography>
                         <Typography variant='body1'><a href='#'>15.04.04.1447.Beac.AU.08.1.200220</a></Typography>
                       </div>
                     </div>
@@ -730,7 +729,7 @@ function rwt() {
                       <div className={classes.versionProductCardHeaderContainer}>
                         <Typography variant='subtitle2'> Developer:</Typography>
                         <Typography variant='body1'><a href='#'> Epic Systems Corporation </a></Typography>|
-                        <Typography variant='subtitle2'>CHPL Product Number:</Typography>
+                        <Typography variant='subtitle2'>CHPL Product ID:</Typography>
                         <Typography variant='body1'><a href='#'>15.04.04.1447.Nati.21.07.1.210825	</a></Typography>
                       </div>
                     </div>
@@ -903,7 +902,7 @@ function rwt() {
                 <div><Chip icon={<HelpOutlineOutlinedIcon />} label="Active" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<DateRangeIcon />} label="2015" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<BookOutlinedIcon />} label="Criteria: 170.314(D)(6)" onDelete={handleDelete} color="primary" variant="outlined" /></div>
-                <div><Chip icon={<GavelOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
+                <div><Chip icon={<VerifiedUserOutlinedIcon />} label="Has Compliance" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <div><Chip icon={<TuneOutlinedIcon />} label="Developer:Epic" onDelete={handleDelete} color="primary" variant="outlined" /></div>
                 <Button variant="contained" size="small" color="default" >Clear All Filters <ClearIcon className={classes.iconSpacing} /></Button>
               </div>
@@ -942,10 +941,13 @@ function rwt() {
                           <a href='#'>{listing.chplProductNumber}</a>
                         </Typography>
                       </TableCell>
-                      <TableCell>{listing.product}</TableCell>
                       <TableCell>{listing.edition}</TableCell>
+                      <TableCell><a href='#'>{listing.developer}</a></TableCell>
                       <TableCell>
-                        <a href='#'>{listing.developer}</a>
+                       {listing.product}
+                      </TableCell>
+                      <TableCell>
+                        {listing.version}
                       </TableCell>
                       <TableCell><a href='#'>{listing.rwtPlansUrl}</a></TableCell>
                       <TableCell><a href='#'>{listing.rwtResultsUrl}</a></TableCell>

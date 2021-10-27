@@ -27,6 +27,7 @@
     "report:open": "npx allure open /chpl/dev/allure/report"
   },
   "dependencies": {
+    "@angular/material-moment-adapter": "^12.2.12",
     "@babel/polyfill": "^7.4.3",
     "@babel/preset-react": "^7.13.13",
     "@babel/register": "^7.4.0",
