@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Chip,
+  Chip, Typography,makeStyles,
 } from '@material-ui/core';
 import { useFilterContext } from './filter-context';
-
+const useStyles = makeStyles(() => ({
+  filterSelectedContainer: {
+   display:'flex',
+   gap:'4px',
+   alignItems:'center',
+   justifyContent:'flex-start',
+   flexWrap:'wrap',
+  },
+}));
 function ChplFilterChips() {
   const [filters, setFilters] = useState([]);
   const filterContext = useFilterContext();
-
+  const classes = useStyles();
   useEffect(() => {
     setFilters(filterContext.filters
                .sort((a, b) => a.key < b.key ? -1 : 1)
@@ -24,12 +32,13 @@ function ChplFilterChips() {
   return (
     <>
       { filters.map((f) => (
-        <span key={f.key}>
-          { f.values
+        <span className={classes.filterSelectedContainer} key={f.key}>
+          <Typography variant='subtitle2'>{f.display}:</Typography>
+          {f.values
             .map((v) => (
               <Chip
                 key={v.value}
-                label={`${f.display}: ${v.value}`}
+                label={`${v.value}`}
                 onDelete={() => filterContext.dispatch('toggle', f, v)}
                 color="primary"
                 variant="outlined"

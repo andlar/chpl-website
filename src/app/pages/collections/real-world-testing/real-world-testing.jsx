@@ -66,6 +66,22 @@ const useStyles = makeStyles(() => ({
       gridTemplateColumns: '1fr 1fr',
     },
   },
+  filterApplied:{
+    paddingTop:'4px',
+  },
+  filterContainer: {
+    display: 'grid',
+    padding: '8px 32px',
+    gap: '8px',
+    gridTemplateColumns: '1fr',
+    backgroundColor: '#fafdff',
+    borderBottom: '1px solid #bbb',
+    boxShadow: 'rgba(149, 157, 165, 0.1) 8px 0px 8px',
+    alignItems:'start',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: 'auto auto auto',
+    },
+  },
   rowHeader: {
     display: 'grid',
     gap: '16px',
@@ -213,11 +229,14 @@ function ChplRealWorldTestingCollectionPage() {
           </Card>
         </div>
       </div>
-      <div className={classes.searchContainer}>
+      <div className={classes.searchContainer} component={Paper}>
         <ChplFilterSearchTerm />
         <ChplFilterPanel />
       </div>
-      <ChplFilterChips />
+      <div className={classes.filterContainer}>
+        <Typography className={classes.filterApplied} variant='subtitle1'>Filters Applied:</Typography>
+        <ChplFilterChips/>
+      </div>
       { listings.length === 0 ?
         (
           <>No results found</>
