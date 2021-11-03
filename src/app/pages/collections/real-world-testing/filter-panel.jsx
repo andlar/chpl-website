@@ -163,7 +163,7 @@ function ChplFilterPanel(props) {
             background: '#E7F0F8',
             display: 'grid',
             width: '100%',
-            marginTop: '21px',
+            marginTop: '18px',
             borderRadius: '0px',
             boxShadow: '0px 4px 8px rgb(149 157 165 / 30%)',
           },
