@@ -4,13 +4,14 @@ const ReportsListingsComponent = {
     productId: '<',
   },
   controller: class ReportsListingsComponent {
-    constructor($filter, $log, $state, $uibModal, ReportService, authService, networkService, utilService) {
+    constructor($filter, $log, $state, $uibModal, DateUtil, ReportService, authService, networkService, utilService) {
       'ngInject';
 
       this.$filter = $filter;
       this.$log = $log;
       this.$state = $state;
       this.$uibModal = $uibModal;
+      this.DateUtil = DateUtil;
       this.ReportService = ReportService;
       this.authService = authService;
       this.networkService = networkService;
@@ -377,16 +378,16 @@ const ReportsListingsComponent = {
       c = 0;
       while (pUcd[p] || cUcd[c]) {
         if (!pUcd[p]) {
-          ret.push('<li>UCD Process Name "' + cUcd[c].name + '" was added</li>');
+          ret.push(`<li>UCD Process Name "${cUcd[c].name}" was added</li>`);
           c++;
         } else if (!cUcd[c]) {
-          ret.push('<li>UCD Process Name "' + pUcd[p].name + '" was removed</li>');
+          ret.push(`<li>UCD Process Name "${pUcd[p].name}" was removed</li>`);
           p++;
         } else if (pUcd[p].name > cUcd[c].name) {
-          ret.push('<li>UCD Process Name "' + cUcd[c].name + '" was added</li>');
+          ret.push(`<li>UCD Process Name "${cUcd[c].name}" was added</li>`);
           c++;
         } else if (pUcd[p].name < cUcd[c].name) {
-          ret.push('<li>UCD Process Name "' + pUcd[p].name + '" was removed</li>');
+          ret.push(`<li>UCD Process Name "${pUcd[p].name}" was removed</li>`);
           p++;
         } else {
           changes = [];
@@ -429,16 +430,16 @@ const ReportsListingsComponent = {
       c = 0;
       while (pTask[p] || cTask[c]) {
         if (!pTask[p]) { // reached the end of the previous tasks; all remaining were added
-          ret.push('<li>Task Description "' + cTask[c].description + '" was added</li>');
+          ret.push(`<li>Task Description "${cTask[c].description}" was added</li>`);
           c++;
         } else if (!cTask[c]) { // reached the end of the current tasks; all remaining were removed
-          ret.push('<li>Task Description "' + pTask[p].description + '" was removed</li>');
+          ret.push(`<li>Task Description "${pTask[p].description}" was removed</li>`);
           p++;
         } else if (pTask[p].description > cTask[c].description) { // found a new current task; it's added
-          ret.push('<li>Task Description "' + cTask[c].description + '" was added</li>');
+          ret.push(`<li>Task Description "${cTask[c].description}" was added</li>`);
           c++;
         } else if (pTask[p].description < cTask[c].description) { // found a previous task that's not in the current set; it's removed
-          ret.push('<li>Task Description "' + pTask[p].description + '" was removed</li>');
+          ret.push(`<li>Task Description "${pTask[p].description}" was removed</li>`);
           p++;
         } else {
           changes = [];
@@ -621,6 +622,41 @@ const ReportsListingsComponent = {
 
     compareTestStuff(prev, curr) {
       const ret = [];
+      if (prev.conformanceMethods && curr.conformanceMethods) {
+        prev.conformanceMethods.forEach((pre) => {
+          if (pre.conformanceMethod) {
+            curr.conformanceMethods.forEach((cur) => {
+              if (!cur.found && !pre.found
+                && pre.conformanceMethod.name === cur.conformanceMethod.name
+                && pre.conformanceMethodVersion === cur.conformanceMethodVersion) {
+                pre.found = true;
+                cur.found = true;
+              }
+            });
+          }
+        });
+        prev.conformanceMethods.forEach((pre) => {
+          if (pre.conformanceMethod) {
+            curr.conformanceMethods.forEach((cur) => {
+              if (!cur.found && !pre.found && pre.conformanceMethod.name === cur.conformanceMethod.name) {
+                pre.found = true;
+                cur.found = true;
+                ret.push(`<li>Conformance Method "${pre.conformanceMethod.name}" version changed from "${pre.conformanceMethodVersion}" to "${cur.conformanceMethodVersion}"</li>`);
+              }
+            });
+            if (!pre.found) {
+              ret.push(`<li>Conformance Method "${pre.conformanceMethod.name}" was removed</li>`);
+            }
+          }
+        });
+        curr.conformanceMethods.forEach((cur) => {
+          if (cur.conformanceMethod) {
+            if (!cur.found) {
+              ret.push(`<li>Conformance Method "${cur.conformanceMethod.name}" was added</li>`);
+            }
+          }
+        });
+      }
       if (prev.testProcedures && curr.testProcedures) {
         prev.testProcedures.forEach((pre) => {
           if (pre.testProcedure) {
@@ -698,38 +734,25 @@ const ReportsListingsComponent = {
           }
         });
       }
-      if (prev.optionalStandards && curr.optionalStandards) {
-        prev.optionalStandards.forEach((pre) => {
-          if (pre.optionalStandard) {
-            curr.optionalStandards.forEach((cur) => {
-              if (!cur.found && !pre.found && pre.optionalStandard.optionalStandard === cur.optionalStandard.optionalStandard) {
-                pre.found = true;
-                cur.found = true;
-              }
-            });
-          }
-        });
-        prev.optionalStandards.forEach((pre) => {
-          if (pre.optionalStandard) {
-            curr.optionalStandards.forEach((cur) => {
-              if (!cur.found && !pre.found && pre.optionalStandard.optionalStandard === cur.optionalStandard.optionalStandard) {
-                pre.found = true;
-                cur.found = true;
-              }
-            });
-            if (!pre.found) {
-              ret.push(`<li>Optional Standard "${pre.optionalStandard.citation}: ${pre.optionalStandard.description}" was removed</li>`);
-            }
-          }
-        });
-        curr.optionalStandards.forEach((cur) => {
-          if (cur.optionalStandard) {
-            if (!cur.found) {
-              ret.push(`<li>Optional Standard "${cur.optionalStandard.citation}: ${cur.optionalStandard.description}" was added</li>`);
-            }
-          }
-        });
+
+      if (!prev.optionalStandards) {
+        prev.optionalStandards = [];
       }
+      if (!curr.optionalStandards) {
+        curr.optionalStandards = [];
+      }
+      curr.optionalStandards
+        .filter((currOS) => prev.optionalStandards.filter((prevOS) => currOS.citation === prevOS.citation).length === 0)
+        .forEach((addedOS) => {
+          ret.push(`<li>Optional Standard "${addedOS.citation}: ${addedOS.description}" was added</li>`);
+        }
+        );
+      prev.optionalStandards
+        .filter((prevOS) => curr.optionalStandards.filter((currOS) => prevOS.citation === currOS.citation).length === 0)
+        .forEach((removedOS) => {
+          ret.push(`<li>Optional Standard "${removedOS.citation}: ${removedOS.description}" was removed</li>`);
+        }
+        );
       return ret;
     }
 
