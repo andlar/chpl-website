@@ -33,7 +33,7 @@ function ChplFilterChips() {
     <>
       { filters.map((f) => (
         <span className={classes.filterSelectedContainer} key={f.key}>
-          <Typography variant='body1'>{f.display}:</Typography>
+          <Typography variant='body1'><strong>{f.display}:</strong></Typography>
           {f.values
             .map((v) => (
               <Chip

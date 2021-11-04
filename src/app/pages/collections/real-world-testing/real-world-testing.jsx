@@ -281,7 +281,7 @@ function ChplRealWorldTestingCollectionPage() {
                   {listings
                     .map((item) => (
                       <TableRow key={item.id}>
-                        <TableCell className={classes.stickyColumn}><a href={`#/listing/${item.id}`}>{item.chplProductNumber}</a></TableCell>
+                        <TableCell className={classes.stickyColumn}><strong><a href={`#/listing/${item.id}`}>{item.chplProductNumber}</a></strong></TableCell>
                         <TableCell><a href={`#/organizations/developers/${item.developerId}`}>{item.developer}</a></TableCell>
                         <TableCell>{item.product}</TableCell>
                         <TableCell>{item.version}</TableCell>
