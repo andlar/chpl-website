@@ -33,12 +33,12 @@ function ChplFilterChips() {
     <>
       { filters.map((f) => (
         <span className={classes.filterSelectedContainer} key={f.key}>
-          <Typography variant='subtitle2'>{f.display}:</Typography>
+          <Typography variant='body1'>{f.display}:</Typography>
           {f.values
             .map((v) => (
               <Chip
                 key={v.value}
-                label={`${f.display}: ${v.display}`}
+                label={`${v.display}`}
                 onDelete={() => filterContext.dispatch('toggle', f, v)}
                 color="primary"
                 variant="outlined"

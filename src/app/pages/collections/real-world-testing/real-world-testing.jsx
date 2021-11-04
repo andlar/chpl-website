@@ -65,6 +65,7 @@ const useStyles = makeStyles(() => ({
     flexFlow:'column',
     [theme.breakpoints.up('md')]: {
       flexFlow:'row',
+      flexWrap:'wrap',
     },
   },
   linkWrap:{

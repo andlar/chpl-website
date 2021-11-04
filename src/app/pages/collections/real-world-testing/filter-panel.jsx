@@ -34,6 +34,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: 'auto',
     justifyItems: 'start',
     alignItems: 'start',
+    gap:'8px',
   },
   filterHeaderContainer: {
     display: 'grid',
@@ -204,10 +205,11 @@ function ChplFilterPanel() {
                   <div className={classes.filterContainer}>
                     { filters.map((f) => (
                       <Button
+                        fullWidth
                         key={f.key}
-                        color="primary"
+                        color={f === active ? 'default' : 'primary'}
                         id={`filter-panel-primary-items-${f.key}`}
-                        variant={f === active ? 'outlined' : 'text'}
+                        variant='outlined'
                         onClick={() => toggleActive(f)}
                       >
                         <span className={f === active ? classes.filterBold : undefined}>
