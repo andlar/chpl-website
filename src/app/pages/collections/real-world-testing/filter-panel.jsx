@@ -26,6 +26,9 @@ const useStyles = makeStyles({
     gridTemplateColumns: '6fr 2fr 4fr',
     padding: '16px',
   },
+  filterButton:{
+    fontWeight:'600',
+  },
   filterContainer: {
     display: 'grid',
     gridTemplateColumns: 'auto',
@@ -163,7 +166,7 @@ function ChplFilterPanel(props) {
             background: '#E7F0F8',
             display: 'grid',
             width: '100%',
-            marginTop: '18px',
+            marginTop: '16px',
             borderRadius: '0px',
             boxShadow: '0px 4px 8px rgb(149 157 165 / 30%)',
           },
@@ -201,8 +204,8 @@ function ChplFilterPanel(props) {
                     { filters.map((f) => (
                       <Button
                         key={f.key}
-                        color="primary"
-                        variant={f === active ? 'outlined' : 'text'}
+                        color={f === active ? 'default' : 'primary'}
+                        variant='text'
                         onClick={() => toggleActive(f)}
                       >
                         {f.display}
