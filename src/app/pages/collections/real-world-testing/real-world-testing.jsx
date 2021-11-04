@@ -70,16 +70,16 @@ const useStyles = makeStyles(() => ({
     paddingTop:'4px',
   },
   filterContainer: {
-    display: 'grid',
-    padding: '8px 32px',
+    display: 'flex',
+    padding: '16px 32px',
     gap: '8px',
-    gridTemplateColumns: '1fr',
     backgroundColor: '#fafdff',
     borderBottom: '1px solid #bbb',
     boxShadow: 'rgba(149, 157, 165, 0.1) 8px 0px 8px',
-    alignItems:'start',
+    flexWrap:'wrap',
+    flexFlow:'column',
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: 'auto auto auto',
+      flexFlow:'row',
     },
   },
   rowHeader: {
@@ -108,6 +108,22 @@ const useStyles = makeStyles(() => ({
     [theme.breakpoints.up('md')]: {
       gridTemplateColumns: 'auto 10fr auto',
     },
+  },
+  stickyColumn: {
+    position: 'sticky',
+    left: 0,
+    boxShadow: 'rgba(149, 157, 165, 0.1) 0px 4px 8px',
+    backgroundColor: '#ffffff',
+  },
+  linkWrap:{
+    overflowWrap:'anywhere',
+  },
+  tableContainer: {
+    maxHeight: "800px",
+    overflowWrap: 'normal',
+    border: '.5px solid #c2c6ca',
+    margin: '0px 32px',
+    width: 'auto',
   },
   tableResultsHeaderContainer: {
     display: 'grid',
@@ -260,8 +276,8 @@ function ChplRealWorldTestingCollectionPage() {
                 </Button>
               </ButtonGroup>
             </div>
-            <TableContainer className={classes.container} component={Paper}>
-              <Table
+            <TableContainer className={classes.tableContainer} component={Paper}>
+              <Table 
                 stickyHeader
                 aria-label="Real World Testing Collections table"
               >
@@ -275,12 +291,12 @@ function ChplRealWorldTestingCollectionPage() {
                   {listings
                    .map((item) => (
                      <TableRow key={item.id}>
-                       <TableCell>{item.chplProductNumber}</TableCell>
+                       <TableCell className={classes.stickyColumn}>{item.chplProductNumber}</TableCell>
                        <TableCell>{item.developer}</TableCell>
                        <TableCell>{item.product}</TableCell>
                        <TableCell>{item.version}</TableCell>
                        <TableCell>{item.certificationStatus} / {item.edition} {item.curesUpdate ? 'Cures Update' : '' }</TableCell>
-                       <TableCell>
+                       <TableCell className={classes.linkWrap}>
                          {item.rwtPlansUrl &&
                           (
                             <ChplLink
@@ -289,7 +305,7 @@ function ChplRealWorldTestingCollectionPage() {
                             />
                           )}
                        </TableCell>
-                       <TableCell>
+                       <TableCell className={classes.linkWrap}>
                          {item.rwtResultsUrl &&
                           (
                             <ChplLink
