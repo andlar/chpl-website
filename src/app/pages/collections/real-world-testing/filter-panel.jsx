@@ -21,7 +21,7 @@ import { useFilterContext } from './filter-context';
 
 const useStyles = makeStyles({
   filterPanelContainer: {
-    background: '#E7F0F8',
+    background: '#fafdff',
     display: 'grid',
     gridTemplateColumns: '6fr 2fr 4fr',
     padding: '16px',
