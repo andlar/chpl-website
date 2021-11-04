@@ -118,7 +118,6 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'rgba(149, 157, 165, 0.1) 0px 4px 8px',
     backgroundColor: '#ffffff',
     overflowWrap:'anywhere',
-
   },
   tableContainer: {
     maxHeight: "800px",
@@ -288,6 +287,7 @@ function ChplRealWorldTestingCollectionPage() {
                   onTableSort={handleTableSort}
                   orderBy={orderBy}
                   order={sortDescending ? 'desc' : 'asc'}
+                  stickyHeader
                 />
                 <TableBody>
                   {listings
