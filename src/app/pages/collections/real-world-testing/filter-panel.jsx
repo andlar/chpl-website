@@ -18,13 +18,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 import { useFilterContext } from './filter-context';
+import theme from '../../../themes/theme';
 
 const useStyles = makeStyles({
   filterPanelContainer: {
     background: '#fafdff',
     display: 'grid',
-    gridTemplateColumns: '6fr 2fr 4fr',
+    gridTemplateColumns: '1fr',
     padding: '16px',
+    rowGap:'16px',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
   },
   filterBold:{
     fontWeight:'600',
@@ -60,7 +65,7 @@ const useStyles = makeStyles({
   },
   filterSubHeaderContainer: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr',
     justifyItems: 'start',
     gap: '8px',
   },

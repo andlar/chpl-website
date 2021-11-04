@@ -8,6 +8,7 @@ import { string } from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { useFilterContext } from './filter-context';
+import theme from '../../../themes/theme';
 
 const useStyles = makeStyles(() => ({
   goButton: {
@@ -19,7 +20,10 @@ const useStyles = makeStyles(() => ({
     gridTemplateColumns: '10fr auto',
   },
   searchIcon: {
-    //need to add a breakpoint to hide this icon on mobile view
+    display:'none',
+    [theme.breakpoints.up('md')]: {
+      display:'grid',
+    },
   },
   searchInput: {
     flexGrow: 1,
