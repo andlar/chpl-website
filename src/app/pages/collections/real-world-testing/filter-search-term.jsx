@@ -41,11 +41,11 @@ function ChplFilterSearchTerm(props) {
 
   const handleGo = () => {
     filterContext.setSearchTerm(searchTerm);
-  }
+  };
 
   const handleSearchTerm = (event) => {
     setSearchTerm(event.target.value);
-  }
+  };
 
   return (
     <>

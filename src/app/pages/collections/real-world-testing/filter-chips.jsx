@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Chip, Typography,makeStyles,
 } from '@material-ui/core';
+
 import { useFilterContext } from './filter-context';
 const useStyles = makeStyles(() => ({
   filterSelectedContainer: {
@@ -18,15 +19,14 @@ function ChplFilterChips() {
   const classes = useStyles();
   useEffect(() => {
     setFilters(filterContext.filters
-               .sort((a, b) => a.key < b.key ? -1 : 1)
-               .map((f) => ({
-                 ...f,
-                 values: f.values
-                   .filter((f) => f.selected)
-                   .sort((a, b) => a.value < b.value ? -1 : 1),
-               }))
-               .filter((f) => f.values.length > 0)
-              );
+      .sort((a, b) => (a.display < b.display ? -1 : 1))
+      .map((filter) => ({
+        ...filter,
+        values: filter.values
+          .filter((f) => f.selected)
+          .sort((a, b) => (a.display < b.display ? -1 : 1)),
+      }))
+      .filter((filter) => filter.values.length > 0));
   }, [filterContext.filters]);
 
   return (
@@ -38,7 +38,7 @@ function ChplFilterChips() {
             .map((v) => (
               <Chip
                 key={v.value}
-                label={`${v.value}`}
+                label={`${f.display}: ${v.display}`}
                 onDelete={() => filterContext.dispatch('toggle', f, v)}
                 color="primary"
                 variant="outlined"
