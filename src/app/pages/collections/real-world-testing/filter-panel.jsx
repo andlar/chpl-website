@@ -3,18 +3,15 @@ import {
   Button,
   ButtonGroup,
   Checkbox,
-  InputBase,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   ListSubheader,
   Popover,
-  Switch,
   Typography,
   makeStyles,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 import { useFilterContext } from './filter-context';
@@ -52,17 +49,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     borderLeft: '1px solid #599bde',
   },
-  filterGroupThreeContainer: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    alignItems: 'center',
-  },
-  filterSubHeaderGroupThreeContainer: {
-    display: 'grid',
-    gridTemplateColumns: '10fr auto auto',
-    alignItems: 'center',
-    gap: '8px',
-  },
   filterSubHeaderContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -79,12 +65,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     display: 'grid',
     gridTemplateColumns: 'auto 1fr',
-  },
-  switchGroupThreeContainer: {
-    display: 'grid',
-    gridTemplateColumns: '10fr auto auto',
-    alignItems: 'center',
-    gap: '4px',
   },
   iconSpacing: {
     marginLeft: '4px',
@@ -228,40 +208,40 @@ function ChplFilterPanel() {
             </div>
           </div>
           <div>
-            <List
-              dense
-              subheader={(
-                <ListSubheader
-                  disableSticky
-                  component="div"
-                  id="filter-panel-secondary-subheader"
-                >
-                  <div className={classes.filterSubHeaderContainer}>
-                    <ButtonGroup
-                      variant="text"
-                      color="primary"
-                      size="medium"
-                      aria-label="apply to filter dropdown"
-                    >
-                      <Button
-                        onClick={() => handleAction('clearFilter')}
+            { active?.values.length > 0 && (
+              <List
+                dense
+                subheader={(
+                  <ListSubheader
+                    disableSticky
+                    component="div"
+                    id="filter-panel-secondary-subheader"
+                  >
+                    <div className={classes.filterSubHeaderContainer}>
+                      <ButtonGroup
+                        variant="text"
+                        color="primary"
+                        size="medium"
+                        aria-label="apply to filter dropdown"
                       >
-                        Clear
-                      </Button>
-                      <Button
-                        onClick={() => handleAction('resetFilter')}
-                      >
-                        Reset
-                      </Button>
-                    </ButtonGroup>
-                  </div>
-                </ListSubheader>
-              )}
-            >
-              { active?.values.length > 0 && (
+                        <Button
+                          onClick={() => handleAction('clearFilter')}
+                        >
+                          Clear
+                        </Button>
+                        <Button
+                          onClick={() => handleAction('resetFilter')}
+                        >
+                          Reset
+                        </Button>
+                      </ButtonGroup>
+                    </div>
+                  </ListSubheader>
+                )}
+              >
                 <div className={classes.filterGroupTwoContainer}>
                   { active.values.map((v) => {
-                    const labelId = `filter-panel-secondary-items-${v.value}`;
+                    const labelId = `filter-panel-secondary-items-${v.value.replaceAll(' ', '_')}`;
                     return (
                       <ListItem
                         key={v.value}
@@ -282,8 +262,8 @@ function ChplFilterPanel() {
                     );
                   })}
                 </div>
-              )}
-            </List>
+              </List>
+            )}
           </div>
         </div>
       </Popover>
