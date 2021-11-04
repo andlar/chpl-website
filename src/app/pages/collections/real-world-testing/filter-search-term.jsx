@@ -18,6 +18,9 @@ const useStyles = makeStyles(() => ({
     display: 'grid',
     gridTemplateColumns: '10fr auto',
   },
+  searchIcon: {
+    //need to add a breakpoint to hide this icon on mobile view
+  },
   searchInput: {
     flexGrow: 1,
   },
@@ -27,7 +30,6 @@ const useStyles = makeStyles(() => ({
     padding: '8px',
     borderRadius: '8px',
   },
-
 }));
 
 function ChplFilterSearchTerm(props) {

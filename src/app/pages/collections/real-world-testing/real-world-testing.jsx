@@ -82,6 +82,9 @@ const useStyles = makeStyles(() => ({
       flexFlow:'row',
     },
   },
+  linkWrap:{
+    overflowWrap:'anywhere',
+  },
   rowHeader: {
     display: 'grid',
     gap: '16px',
@@ -114,9 +117,8 @@ const useStyles = makeStyles(() => ({
     left: 0,
     boxShadow: 'rgba(149, 157, 165, 0.1) 0px 4px 8px',
     backgroundColor: '#ffffff',
-  },
-  linkWrap:{
     overflowWrap:'anywhere',
+
   },
   tableContainer: {
     maxHeight: "800px",
