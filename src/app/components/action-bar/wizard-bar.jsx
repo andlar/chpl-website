@@ -80,54 +80,55 @@ function ChplWizardBar(props) {
   return (
     <ThemeProvider theme={theme}>
       <div className="action-bar">
-        { isConfirming
+        {isConfirming
           && (
-          <ChplActionBarConfirmation
-            dispatch={handleConfirmation}
-            pendingMessage={pendingMessage}
-          />
+            <ChplActionBarConfirmation
+              dispatch={handleConfirmation}
+              pendingMessage={pendingMessage}
+            />
           )}
-        { (errors?.length > 0 || warnings?.length > 0)
+        {(errors?.length > 0 || warnings?.length > 0)
           && (
             <>
               <div className="action-bar__error-toggle">
-                <span
+                <div
                   onClick={() => setShowMessages(!showMessages)}
                   onKeyDown={() => setShowMessages(!showMessages)}
                   tabIndex={0}
                   role="button"
                 >
-                  { errors?.length > 0
+                  {errors?.length > 0
                     && (
                       <>
                         Error
-                        { errors.length > 1 && 's'}
+                        {errors.length > 1 && 's'}
                       </>
                     )}
-                  { errors?.length > 0 && warnings?.length > 0
+                  {errors?.length > 0 && warnings?.length > 0
                     && <> and </>}
-                  { warnings?.length > 0
+                  {warnings?.length > 0
                     && (
                       <>
                         Warning
-                        { warnings.length > 1 && 's'}
+                        {warnings.length > 1 && 's'}
                       </>
                     )}
-                  <i className={`fa ${showMessages ? 'fa-caret-down' : 'fa-caret-left'}`} />
-                </span>
+                  <span className={classes.iconSpacing}>
+                    <i className={`fa ${showMessages ? 'fa-caret-down' : 'fa-caret-left'}`} /></span>
+                </div>
               </div>
             </>
           )}
-        { showMessages
+        {showMessages
           && (
             <>
               <div className="action-bar__messages">
-                { errors?.length > 0
+                {errors?.length > 0
                   && (
                     <div className="action-bar__errors">
                       <strong>
                         Error
-                        { errors.length > 1 && 's'}
+                        {errors.length > 1 && 's'}
                       </strong>
                       <ul className="action-bar__error-messages">
                         {
@@ -138,13 +139,13 @@ function ChplWizardBar(props) {
                       </ul>
                     </div>
                   )}
-                { warnings?.length > 0
+                {warnings?.length > 0
                   && (
                     <>
                       <div className="action-bar__warnings">
                         <strong>
                           Warning
-                          { warnings.length > 1 && 's'}
+                          {warnings.length > 1 && 's'}
                         </strong>
                         <ul className="action-bar__warning-messages">
                           {
@@ -159,7 +160,7 @@ function ChplWizardBar(props) {
               </div>
             </>
           )}
-        { warnings?.length > 0
+        {warnings?.length > 0
           && (
             <div className="action-bar__acknowledge-warnings">
               <FormControlLabel
@@ -181,7 +182,8 @@ function ChplWizardBar(props) {
           >
             <Button
               id="action-bar-cancel"
-              variant="outlined"
+              variant="contained"
+              color="default"
               onClick={() => confirmCancel()}
               className={classes.buttons}
             >
@@ -193,6 +195,7 @@ function ChplWizardBar(props) {
             <Button
               id="action-bar-previous"
               variant="outlined"
+              color="primary"
               disabled={!canPrevious}
               onClick={() => act('previous')}
               className={classes.buttons}
@@ -202,7 +205,7 @@ function ChplWizardBar(props) {
                 className={classes.iconSpacing}
               />
             </Button>
-            { canNext
+            {canNext
               && (
                 <Button
                   id="action-bar-next"
@@ -216,7 +219,7 @@ function ChplWizardBar(props) {
                   />
                 </Button>
               )}
-            { !canNext
+            {!canNext
               && (
                 <Button
                   id="action-bar-confirm"

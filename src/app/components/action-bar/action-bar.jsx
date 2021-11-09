@@ -7,6 +7,7 @@ import {
   ButtonGroup,
   ThemeProvider,
   makeStyles,
+  Typography,
 } from '@material-ui/core';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
@@ -73,54 +74,55 @@ function ChplActionBar(props) {
   return (
     <ThemeProvider theme={theme}>
       <div className="action-bar">
-        { isConfirming
+        {isConfirming
           && (
-          <ChplActionBarConfirmation
-            dispatch={handleConfirmation}
-            pendingMessage={pendingMessage}
-          />
+            <ChplActionBarConfirmation
+              dispatch={handleConfirmation}
+              pendingMessage={pendingMessage}
+            />
           )}
-        { ((errors && errors.length > 0) || (warnings && warnings.length > 0))
+        {((errors && errors.length > 0) || (warnings && warnings.length > 0))
           && (
             <>
               <div className="action-bar__error-toggle">
-                <span
+                <div
                   onClick={() => setShowMessages(!showMessages)}
                   onKeyDown={() => setShowMessages(!showMessages)}
                   tabIndex={0}
                   role="button"
                 >
-                  { errors && errors.length > 0
+                  {errors && errors.length > 0
                     && (
                       <>
-                        Error
-                        { errors.length > 1 && 's'}
+                        <Typography>Error</Typography>
+                        {errors.length > 1 && 's'}
                       </>
                     )}
-                  { errors && errors.length > 0 && warnings && warnings.length > 0
+                  {errors && errors.length > 0 && warnings && warnings.length > 0
                     && <> and </>}
-                  { warnings && warnings.length > 0
+                  {warnings && warnings.length > 0
                     && (
                       <>
-                        Warning
-                        { warnings.length > 1 && 's'}
+                        <Typography>Warning</Typography>
+                        {warnings.length > 1 && 's'}
                       </>
                     )}
-                  <i className={`fa ${showMessages ? 'fa-caret-down' : 'fa-caret-left'}`} />
-                </span>
+                  <span className={classes.iconSpacing}>
+                    <i className={`fa ${showMessages ? 'fa-caret-down' : 'fa-caret-left'}`} /></span>
+                </div>
               </div>
             </>
           )}
-        { showMessages
+        {showMessages
           && (
             <>
               <div className="action-bar__messages">
-                { errors && errors.length > 0
+                {errors && errors.length > 0
                   && (
                     <div className="action-bar__errors">
                       <strong>
                         Error
-                        { errors.length > 1 && 's'}
+                        {errors.length > 1 && 's'}
                       </strong>
                       <ul className="action-bar__error-messages">
                         {
@@ -131,13 +133,13 @@ function ChplActionBar(props) {
                       </ul>
                     </div>
                   )}
-                { warnings && warnings.length > 0
+                {warnings && warnings.length > 0
                   && (
                     <>
                       <div className="action-bar__warnings">
                         <strong>
                           Warning
-                          { warnings.length > 1 && 's'}
+                          {warnings.length > 1 && 's'}
                         </strong>
                         <ul className="action-bar__warning-messages">
                           {
@@ -158,7 +160,8 @@ function ChplActionBar(props) {
           >
             <Button
               id="action-bar-cancel"
-              variant="outlined"
+              variant="contained"
+              color="default"
               onClick={() => confirmCancel()}
               className={classes.buttons}
             >
@@ -180,7 +183,7 @@ function ChplActionBar(props) {
                 className={classes.iconSpacing}
               />
             </Button>
-            { canDelete
+            {canDelete
               && (
                 <Button
                   id="action-bar-delete"
