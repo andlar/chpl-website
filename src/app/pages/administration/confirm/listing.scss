@@ -12,6 +12,10 @@
 
 .listing-inspect__subheader {
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     justify-content: space-between;
+}
+
+.align-right {
+    text-align: right;
 }
