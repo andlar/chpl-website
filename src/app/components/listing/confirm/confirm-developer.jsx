@@ -16,6 +16,7 @@ import {
   ThemeProvider,
   Typography,
   Button,
+  CardHeader,
 } from '@material-ui/core';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -197,7 +198,7 @@ function ChplConfirmDeveloper(props) {
         <StepLabel>Version</StepLabel>
         </Step>
         <Step>
-        <StepLabel>Developer</StepLabel>
+        <StepLabel>Listing</StepLabel>
         </Step>
       </Stepper>
       <form noValidate>
@@ -238,18 +239,12 @@ function ChplConfirmDeveloper(props) {
                   )}
               </div>
           </div>
-          <Divider/>
-          <Card>
-            <CardContent>
-              <Grid container spacing={4}>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1">
-                    Developer Information
-                  </Typography>
-                  <Divider />
-                </Grid>
+          <Divider/>   
                 {isCreating
                   ? (
+                    <Card>
+                    <CardHeader title="Create A Developer"></CardHeader>
+                    <CardContent>
                     <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <ChplTextField
@@ -306,9 +301,13 @@ function ChplConfirmDeveloper(props) {
                         />
                       </Grid>
                     </Grid>
+                    </CardContent>
+                    </Card>
                   )
                   : (
-                    <Grid container spacing={4}>
+                    <Card>
+                    <CardHeader title="Existing Developers"></CardHeader>
+                    <CardContent>
                       <Grid item xs={12}>
                         <ChplTextField
                           select
@@ -327,11 +326,10 @@ function ChplConfirmDeveloper(props) {
                           ))}
                         </ChplTextField>
                       </Grid>
-                    </Grid>
+                      </CardContent>
+                      </Card>
                   )}
-              </Grid>
-            </CardContent>
-          </Card>
+
           <Switch
                 id="create-toggle"
                 name="createDeveloper"
