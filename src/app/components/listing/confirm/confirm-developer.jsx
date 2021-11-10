@@ -15,6 +15,7 @@ import {
   Typography,
   Button,
   CardHeader,
+  ButtonGroup,
 } from '@material-ui/core';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -48,13 +49,13 @@ const useStyles = makeStyles(() => ({
   formContainer: {
     display: 'flex',
     gap: '16px',
-    flexDirection:'column',
+    flexDirection: 'column',
   },
   formSubContainer: {
     display: 'grid',
     gap: '16px',
-    flexDirection:'row',
-    gridTemplateColumns:'auto auto',
+    flexDirection: 'row',
+    gridTemplateColumns: 'auto auto',
   },
   rejectButton: {
     backgroundColor: '#c44f65',
@@ -63,12 +64,28 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#853544',
     },
   },
-  stepper: {
+  stepperBar:{
+    padding: '8px 32px',
+  },
+  stepperContainer: {
     borderRadius: '64px',
-    padding: '16px',
+    padding: '8px 16px',
     margin: '0 32px',
     border: '0.5px solid #c2c6ca',
     boxShadow: 'rgb(149 157 165 / 10%) 0 4px 8px',
+    backgroundColor: '#fff',
+  },
+  stepperButton: {
+    backgroundColor:'#fff',
+    borderBottom: '0.5px solid #c2c6ca',
+    borderLeft: '0.5px solid #c2c6ca',
+    borderRight: '0.5px solid #c2c6ca',
+    borderRadius:'0 0 32px 32px',
+    padding: '0 16px 8px 16px',
+  },
+  stepperButtonContainer: {
+    display: 'flex',
+    justifyContent:'center',
   },
   verticalDivider: {
     height: '25%',
@@ -77,6 +94,10 @@ const useStyles = makeStyles(() => ({
     padding: '32px',
     backgroundColor: '#fff',
     whiteSpace: 'pre-wrap',
+    '&:focus': {
+      boxShadow:'0px 0px 4px 3px #337ab76e',
+      fontWeight:'600',
+    },
   },
   iconSpacing: {
     marginLeft: '4px',
@@ -196,20 +217,28 @@ function ChplConfirmDeveloper(props) {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Stepper className={classes.stepper}>
-          <Step>
-            <StepLabel>Developer</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Product</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Version</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Listing</StepLabel>
-          </Step>
-        </Stepper>
+        <div className={classes.stepperContainer}>
+            <Stepper className={classes.stepperBar}>
+              <Step>
+                <StepLabel>Developer</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Product</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Version</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Listing</StepLabel>
+              </Step>
+            </Stepper>
+        </div>
+        <div className={classes.stepperButtonContainer}>
+            <ButtonGroup variant="text" className={classes.stepperButton} size="medium">
+              <Button>Back</Button>
+              <Button>Next</Button>
+            </ButtonGroup>
+          </div>
         <form noValidate>
           <div className={classes.developerConfirm}>
             <div className={classes.developerSubContainer}>
