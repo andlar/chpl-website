@@ -6,14 +6,16 @@
       <h1 ng-switch-when="version">Version</h1>
       <h1 ng-switch-when="listing">Listing</h1>
       <div>
-        <p class="align-right">Listing:</p>
+        <p class="align-right">INSPECTING:</p>
         <p>{{ $ctrl.listing.chplProductNumber }}</p></div>
     </div>
+    <!---
     <div>
       <chpl-confirm-progress-bridge
         value="$ctrl.progress"
         ></chpl-confirm-progress-bridge>
     </div>
+  -->
   </div>
   <div ng-switch="$ctrl.stage" ng-form="$ctrl.form">
     <div ng-switch-when="developer">

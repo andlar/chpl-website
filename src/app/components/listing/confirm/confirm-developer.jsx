@@ -8,6 +8,10 @@ import {
   Grid,
   MenuItem,
   Switch,
+  Stepper,
+  Step,
+  StepLabel,
+  StepButton,
   makeStyles,
   ThemeProvider,
   Typography,
@@ -49,12 +53,20 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#853544',
     },
   },
+  stepper:{
+    borderRadius:'64px',
+    padding:'16px',
+    margin:'0 32px',
+    border: '0.5px solid #c2c6ca',
+    boxShadow: 'rgb(149 157 165 / 10%) 0 4px 8px',
+  },
   verticalDivider: {
    height:'25%',
   },
   buttonCard:{
     padding:'32px',
     backgroundColor:'#fff',
+    whiteSpace:'pre-wrap',
   },
   iconSpacing: {
     marginLeft: '4px',
@@ -173,6 +185,21 @@ function ChplConfirmDeveloper(props) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Container>
+      <Stepper className={classes.stepper}>
+        <Step>
+        <StepLabel>Developer</StepLabel>
+        </Step>
+        <Step>
+        <StepLabel>Product</StepLabel>
+        </Step>
+        <Step>
+        <StepLabel>Version</StepLabel>
+        </Step>
+        <Step>
+        <StepLabel>Developer</StepLabel>
+        </Step>
+      </Stepper>
       <form noValidate>
         <div className={classes.developerConfirm}>
           <div className={classes.developerSubContainer}> 
@@ -314,6 +341,7 @@ function ChplConfirmDeveloper(props) {
               />
         </div>
       </form>
+      </Container>
     </ThemeProvider >
   );
 }

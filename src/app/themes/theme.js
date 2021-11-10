@@ -6,7 +6,7 @@ const theme = createMuiTheme({
     display: 'flex',
   },
   spacing: 4,
-  
+
   palette: {
     background: {
       default: '#f9f9f9',
@@ -78,25 +78,25 @@ const theme = createMuiTheme({
     MuiAccordionSummary: {
       root: {
         padding: '8px',
-        backgroundColor:'#f5f9fd',
+        backgroundColor: '#f5f9fd',
         '&$expanded': {
-          boxShadow:'0px 4px 8px rgb(149 157 165 / 30%)',
+          boxShadow: '0px 4px 8px rgb(149 157 165 / 30%)',
+        },
       },
-    },
 
       content: {
         padding: '4px 8px',
       },
-      expandIcon:{
-        transform:'none',
+      expandIcon: {
+        transform: 'none',
         '&$expanded': {
-          transform:'none',
+          transform: 'none',
         },
       },
     },
-    MuiAccordionDetails:{
-      root:{
-        padding:'16px 0px',
+    MuiAccordionDetails: {
+      root: {
+        padding: '16px 0px',
       },
     },
     MuiPaper: {
@@ -210,12 +210,12 @@ const theme = createMuiTheme({
         verticalAlign: 'text-top',
       },
     },
-    MuiOutlinedInput:{
-      input:{
+    MuiOutlinedInput: {
+      input: {
         paddingTop: '18.5px',
         paddingBottom: '14px',
       },
-      inputMarginDense:{
+      inputMarginDense: {
         paddingTop: '14.5px',
         paddingBottom: '10px',
       },
@@ -375,6 +375,27 @@ const theme = createMuiTheme({
         paddingBottom: '10px',
       },
     },
+    MuiStepLabel: {
+      root: {
+        flexDirection: 'column',
+      },
+      label: {
+        active: {
+          fontWeight: '600',
+        },
+      },
+      iconContainer:{
+        paddingRight:'0',
+      },
+    },
+    MuiStepIcon: {
+      root: {
+        fontSize: '1.7em',
+      },
+      text: {
+        fontSize: '1rem'
+      },
+    }
   },
 });
 export default theme;

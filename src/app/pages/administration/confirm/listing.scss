@@ -1,6 +1,7 @@
 .listing-inspect {
     display: grid;
     grid-template-rows: auto 1fr;
+    gap: 16px;
 }
 
 .listing-inspect__header {
@@ -14,8 +15,11 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    padding: 0 16px;
 }
 
 .align-right {
     text-align: right;
+    margin-bottom: 0;
+    font-weight: 600;
 }
