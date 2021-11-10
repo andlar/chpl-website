@@ -5,6 +5,13 @@
 
 .listing-inspect__header {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     align-items: center;
+    padding: 0 32px;
+}
+
+.listing-inspect__subheader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }

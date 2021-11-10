@@ -38,8 +38,9 @@ const useStyles = makeStyles(() => ({
   developerSubContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr auto 1fr',
-    alignItems:'stretch',
-    textAlign:'center',
+    alignItems: 'stretch',
+    textAlign: 'center',
+    gap: '32px',
   },
   rejectButton: {
     backgroundColor: '#c44f65',
@@ -48,11 +49,11 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#853544',
     },
   },
+  buttonCards: {
+    padding: '16px',
+  },
   iconSpacing: {
     marginLeft: '4px',
-  },
-  verticalDivider: {
-    height:'25%',
   },
 }));
 
@@ -171,7 +172,7 @@ function ChplConfirmDeveloper(props) {
       <form noValidate>
         <div className={classes.developerConfirm}>
           <div className={classes.developerSubContainer}>
-            <Card>
+            <Card className={classes.buttonCards}>
               <CardContent>
                 <Button
                   variant="contained"
@@ -188,7 +189,7 @@ function ChplConfirmDeveloper(props) {
               <Divider flexItem variant="middle" orientation="vertical"></Divider>
               <Typography>OR</Typography>
               <Divider flexItem variant="middle" orientation="vertical"></Divider>
-            <Switch
+              <Switch
                 id="create-toggle"
                 name="createDeveloper"
                 color="primary"
@@ -196,27 +197,28 @@ function ChplConfirmDeveloper(props) {
                 onChange={handleCreationToggle}
               />
             </div>
-            <Card>
-              <CardContent>
-                <div>
-                  {selectedDeveloper
-                    ? (
-                      <>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                        >
-                          Use An Existing Developer
-                          <CheckCircleIcon className={classes.iconSpacing}></CheckCircleIcon>
-                        </Button>
-                      </>
-                    ) : (
-                      <>
-                        Choose a developer to use
-                      </>
-                    )}
-                </div>
+            <Card className={classes.buttonCards}>
+            <CardContent>
+
+              <div>
+                {selectedDeveloper
+                  ? (
+                    <>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        fullWidth
+                      >
+                        Use An Existing Developer
+                        <CheckCircleIcon className={classes.iconSpacing}></CheckCircleIcon>
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      Choose a developer to use
+                    </>
+                  )}
+              </div>
               </CardContent>
             </Card>
           </div>
