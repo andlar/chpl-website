@@ -379,11 +379,6 @@ const theme = createMuiTheme({
       root: {
         flexDirection: 'column',
       },
-      label: {
-        active: {
-          fontWeight: '600',
-        },
-      },
       iconContainer:{
         paddingRight:'0',
       },
@@ -391,6 +386,10 @@ const theme = createMuiTheme({
     MuiStepIcon: {
       root: {
         fontSize: '1.7em',
+      },
+      active:{
+        boxShadow:'0px 0px 4px 3px #337ab76e',
+        borderRadius:'64px',
       },
       text: {
         fontSize: '1rem'

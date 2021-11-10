@@ -243,10 +243,10 @@ function ChplConfirmDeveloper(props) {
                 {isCreating
                   ? (
                     <Card>
-                    <CardHeader title="Create A Developer"></CardHeader>
+                    <CardHeader title="Creating A New Developer"></CardHeader>
                     <CardContent>
-                    <Grid container spacing={4}>
-                      <Grid item xs={6}>
+                    <div>
+                      <div >
                         <ChplTextField
                           id="name"
                           name="name"
@@ -257,8 +257,8 @@ function ChplConfirmDeveloper(props) {
                           onChange={handleChange}
                           onBlur={formik.handleBlur}
                         />
-                      </Grid>
-                      <Grid item xs={6}>
+                      </div>
+                      <div>
                         <FormControlLabel
                           label={`Self-Developer (${formik.values.selfDeveloper ? 'Yes' : 'No'})`}
                           control={(
@@ -271,8 +271,8 @@ function ChplConfirmDeveloper(props) {
                             />
                           )}
                         />
-                      </Grid>
-                      <Grid item xs={12}>
+                      </div>
+                      <div>
                         <ChplTextField
                           id="website"
                           name="website"
@@ -283,24 +283,24 @@ function ChplConfirmDeveloper(props) {
                           onChange={handleChange}
                           onBlur={formik.handleBlur}
                         />
-                      </Grid>
-                      <Grid item xs={12}>
+                      </div>
+                      <div>
                         <ChplConfirmDeveloperAddress
                           address={developer.address}
                           editing
                           formik={formik}
                           handleChange={handleChange}
                         />
-                      </Grid>
-                      <Grid item xs={12}>
+                      </div>
+                      <div>
                         <ChplConfirmDeveloperContact
                           contact={developer.contact}
                           editing
                           formik={formik}
                           handleChange={handleChange}
                         />
-                      </Grid>
-                    </Grid>
+                      </div>
+                    </div>
                     </CardContent>
                     </Card>
                   )
@@ -308,7 +308,7 @@ function ChplConfirmDeveloper(props) {
                     <Card>
                     <CardHeader title="Existing Developers"></CardHeader>
                     <CardContent>
-                      <Grid item xs={12}>
+                      <div>
                         <ChplTextField
                           select
                           id="selected-developer"
@@ -325,7 +325,7 @@ function ChplConfirmDeveloper(props) {
                             </MenuItem>
                           ))}
                         </ChplTextField>
-                      </Grid>
+                      </div>
                       </CardContent>
                       </Card>
                   )}
@@ -364,18 +364,18 @@ ChplConfirmDeveloper.propTypes = {
                               <Typography variant="subtitle2">Self Developer</Typography>
                               <Typography variant="body1">{ developer.selfDeveloper ? 'Yes' : 'No' }</Typography>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid>
                               <Typography variant="subtitle2">Website</Typography>
                               <Typography variant="body1">{ developer.website }</Typography>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid>
                               <ChplConfirmDeveloperAddress
                                 address={developer.address}
                                 editing={false}
                                 formik={formik}
                               />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid>
                               <ChplConfirmDeveloperContact
                                 contact={developer.contact}
                                 editing={false}
