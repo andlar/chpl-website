@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
   developerSubContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr auto 1fr',
-    alignItems: 'stretch',
+    alignItems: 'center',
     textAlign: 'center',
     gap: '32px',
   },
@@ -49,8 +49,12 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#853544',
     },
   },
-  buttonCards: {
-    padding: '16px',
+  verticalDivider: {
+   height:'25%',
+  },
+  buttonCard:{
+    padding:'32px',
+    backgroundColor:'#fff',
   },
   iconSpacing: {
     marginLeft: '4px',
@@ -171,46 +175,33 @@ function ChplConfirmDeveloper(props) {
     <ThemeProvider theme={theme}>
       <form noValidate>
         <div className={classes.developerConfirm}>
-          <div className={classes.developerSubContainer}>
-            <Card className={classes.buttonCards}>
-              <CardContent>
-                <Button
-                  variant="contained"
-                  color="secondary"
+          <div className={classes.developerSubContainer}> 
+                <Button 
+                  className={classes.buttonCard}
+                  variant="outlined"
+                  color="default"
                   fullWidth
-                  className={classes.toggleButton}
                 >
                   Create a developer
-                  <AddCircleIcon className={classes.iconSpacing}></AddCircleIcon>
+                  <AddCircleIcon color="primary" className={classes.iconSpacing}></AddCircleIcon>
                 </Button>
-              </CardContent>
-            </Card>
             <div>
-              <Divider flexItem variant="middle" orientation="vertical"></Divider>
+              <Divider></Divider>
               <Typography>OR</Typography>
-              <Divider flexItem variant="middle" orientation="vertical"></Divider>
-              <Switch
-                id="create-toggle"
-                name="createDeveloper"
-                color="primary"
-                checked={!isCreating}
-                onChange={handleCreationToggle}
-              />
+              <Divider ></Divider>
             </div>
-            <Card className={classes.buttonCards}>
-            <CardContent>
-
               <div>
                 {selectedDeveloper
                   ? (
                     <>
                       <Button
-                        variant="contained"
-                        color="secondary"
+                        variant="outlined"
+                        color="default"
                         fullWidth
+                        className={classes.buttonCard}
                       >
                         Use An Existing Developer
-                        <CheckCircleIcon className={classes.iconSpacing}></CheckCircleIcon>
+                        <CheckCircleIcon color="primary" className={classes.iconSpacing}></CheckCircleIcon>
                       </Button>
                     </>
                   ) : (
@@ -219,9 +210,8 @@ function ChplConfirmDeveloper(props) {
                     </>
                   )}
               </div>
-              </CardContent>
-            </Card>
           </div>
+          <Divider/>
           <Card>
             <CardContent>
               <Grid container spacing={4}>
@@ -315,6 +305,13 @@ function ChplConfirmDeveloper(props) {
               </Grid>
             </CardContent>
           </Card>
+          <Switch
+                id="create-toggle"
+                name="createDeveloper"
+                color="primary"
+                checked={!isCreating}
+                onChange={handleCreationToggle}
+              />
         </div>
       </form>
     </ThemeProvider >
