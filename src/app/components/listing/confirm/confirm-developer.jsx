@@ -19,7 +19,10 @@ import {
 } from '@material-ui/core';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
 import { arrayOf, func } from 'prop-types';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -42,9 +45,15 @@ const useStyles = makeStyles(() => ({
   developerSubContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr auto 1fr',
-    alignItems: 'center',
+    alignItems: 'self-start',
     textAlign: 'center',
     gap: '32px',
+  },
+  orContainer:{
+    display: 'flex',
+    gap: '4px',
+    flexDirection: 'column',
+    paddingTop:'16px',
   },
   formContainer: {
     display: 'flex',
@@ -64,7 +73,7 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#853544',
     },
   },
-  stepperBar:{
+  stepperBar: {
     padding: '8px 32px',
   },
   stepperContainer: {
@@ -76,16 +85,20 @@ const useStyles = makeStyles(() => ({
     backgroundColor: '#fff',
   },
   stepperButton: {
-    backgroundColor:'#fff',
+    backgroundColor: '#fff',
     borderBottom: '0.5px solid #c2c6ca',
     borderLeft: '0.5px solid #c2c6ca',
     borderRight: '0.5px solid #c2c6ca',
-    borderRadius:'0 0 32px 32px',
+    borderRadius: '0 0 32px 32px',
     padding: '0 16px 8px 16px',
   },
   stepperButtonContainer: {
     display: 'flex',
-    justifyContent:'center',
+    justifyContent: 'center',
+  },
+  selectedDeveloper: {
+    fontWeight: '100',
+    paddingTop: '8px',
   },
   verticalDivider: {
     height: '25%',
@@ -95,8 +108,8 @@ const useStyles = makeStyles(() => ({
     backgroundColor: '#fff',
     whiteSpace: 'pre-wrap',
     '&:focus': {
-      boxShadow:'0px 0px 4px 3px #337ab76e',
-      fontWeight:'600',
+      boxShadow: '0px 0px 16px 4px #337ab750',
+      fontWeight: '600',
     },
   },
   iconSpacing: {
@@ -218,27 +231,27 @@ function ChplConfirmDeveloper(props) {
     <ThemeProvider theme={theme}>
       <Container>
         <div className={classes.stepperContainer}>
-            <Stepper className={classes.stepperBar}>
-              <Step>
-                <StepLabel>Developer</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Product</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Version</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Listing</StepLabel>
-              </Step>
-            </Stepper>
+          <Stepper className={classes.stepperBar}>
+            <Step>
+              <StepLabel>Developer</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Product</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Version</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Listing</StepLabel>
+            </Step>
+          </Stepper>
         </div>
         <div className={classes.stepperButtonContainer}>
-            <ButtonGroup variant="text" className={classes.stepperButton} size="medium">
-              <Button>Back</Button>
-              <Button>Next</Button>
-            </ButtonGroup>
-          </div>
+          <ButtonGroup variant="text" color='primary' className={classes.stepperButton} size="medium">
+            <Button disabled><NavigateBeforeIcon />Back</Button>
+            <Button>Next<NavigateNextIcon /></Button>
+          </ButtonGroup>
+        </div>
         <form noValidate>
           <div className={classes.developerConfirm}>
             <div className={classes.developerSubContainer}>
@@ -251,7 +264,7 @@ function ChplConfirmDeveloper(props) {
                 Create a developer
                 <AddCircleIcon color="primary" className={classes.iconSpacing}></AddCircleIcon>
               </Button>
-              <div>
+              <div className={classes.orContainer}>
                 <Divider></Divider>
                 <Typography>OR</Typography>
                 <Divider ></Divider>
@@ -275,7 +288,11 @@ function ChplConfirmDeveloper(props) {
                       Choose a developer to use
                     </>
                   )}
+                   <span>
+                      <Typography className={classes.selectedDeveloper} variant='body1'>( Developer Selected: Greenway Health,LLC )</Typography>
+                  </span>
               </div>
+
             </div>
             <Divider />
             {isCreating
