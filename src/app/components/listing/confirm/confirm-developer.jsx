@@ -64,7 +64,7 @@ const useStyles = makeStyles(() => ({
     display: 'grid',
     gap: '16px',
     flexDirection: 'row',
-    gridTemplateColumns: 'auto auto',
+    gridTemplateColumns: '1fr',
   },
   rejectButton: {
     backgroundColor: '#c44f65',
