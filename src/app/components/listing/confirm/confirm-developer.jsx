@@ -49,6 +49,12 @@ const useStyles = makeStyles(() => ({
     textAlign: 'center',
     gap: '32px',
   },
+  developerInfo: {
+    display: 'grid',
+    gap: '16px',
+    flexDirection: 'row',
+    gridTemplateColumns: '1fr 1fr',
+  },
   orContainer:{
     display: 'flex',
     gap: '4px',
@@ -289,7 +295,7 @@ function ChplConfirmDeveloper(props) {
                     </>
                   )}
                    <span>
-                      <Typography className={classes.selectedDeveloper} variant='body1'>( Developer Selected: Greenway Health,LLC )</Typography>
+                      <Typography className={classes.selectedDeveloper} variant='body1'>(Developer Selected: Greenway Health,LLC)</Typography>
                   </span>
               </div>
 
@@ -302,7 +308,8 @@ function ChplConfirmDeveloper(props) {
                   <CardContent>
                     <div className={classes.formContainer}>
                       <div className={classes.formSubContainer}>
-                        <div>
+                        <div className={classes.developerInfo}>
+                          <div>
                           <ChplTextField
                             id="name"
                             name="name"
@@ -327,6 +334,7 @@ function ChplConfirmDeveloper(props) {
                               />
                             )}
                           />
+                        </div>
                         </div>
                         <div>
                           <ChplTextField
