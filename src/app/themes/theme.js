@@ -53,11 +53,11 @@ const theme = createMuiTheme({
     h6: {
       fontSize: '1.125em',
       fontWeight: 400,
-      lineHeight: '1.3em'
+      lineHeight: '1.3em',
     },
     body1: {
       fontSize: '1em',
-      lineHeight: '1.3em'
+      lineHeight: '1.3em',
     },
     body2: {
       fontSize: '0.875em',
@@ -97,11 +97,6 @@ const theme = createMuiTheme({
     MuiAccordionDetails: {
       root: {
         padding: '16px 0px',
-      },
-    },
-    MuiPaper: {
-      rounded: {
-        borderRadius: '8px',
       },
     },
     MuiButton: {
@@ -155,6 +150,9 @@ const theme = createMuiTheme({
     MuiCardHeader: {
       root: {
         backgroundColor: '#f5f9fd',
+      },
+      title: {
+        fontWeight: '600',
       },
     },
     MuiCheckbox: {
@@ -248,7 +246,7 @@ const theme = createMuiTheme({
       },
       elevation1: {
         boxShadow: '0px 4px 8px rgb(149 157 165 / 10%)',
-      }
+      },
     },
     MuiSelect: {
       icon: {
@@ -270,8 +268,8 @@ const theme = createMuiTheme({
         fontWeight: 800,
       },
       stickyHeader: {
-        backgroundColor: '#ffffff'
-      }
+        backgroundColor: '#ffffff',
+      },
     },
     MuiTableHead: {
       root: {
@@ -298,6 +296,7 @@ const theme = createMuiTheme({
         display: 'flex',
         justifyContent: 'center',
         padding: '8px 32px',
+        paddingRight: '16px',
       },
       select: {
         color: '#156dac',
@@ -314,47 +313,10 @@ const theme = createMuiTheme({
         },
       },
     },
-    MuiTableSortLabel: {
-      active: {
-        color: '#000000',
-      },
-      icon: {
-        color: '#000000',
-      },
-    },
     MuiFormLabel: {
       asterisk: {
         fontSize: '2em',
-        verticalAlign: 'top',
-      },
-    },
-    MuiTablePagination: {
-      root: {
-        display: 'flex',
-        alignItems: 'center',
-        alignContent: 'center',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        fontSize: '1em',
-      },
-      toolbar: {
-        backgroundColor: '#ffffff',
-        margin: '16px 0px 4px 0px',
-        boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
-        borderRadius: '64px',
-      },
-      select: {
-        color: '#156dac',
-        fontWeight: '500',
-      },
-      actions: {
-        color: '#156dac',
-      },
-    },
-    MuiSelect: {
-      icon: {
-        position: 'inherit',
-        color: '#156dac',
+        verticalAlign: 'text-top',
       },
     },
     MuiTableSortLabel: {
@@ -373,6 +335,13 @@ const theme = createMuiTheme({
       inputMarginDense: {
         paddingTop: '14.5px',
         paddingBottom: '10px',
+      },
+      multiline: {
+        paddingTop: '14.5px',
+        paddingBottom: '10px',
+      },
+      inputMultiline: {
+        height: '256px',
       },
     },
     MuiStepLabel: {
