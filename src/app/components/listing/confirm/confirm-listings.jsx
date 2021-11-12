@@ -30,6 +30,31 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#853544',
     },
   },
+  stickyColumn: {
+    position: 'sticky',
+    left: 0,
+    boxShadow: 'rgba(149, 157, 165, 0.1) 0px 4px 8px',
+    backgroundColor: '#ffffff',
+    overflowWrap: 'anywhere',
+    [theme.breakpoints.up('sm')]: {
+      minWidth:'275px',
+    },
+  },
+  tableContainer: {
+    overflowWrap: 'normal',
+    border: '.5px solid #c2c6ca',
+    margin: '0px 32px',
+    width: 'auto',
+  },
+  rejectFooter:{
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '16px'
+  },
+  wrap: {
+    flexFlow: 'wrap',
+  },
 }));
 
 function ChplConfirmListings(props) {
@@ -194,38 +219,17 @@ function ChplConfirmListings(props) {
       { listings?.length > 0
         ? (
           <>
-            <TableContainer component={Paper}>
-              <Table size="small">
+            <TableContainer className={classes.tableContainer} component={Paper}>
+              <Table>
                 <ChplSortableHeaders
                   headers={headers}
                   onTableSort={handleTableSort}
                 />
-                <TableFooter>
-                  <TableRow>
-                    <TableCell colSpan={7} />
-                    <TableCell align="right">
-                      <Button
-                        id="reject-selected-pending-listings"
-                        className={classes.deleteButton}
-                        variant="contained"
-                        onClick={handleReject}
-                        startIcon={<DeleteIcon />}
-                        disabled={idsToReject.length === 0}
-                      >
-                        Reject
-                        {' '}
-                        { (idsToReject.length > 0) ? idsToReject.length : '' }
-                        {' '}
-                        selected
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                </TableFooter>
                 <TableBody>
                   { listings
                     .map((listing) => (
-                      <TableRow key={listing.id}>
-                        <TableCell>
+                      <TableRow className={classes.wrap} key={listing.id}>
+                        <TableCell className={classes.stickyColumn} >
                           <Button
                             id={`process-pending-listing-${listing.chplProductNumber}`}
                             color="primary"
@@ -243,7 +247,7 @@ function ChplConfirmListings(props) {
                         <TableCell>{ beta ? listing.version : listing.version.version }</TableCell>
                         <TableCell>{ DateUtil.getDisplayDateFormat(listing.certificationDate) }</TableCell>
                         <TableCell>{ getStatus(listing) }</TableCell>
-                        <TableCell align="right">
+                        <TableCell>
                           <Checkbox
                             id={`reject-pending-listing-${listing.chplProductNumber}`}
                             onChange={($event) => handleRejectCheckbox($event, listing)}
@@ -254,6 +258,22 @@ function ChplConfirmListings(props) {
                     ))}
                 </TableBody>
               </Table>
+                <div className={classes.rejectFooter}>
+                      <Button
+                        id="reject-selected-pending-listings"
+                        className={classes.deleteButton}
+                        variant="contained"
+                        onClick={handleReject}
+                        startIcon={<DeleteIcon />}
+                        disabled={idsToReject.length === 0}
+                      >
+                        Reject
+                        {' '}
+                        { (idsToReject.length > 0) ? idsToReject.length : '' }
+                        {' '}
+                        selected
+                      </Button>
+                  </div>
             </TableContainer>
           </>
 )
