@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Button,
+  ButtonGroup,
   Card,
   CardContent,
+  CardHeader,
   Container,
   Divider,
   FormControlLabel,
@@ -10,18 +13,15 @@ import {
   Stepper,
   Step,
   StepLabel,
+  Typography,
   makeStyles,
   ThemeProvider,
-  Typography,
-  Button,
-  CardHeader,
-  ButtonGroup,
 } from '@material-ui/core';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import { arrayOf, func } from 'prop-types';
 import { useFormik } from 'formik';
@@ -35,6 +35,24 @@ import ChplConfirmDeveloperAddress from './address';
 import ChplConfirmDeveloperContact from './contact';
 
 const useStyles = makeStyles(() => ({
+  buttonCard: {
+    padding: '32px',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#f5f9fd',
+    whiteSpace: 'pre-wrap',
+    '&:focus': {
+      boxShadow: '0px 0px 16px 4px #337ab750',
+      fontWeight: '600',
+    },
+  },
+  buttonContent: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    whiteSpace: 'pre-wrap',
+  },
   developerConfirm: {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -55,11 +73,9 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'row',
     gridTemplateColumns: '1fr 1fr',
   },
-  orContainer:{
-    display: 'flex',
-    gap: '4px',
-    flexDirection: 'column',
-    paddingTop:'32px',
+  extraLargeIcons: {
+    marginBottom: '8px',
+    fontSize: '2em',
   },
   formContainer: {
     display: 'flex',
@@ -71,6 +87,12 @@ const useStyles = makeStyles(() => ({
     gap: '16px',
     flexDirection: 'row',
     gridTemplateColumns: '1fr',
+  },
+  orContainer: {
+    display: 'flex',
+    gap: '4px',
+    flexDirection: 'column',
+    paddingTop: '32px',
   },
   rejectButton: {
     backgroundColor: '#c44f65',
@@ -108,28 +130,6 @@ const useStyles = makeStyles(() => ({
   },
   verticalDivider: {
     height: '25%',
-  },
-  buttonCard: {
-    padding: '32px',
-    display:'flex',
-    alignItems:'center',
-    flexDirection:'column',
-    backgroundColor: '#f5f9fd',
-    whiteSpace: 'pre-wrap',
-    '&:focus': {
-      boxShadow: '0px 0px 16px 4px #337ab750',
-      fontWeight: '600',
-    },
-  },
-  buttonContent: {
-    display:'flex',
-    alignItems:'center',
-    flexDirection:'column',
-    whiteSpace: 'pre-wrap',
-  },
-  extraLargeIcons: {
-    marginBottom:'8px',
-    fontSize:'2em',
   },
 }));
 
@@ -279,8 +279,8 @@ function ChplConfirmDeveloper(props) {
                 fullWidth
               >
                 <span className={classes.buttonContent}>
-                <AddCircleIcon color="primary" className={classes.extraLargeIcons}></AddCircleIcon>
-                Create a developer
+                  <AddCircleIcon color="primary" className={classes.extraLargeIcons}></AddCircleIcon>
+                  Create a developer
                 </span>
               </Button>
               <div className={classes.orContainer}>
@@ -298,11 +298,11 @@ function ChplConfirmDeveloper(props) {
                         fullWidth
                         className={classes.buttonCard}
                       >
-                     <span className={classes.buttonContent}>
-                      <CheckCircleIcon color="primary" className={classes.extraLargeIcons}>
-                      </CheckCircleIcon>
-                      Using Greenway Health,LLC
-                      </span>
+                        <span className={classes.buttonContent}>
+                          <CheckCircleIcon color="primary" className={classes.extraLargeIcons}>
+                          </CheckCircleIcon>
+                          Using Greenway Health,LLC
+                        </span>
                       </Button>
                     </>
                   ) : (
@@ -323,31 +323,31 @@ function ChplConfirmDeveloper(props) {
                       <div className={classes.formSubContainer}>
                         <div className={classes.developerInfo}>
                           <div>
-                          <ChplTextField
-                            id="name"
-                            name="name"
-                            label="Developer Name"
-                            value={formik.values.name}
-                            error={formik.touched.name && !!formik.errors.name}
-                            helperText={formik.touched.name && formik.errors.name}
-                            onChange={handleChange}
-                            onBlur={formik.handleBlur}
-                          />
-                        </div>
-                        <div>
-                          <FormControlLabel
-                            label={`Self-Developer (${formik.values.selfDeveloper ? 'Yes' : 'No'})`}
-                            control={(
-                              <Switch
-                                id="self-developer"
-                                name="selfDeveloper"
-                                color="primary"
-                                checked={formik.values.selfDeveloper}
-                                onChange={handleChange}
-                              />
-                            )}
-                          />
-                        </div>
+                            <ChplTextField
+                              id="name"
+                              name="name"
+                              label="Developer Name"
+                              value={formik.values.name}
+                              error={formik.touched.name && !!formik.errors.name}
+                              helperText={formik.touched.name && formik.errors.name}
+                              onChange={handleChange}
+                              onBlur={formik.handleBlur}
+                            />
+                          </div>
+                          <div>
+                            <FormControlLabel
+                              label={`Self-Developer (${formik.values.selfDeveloper ? 'Yes' : 'No'})`}
+                              control={(
+                                <Switch
+                                  id="self-developer"
+                                  name="selfDeveloper"
+                                  color="primary"
+                                  checked={formik.values.selfDeveloper}
+                                  onChange={handleChange}
+                                />
+                              )}
+                            />
+                          </div>
                         </div>
                         <div>
                           <ChplTextField

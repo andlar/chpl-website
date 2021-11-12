@@ -21,10 +21,9 @@ formSubContainer: {
 function ChplConfirmDeveloperAddress({
   address, editing, formik, handleChange,
 })
- 
-
 {
-  const classes = useStyles();
+  
+const classes = useStyles();
 
   return (
     <>
