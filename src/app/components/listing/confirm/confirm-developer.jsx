@@ -59,7 +59,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     gap: '4px',
     flexDirection: 'column',
-    paddingTop:'16px',
+    paddingTop:'32px',
   },
   formContainer: {
     display: 'flex',
@@ -111,15 +111,25 @@ const useStyles = makeStyles(() => ({
   },
   buttonCard: {
     padding: '32px',
-    backgroundColor: '#fff',
+    display:'flex',
+    alignItems:'center',
+    flexDirection:'column',
+    backgroundColor: '#f5f9fd',
     whiteSpace: 'pre-wrap',
     '&:focus': {
       boxShadow: '0px 0px 16px 4px #337ab750',
       fontWeight: '600',
     },
   },
-  iconSpacing: {
-    marginLeft: '4px',
+  buttonContent: {
+    display:'flex',
+    alignItems:'center',
+    flexDirection:'column',
+    whiteSpace: 'pre-wrap',
+  },
+  extraLargeIcons: {
+    marginBottom:'8px',
+    fontSize:'2em',
   },
 }));
 
@@ -265,10 +275,13 @@ function ChplConfirmDeveloper(props) {
                 className={classes.buttonCard}
                 variant="outlined"
                 color="default"
+                disabled
                 fullWidth
               >
+                <span className={classes.buttonContent}>
+                <AddCircleIcon color="primary" className={classes.extraLargeIcons}></AddCircleIcon>
                 Create a developer
-                <AddCircleIcon color="primary" className={classes.iconSpacing}></AddCircleIcon>
+                </span>
               </Button>
               <div className={classes.orContainer}>
                 <Divider></Divider>
@@ -285,8 +298,11 @@ function ChplConfirmDeveloper(props) {
                         fullWidth
                         className={classes.buttonCard}
                       >
-                        Use An Existing Developer
-                        <CheckCircleIcon color="primary" className={classes.iconSpacing}></CheckCircleIcon>
+                     <span className={classes.buttonContent}>
+                      <CheckCircleIcon color="primary" className={classes.extraLargeIcons}>
+                      </CheckCircleIcon>
+                      Using Greenway Health,LLC
+                      </span>
                       </Button>
                     </>
                   ) : (
@@ -294,9 +310,6 @@ function ChplConfirmDeveloper(props) {
                       Choose a developer to use
                     </>
                   )}
-                   <span>
-                      <Typography className={classes.selectedDeveloper} variant='body1'>(Developer Selected: Greenway Health,LLC)</Typography>
-                  </span>
               </div>
 
             </div>
