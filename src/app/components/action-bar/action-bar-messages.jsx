@@ -68,10 +68,12 @@ const useStyles = makeStyles({
   errorContainer: {
     backgroundColor: '#c44f6520',
     color: '#1c1c1c',
+    paddingBottom: '32px',
   },
   warningContainer: {
     backgroundColor: '#e6ea0b20',
     color: '#1c1c1c',
+    paddingBottom: '32px',
   },
   messageHeader: {
     alignItems: 'center',
