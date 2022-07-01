@@ -17,6 +17,7 @@ import { developer as developerPropType } from 'shared/prop-types';
 const useStyles = makeStyles({
   buttonMargin: {
     marginTop: '8px',
+    marginLeft: '4px',
   },
 });
 
