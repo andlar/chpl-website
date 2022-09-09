@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -18,7 +19,7 @@ import { arrayOf, func, object } from 'prop-types';
 import EditIcon from '@material-ui/icons/Edit';
 import EventIcon from '@material-ui/icons/Event';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-
+import AddIcon from '@material-ui/icons/Add';
 import { ChplSortableHeaders, sortComparator } from 'components/util/sortable-headers';
 import { isCures, sortCriteria } from 'services/criteria.service';
 
@@ -36,6 +37,10 @@ const useStyles = makeStyles({
     left: 0,
     boxShadow: 'rgba(149, 157, 165, 0.1) 0px 4px 8px',
     backgroundColor: '#fff',
+  },
+  addContainer:{
+    display:'flex',
+    justifyContent: 'flex-end',
   },
 });
 
@@ -68,11 +73,13 @@ function ChplSvapsView(props) {
 
   return (
     <>
+      <Box className={classes.addContainer}>
       <Button
-        onClick={() => dispatch({action: 'edit', payload: {}})}
+       variant="contained" color="primary" endIcon={<AddIcon/>} onClick={() => dispatch({action: 'edit', payload: {}})}
       >
         Add
       </Button>
+      </Box>
       <TableContainer className={classes.container} component={Paper}>
         <Table
           aria-label="SVAP table"
