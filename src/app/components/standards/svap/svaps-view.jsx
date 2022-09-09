@@ -109,8 +109,7 @@ function ChplSvapsView(props) {
                   </TableCell>
                   <TableCell align="right">
                     <Button
-                      onClick={() => dispatch({action: 'edit', payload: item})}
-                    >
+                      onClick={() => dispatch({action: 'edit', payload: item})} variant="contained" color="secondary" endIcon={<EditIcon/>}>
                       Edit
                     </Button>
                   </TableCell>
