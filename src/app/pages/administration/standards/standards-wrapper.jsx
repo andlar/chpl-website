@@ -1,7 +1,5 @@
 import React from 'react';
-
 import ChplStandards from './standards';
-
 import ApiWrapper from 'api/api-wrapper';
 import BreadcrumbWrapper from 'components/breadcrumb/breadcrumb-wrapper';
 import { UserWrapper } from 'components/login';
@@ -11,7 +9,7 @@ function ChplStandardsWrapper() {
     <UserWrapper>
       <ApiWrapper>
         <BreadcrumbWrapper>
-          <ChplStandards />
+          <ChplStandards></ChplStandards>
         </BreadcrumbWrapper>
       </ApiWrapper>
     </UserWrapper>

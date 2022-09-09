@@ -101,6 +101,12 @@ const theme = createTheme({
         color: '#156dac',
       },
     },
+    MuiBreadcrumbs:{
+      root:{
+        backgroundColor: '#ffffff',
+        padding: '0px 16px',
+        },
+      },
     MuiButton: {
       root: {
         boxShadow: 'none',

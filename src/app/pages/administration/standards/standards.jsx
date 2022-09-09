@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
+  Card,
   Container,
   Typography,
   makeStyles,
@@ -10,7 +11,7 @@ import * as jsJoda from '@js-joda/core';
 import '@js-joda/timezone';
 
 import ChplSvaps from 'components/standards/svap/svaps';
-
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { BreadcrumbContext, UserContext } from 'shared/contexts';
 import { theme, utilStyles } from 'themes';
 
@@ -27,6 +28,15 @@ const useStyles = makeStyles({
   },
   breadcrumbs: {
     textTransform: 'none',
+  },
+  menuItems: {
+    justifyContent:'left',
+    padding: '8px',
+  },
+  pageHeader: {
+    padding: '0 16px 16px 16px',
+    marginBottom: '32px',
+    backgroundColor: '#ffffff',
   },
 });
 
@@ -58,10 +68,18 @@ function ChplStandards() {
   };
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
-      <Typography className={classes.fullWidthGridRow} variant="h1">Management of Standards &amp; Processes</Typography>
+    <>
+    <Container maxWidth="lg" className={classes.pageHeader}>
+        <Typography variant="h1"
+        >
+         Management of Standards &amp; Processes
+        </Typography>
+        </Container>
+      <Container maxWidth="lg" pa className={classes.container}>
       <div>
-        <Button onClick={() => setActive('svaps')}>SVAP Maintenance</Button>
+        <Card>
+        <Button className={classes.menuItems} endIcon={<ArrowForwardIcon/>} color='primary' variant='text' fullWidth onClick={() => setActive('svaps')}>SVAP Maintenance</Button>
+        </Card>
       </div>
       <div>
         { active === 'svaps'
@@ -70,6 +88,7 @@ function ChplStandards() {
           )}
       </div>
     </Container>
+    </>
   );
 }
 
