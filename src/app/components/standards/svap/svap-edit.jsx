@@ -36,8 +36,9 @@ const useStyles = makeStyles({
   divSpacing: {
     display: 'flex',
     justifyContent: 'space-between',
-    gap: '8px',
-    alignItems: 'center',
+    flexDirection: 'column',
+    gap: '16px',
+    alignItems: 'left',
   },
   iconSpacing: {
     marginLeft: '4px',
@@ -45,6 +46,12 @@ const useStyles = makeStyles({
   subHeaderColor: {
     color: '#000000',
   },
+  chipContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: '8px',
+  }
 });
 
 const validationSchema = yup.object({
@@ -124,7 +131,11 @@ function ChplSvapEdit(props) {
 
   return (
     <>
-      <ChplTextField
+      <Card>
+        <CardHeader title="SVAP Maintenance"></CardHeader>
+        <CardContent>
+        <div className={classes.divSpacing}>
+        <ChplTextField
         id="regulatory-text-citation"
         name="regulatoryTextCitation"
         label="Regulatory Text Citation"
@@ -167,6 +178,7 @@ function ChplSvapEdit(props) {
             </MenuItem>
           ))}
       </ChplTextField>
+      <div className={classes.chipContainer}>
       { criteria
         .sort(sortCriteria)
         .map((item) => (
@@ -178,6 +190,7 @@ function ChplSvapEdit(props) {
             variant="outlined"
           />
         ))}
+      </div>
       <FormControlLabel
         control={(
           <Switch
@@ -190,6 +203,9 @@ function ChplSvapEdit(props) {
         )}
         label="Replaced"
       />
+      </div>
+        </CardContent>
+      </Card>
       <ChplActionBar
         dispatch={handleDispatch}
         canDelete={false && !!svap.svapId}
