@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Button,
+  ButtonGroup,
   Paper,
   Table,
   TableBody,
@@ -296,16 +297,18 @@ function ChplSedCollectionView(props) {
                               <TableCell>{item.version.name}</TableCell>
                               <TableCell>{item.certificationStatus.name}</TableCell>
                               <TableCell>
-                                <Button
-                                  color="primary"
-                                  variant="contained"
-                                  id={`view-details-${item.id}`}
-                                  onClick={() => viewDetails(item.id)}
-                                  endIcon={<InfoIcon />}
-                                >
-                                  View
-                                </Button>
-                                <ChplCompareButton listing={item} />
+                                <ButtonGroup>
+                                  <Button
+                                    color="primary"
+                                    variant="contained"
+                                    id={`view-details-${item.id}`}
+                                    onClick={() => viewDetails(item.id)}
+                                    endIcon={<InfoIcon />}
+                                  >
+                                    View
+                                  </Button>
+                                  <ChplCompareButton listing={item} />
+                                </ButtonGroup>
                               </TableCell>
                             </TableRow>
                           ))}
