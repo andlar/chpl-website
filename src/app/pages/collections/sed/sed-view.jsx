@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Button,
-  ButtonGroup,
   Paper,
   Table,
   TableBody,
@@ -72,6 +71,14 @@ const useStyles = makeStyles({
     overflowWrap: 'anywhere',
     [theme.breakpoints.up('sm')]: {
       minWidth: '275px',
+    },
+  },
+  tableActions: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
     },
   },
   tableContainer: {
@@ -297,18 +304,19 @@ function ChplSedCollectionView(props) {
                               <TableCell>{item.version.name}</TableCell>
                               <TableCell>{item.certificationStatus.name}</TableCell>
                               <TableCell>
-                                <ButtonGroup>
+                                <div className={classes.tableActions}>
                                   <Button
                                     color="primary"
                                     variant="contained"
+                                    size="small"
                                     id={`view-details-${item.id}`}
                                     onClick={() => viewDetails(item.id)}
-                                    endIcon={<InfoIcon />}
+                                    endIcon={<InfoIcon fontSize="small" />}
                                   >
                                     View
                                   </Button>
                                   <ChplCompareButton listing={item} />
-                                </ButtonGroup>
+                                </div>
                               </TableCell>
                             </TableRow>
                           ))}
