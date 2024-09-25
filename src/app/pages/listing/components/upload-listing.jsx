@@ -101,8 +101,8 @@ function ChplUploadListing({ id, setErrors, setWarnings }) {
     <>
       <div>
         <Button
-          color="primary"
-          variant="outlined"
+          color="secondary"
+          variant="contained"
           component="label"
           endIcon={<CloudUploadOutlinedIcon />}
         >
