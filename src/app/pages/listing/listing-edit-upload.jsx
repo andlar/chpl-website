@@ -5,6 +5,7 @@ import {
   CardContent,
   CircularProgress,
   Container,
+  Fade,
   FormControlLabel,
   List,
   Switch,
@@ -40,15 +41,19 @@ const useStyles = makeStyles({
     backgroundColor: palette.background,
     [theme.breakpoints.up('md')]: {
       display: 'grid',
-      gridTemplateColumns: '300px 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr 350px',
       alignItems: 'start',
     },
   },
-  differenceContainer: {
+  differenceCallout: {
     background: palette.warningLight,
     border: `.5px solid ${palette.warning}`,
     borderRadius: '8px',
     padding: '16px 8px',
+  },
+  differenceContainer: {
+    position: 'sticky',
+    top: '116px',
   },
   pageHeader: {
     padding: '32px 0',
@@ -59,6 +64,9 @@ const useStyles = makeStyles({
     border: `.5px solid ${palette.divider}`,
     borderRadius: '8px',
     padding: '16px 8px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   sectionHeader: {
     display: 'flex',
@@ -77,12 +85,6 @@ const useStyles = makeStyles({
     fontWeight: '600 !important',
     fontSize: '1.1em!important',
   },
-  waitingContainer:{
-    background: palette.greyLight,
-    border: `.5px solid ${palette.divider}`,
-    borderRadius: '8px',
-    padding: '16px 8px',
-  }
 });
 
 function ChplListingEditUploadPage({ id }) {
@@ -182,201 +184,181 @@ function ChplListingEditUploadPage({ id }) {
         </Box>
         <div className={classes.container}>
           <div>
-            <Typography gutterBottom component={"h2"} style={{ fontWeight: '600' }} variant="h4">Difference(s)</Typography>
-            <div>
-              {diff.length === 0 ? (
-                <Box display={'flex'} flexDirection={'row'} gridGap={8}  className={classes.placeholderContainer}>
-                  <HelpOutlineIcon fontSize="large" color="primary" />
-                  <Typography>Upload a file above to display the difference(s)</Typography>
-                  </Box>
-              ) : (
-                <Box className={classes.differenceContainer}>
-                  <List className="list-unstyled">
-                    {diff.map((change) => (
-                      <li key={change} dangerouslySetInnerHTML={{ __html: `${change}` }} />
-                    ))}
-                  </List>
-                </Box>
-              )}
-            </div>
-          </div>
-          <div>
             <Typography gutterBottom component={"h3"} style={{ fontWeight: '600' }} variant='h4'>Current Listing</Typography>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">Listing Information</Typography>
-                  </Box>
-                  <CardContent>
-                    <ChplListingInformation
-                      listing={listing}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">Certification Criteria</Typography>
-                    <div>
-                      <FormControlLabel
-                        control={(
-                          <Switch
-                            id="see-all-criteria"
-                            name="seeAllCriteria"
-                            checked={seeAllCriteria}
-                            color="primary"
-                            onChange={toggleSeeAllCriteria}
-                          />
-                        )}
-                        label="See all Certification Criteria"
+            <Box display={'flex'} flexDirection={'column'} gridGap={'32px'}>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">Listing Information</Typography>
+                    </Box>
+                    <CardContent>
+                      <ChplListingInformation
+                        listing={listing}
                       />
-                      (
-                      {listing.certificationResults.filter((cr) => cr.success).length}
-                      {' '}
-                      found)
-                    </div>
-                  </Box>
-                  <CardContent>
-                    <ChplCriteria
-                      listing={listing}
-                      viewAll={seeAllCriteria}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">Clinical Quality Measures</Typography>
-                    <div>
-                      <FormControlLabel
-                        control={(
-                          <Switch
-                            id="see-all-cqms"
-                            name="seeAllCqms"
-                            color="primary"
-                            checked={seeAllCqms}
-                            onChange={toggleSeeAllCqms}
-                          />
-                        )}
-                        label="See all CQMs"
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">Certification Criteria</Typography>
+                      <div>
+                        <FormControlLabel
+                          control={(
+                            <Switch
+                              id="see-all-criteria"
+                              name="seeAllCriteria"
+                              checked={seeAllCriteria}
+                              color="primary"
+                              onChange={toggleSeeAllCriteria}
+                            />
+                          )}
+                          label="See all Certification Criteria"
+                        />
+                        (
+                        {listing.certificationResults.filter((cr) => cr.success).length}
+                        {' '}
+                        found)
+                      </div>
+                    </Box>
+                    <CardContent>
+                      <ChplCriteria
+                        listing={listing}
+                        viewAll={seeAllCriteria}
                       />
-                      (
-                      {listing.cqmResults.filter((cqm) => cqm.success).length}
-                      {' '}
-                      found)
-                    </div>
-                  </Box>
-                  <CardContent>
-                    <ChplCqms
-                      cqms={listing.cqmResults}
-                      edition={listing.edition}
-                      viewAll={seeAllCqms}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">Safety Enhanced Design (SED)</Typography>
-                  </Box>
-                  <CardContent>
-                    <ChplSed
-                      listing={listing}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">G1/G2 Measures</Typography>
-                  </Box>
-                  <CardContent>
-                    <ChplG1G2
-                      measures={listing.measures}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">Compliance Activities</Typography>
-                  </Box>
-                  <CardContent>
-                    <ChplCompliance
-                      directReviews={listing.directReviews}
-                      directReviewsAvailable={listing.directReviewsAvailable}
-                      surveillance={listing.surveillance}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
-            <div>
-              <ListingContext.Provider value={listingState}>
-                <Card>
-                  <Box className={classes.sectionHeader}>
-                    <Typography className={classes.sectionHeaderText} variant="h5">Additional Information</Typography>
-                  </Box>
-                  <CardContent>
-                    <ChplAdditionalInformation
-                      listing={listing}
-                    />
-                  </CardContent>
-                </Card>
-              </ListingContext.Provider>
-            </div>
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">Clinical Quality Measures</Typography>
+                      <div>
+                        <FormControlLabel
+                          control={(
+                            <Switch
+                              id="see-all-cqms"
+                              name="seeAllCqms"
+                              color="primary"
+                              checked={seeAllCqms}
+                              onChange={toggleSeeAllCqms}
+                            />
+                          )}
+                          label="See all CQMs"
+                        />
+                        (
+                        {listing.cqmResults.filter((cqm) => cqm.success).length}
+                        {' '}
+                        found)
+                      </div>
+                    </Box>
+                    <CardContent>
+                      <ChplCqms
+                        cqms={listing.cqmResults}
+                        edition={listing.edition}
+                        viewAll={seeAllCqms}
+                      />
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">Safety Enhanced Design (SED)</Typography>
+                    </Box>
+                    <CardContent>
+                      <ChplSed
+                        listing={listing}
+                      />
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">G1/G2 Measures</Typography>
+                    </Box>
+                    <CardContent>
+                      <ChplG1G2
+                        measures={listing.measures}
+                      />
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">Compliance Activities</Typography>
+                    </Box>
+                    <CardContent>
+                      <ChplCompliance
+                        directReviews={listing.directReviews}
+                        directReviewsAvailable={listing.directReviewsAvailable}
+                        surveillance={listing.surveillance}
+                      />
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+              <div>
+                <ListingContext.Provider value={listingState}>
+                  <Card>
+                    <Box className={classes.sectionHeader}>
+                      <Typography className={classes.sectionHeaderText} variant="h5">Additional Information</Typography>
+                    </Box>
+                    <CardContent>
+                      <ChplAdditionalInformation
+                        listing={listing}
+                      />
+                    </CardContent>
+                  </Card>
+                </ListingContext.Provider>
+              </div>
+            </Box>
           </div>
           <div>
             <div>
               <Typography gutterBottom component={"h3"} style={{ fontWeight: '600' }} variant='h4'>Updated Listing</Typography>
               <div>
                 {!newListing ? (
-                <Box className={classes.waitingContainer}><Typography>waiting for upload...</Typography></Box>
-              ) : (
+                  <Box display={'flex'} flexDirection={'row'} gridGap={8} className={classes.placeholderContainer}>
+                    <HelpOutlineIcon fontSize="large" color="primary" />
+                    <Typography>Upload a file above to display your new listing.</Typography>
+                  </Box>
+                ) : (
                   <>
-                    <div>
-                      {newListing
-                        && (
+                    {newListing && (
+                      <Fade style={{ transitionDelay: newListing ? '1s' : '0ms' }} in={!!newListing}>
+                        <Box display={'flex'} flexDirection={'column'} gridGap={'32px'}>
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">Listing Information</Typography>
                               </Box>
                               <CardContent>
-                                <ChplListingInformation
-                                  listing={newListing}
-                                />
+                                <ChplListingInformation listing={newListing} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
-                    <div>
-                      {newListing
-                        && (
+
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">Certification Criteria</Typography>
                                 <div>
                                   <FormControlLabel
-                                    control={(
+                                    control={
                                       <Switch
                                         id="see-all-criteria"
                                         name="seeAllCriteria"
@@ -384,35 +366,25 @@ function ChplListingEditUploadPage({ id }) {
                                         color="primary"
                                         onChange={toggleSeeAllCriteria}
                                       />
-                                    )}
+                                    }
                                     label="See all Certification Criteria"
                                   />
-                                  (
-                                  {newListing.certificationResults.filter((cr) => cr.success).length}
-                                  {' '}
-                                  found)
+                                  ({newListing.certificationResults.filter((cr) => cr.success).length} found)
                                 </div>
                               </Box>
                               <CardContent>
-                                <ChplCriteria
-                                  listing={newListing}
-                                  viewAll={seeAllCriteria}
-                                />
+                                <ChplCriteria listing={newListing} viewAll={seeAllCriteria} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
-                    <div>
-                      {newListing
-                        && (
+
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">Clinical Quality Measures</Typography>
                                 <div>
                                   <FormControlLabel
-                                    control={(
+                                    control={
                                       <Switch
                                         id="see-all-cqms"
                                         name="seeAllCqms"
@@ -420,100 +392,85 @@ function ChplListingEditUploadPage({ id }) {
                                         checked={seeAllCqms}
                                         onChange={toggleSeeAllCqms}
                                       />
-                                    )}
+                                    }
                                     label="See all CQMs"
                                   />
-                                  (
-                                  {newListing.cqmResults.filter((cqm) => cqm.success).length}
-                                  {' '}
-                                  found)
+                                  ({newListing.cqmResults.filter((cqm) => cqm.success).length} found)
                                 </div>
                               </Box>
                               <CardContent>
-                                <ChplCqms
-                                  cqms={newListing.cqmResults}
-                                  edition={newListing.edition}
-                                  viewAll={seeAllCqms}
-                                />
+                                <ChplCqms cqms={newListing.cqmResults} edition={newListing.edition} viewAll={seeAllCqms} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
-                    <div>
-                      {newListing
-                        && (
+
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">Safety Enhanced Design (SED)</Typography>
                               </Box>
                               <CardContent>
-                                <ChplSed
-                                  listing={newListing}
-                                />
+                                <ChplSed listing={newListing} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
-                    <div>
-                      {newListing
-                        && (
+
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">G1/G2 Measures</Typography>
                               </Box>
                               <CardContent>
-                                <ChplG1G2
-                                  measures={newListing.measures}
-                                />
+                                <ChplG1G2 measures={newListing.measures} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
-                    <div>
-                      {newListing
-                        && (
+
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">Compliance Activities</Typography>
                               </Box>
                               <CardContent>
-                                <ChplCompliance
-                                  directReviews={newListing.directReviews}
-                                  directReviewsAvailable={newListing.directReviewsAvailable}
-                                  surveillance={newListing.surveillance}
-                                />
+                                <ChplCompliance directReviews={newListing.directReviews} directReviewsAvailable={newListing.directReviewsAvailable} surveillance={newListing.surveillance} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
-                    <div>
-                      {newListing
-                        && (
+
                           <ListingContext.Provider value={newListingState}>
                             <Card>
                               <Box className={classes.sectionHeader}>
                                 <Typography className={classes.sectionHeaderText} variant="h5">Additional Information</Typography>
                               </Box>
                               <CardContent>
-                                <ChplAdditionalInformation
-                                  listing={newListing}
-                                />
+                                <ChplAdditionalInformation listing={newListing} />
                               </CardContent>
                             </Card>
                           </ListingContext.Provider>
-                        )}
-                    </div>
+                        </Box>
+                      </Fade>
+                    )}
                   </>
                 )}
               </div>
             </div>
+          </div>
+          <div className={classes.differenceContainer}>
+            <Typography gutterBottom component={"h2"} style={{ fontWeight: '600' }} variant="h4">Difference(s)</Typography>
+            {diff.length === 0 ? (
+              <Box className={classes.placeholderContainer}><Typography>Waiting for upload to show results...</Typography></Box>
+
+            ) : (
+              <Fade style={{ transitionDelay: newListing ? '1.5s' : '0ms' }} in={!!diff.length > 0}>
+                <Box className={classes.differenceCallout}>
+                  <List className="list-unstyled">
+                    {diff.map((change) => (
+                      <li key={change} dangerouslySetInnerHTML={{ __html: `${change}` }} />
+                    ))}
+                  </List>
+                </Box>
+              </Fade>
+            )}
           </div>
         </div>
       </Container>
