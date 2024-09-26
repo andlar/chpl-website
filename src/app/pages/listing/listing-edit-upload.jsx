@@ -72,8 +72,6 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
     gridGap: '8px',
   },
   sectionHeader: {
