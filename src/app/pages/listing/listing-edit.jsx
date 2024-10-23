@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     gap: '16px',
   },
+  reasonForChangeText: {
+    paddingTop: '16px',
+    fontWeight: 'bold',
+  }
 });
 
 function ChplListingEditPage() {
@@ -131,7 +135,7 @@ function ChplListingEditPage() {
           </Box>
         </Container>
       </Box>
-      <Box style={{ height: '100vh', backgroundColor: palette.background }}>
+      <Box sx={{ height: '100vh', backgroundColor: palette.background }}>
         <Container maxWidth="lg">
           <Box py={8} className={classes.container} id="main-content" tabIndex="-1">
             {isEditing ? (
@@ -154,7 +158,7 @@ function ChplListingEditPage() {
                   value={reasonForChange}
                   onChange={(event) => setReasonForChange(event.target.value)}
                 />
-                <Typography variant="body1" style={{ paddingTop: '16px', fontWeight: 'bold' }}>If changes are made in any of the following ways, a Reason for Change is required:</Typography>
+                <Typography variant="body1" className={classes.reasonForChangeText}>If changes are made in any of the following ways, a Reason for Change is required:</Typography>
                 <List disablePadding>
                   <ListItem>Clinical Quality Measure Removed</ListItem>
                   <ListItem>Certification Criteria Removed</ListItem>
