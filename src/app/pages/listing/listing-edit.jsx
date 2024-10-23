@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import {
   Box,
+  Card,
+  CardContent,
   CircularProgress,
   Container,
   FormControlLabel,
@@ -17,15 +19,14 @@ import { ChplTextField } from 'components/util';
 import { eventTrack } from 'services/analytics.service';
 import { getAngularService } from 'services/angular-react-helper';
 import { AnalyticsContext, ListingContext, useAnalyticsContext } from 'shared/contexts';
-import { utilStyles } from 'themes';
+import { utilStyles, palette } from 'themes';
 
 const useStyles = makeStyles({
   ...utilStyles,
   container: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    gap: '16px',
   },
 });
 
@@ -80,7 +81,7 @@ function ChplListingEditPage() {
           },
         });
         break;
-        // no default
+      // no default
     }
   };
 
@@ -107,54 +108,64 @@ function ChplListingEditPage() {
 
   return (
     <AnalyticsContext.Provider value={analyticsData}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h1"
-        >
-          {listing.product.name}
-        </Typography>
-      </Container>
-      <Container maxWidth="lg">
-        <Box className={classes.container} id="main-content" tabIndex="-1">
-          <FormControlLabel
-            control={(
-              <Switch
-                id="is-editing"
-                name="isEditing"
-                checked={isEditing}
-                color="primary"
-                onChange={toggleIsEditing}
-              />
-            )}
-            label={isEditing ? 'Edit basic Listing information' : 'Upload detailed Listing information'}
-          />
-          <ChplTextField
-            id="reson-for-change"
-            name="reasonForChange"
-            label="Reason For Change"
-            multiline
-            value={reasonForChange}
-            onChange={(event) => setReasonForChange(event.target.value)}
-          />
-          <Typography>If changes are made in any of the following ways, a Reason for Change is required:</Typography>
-          <List>
-            <ListItem>Clinical Quality Measure Removed</ListItem>
-            <ListItem>Certification Criteria Removed</ListItem>
-            <ListItem>Editing of a non-active Certified Product</ListItem>
-            <ListItem>Certification Status Changed from anything to &quot;Active&quot;</ListItem>
-          </List>
-          { isEditing ? (
-            <ChplListingEdit
-              dispatch={handleDispatch}
-              errors={errors}
-              warnings={warnings}
-              isProcessing={isProcessing}
+      <Box bgcolor="white" p={8}>
+        <Container maxWidth="lg">
+          <Box display="flex" justifyContent="space-between" flexDirection="row">
+            <Typography
+              variant="h1"
+            >
+              {listing.product.name}
+            </Typography>
+            <FormControlLabel
+              control={(
+                <Switch
+                  id="is-editing"
+                  name="isEditing"
+                  checked={isEditing}
+                  color="primary"
+                  onChange={toggleIsEditing}
+                />
+              )}
+              label={isEditing ? 'Edit basic Listing information' : 'Upload detailed Listing information'}
             />
-          ) : (
-            <Typography>Insert upload component here</Typography>
-          )}
-        </Box>
-      </Container>
+          </Box>
+        </Container>
+      </Box>
+      <Box style={{ height: '100vh', backgroundColor: palette.background }}>
+        <Container maxWidth="lg">
+          <Box py={8} className={classes.container} id="main-content" tabIndex="-1">
+            {isEditing ? (
+              <ChplListingEdit
+                dispatch={handleDispatch}
+                errors={errors}
+                warnings={warnings}
+                isProcessing={isProcessing}
+              />
+            ) : (
+              <Typography>Insert upload component here</Typography>
+            )}
+            <Card>
+              <CardContent>
+                <ChplTextField
+                  id="reson-for-change"
+                  name="reasonForChange"
+                  label="Reason For Change"
+                  multiline
+                  value={reasonForChange}
+                  onChange={(event) => setReasonForChange(event.target.value)}
+                />
+                <Typography variant="body1" style={{ paddingTop: '16px', fontWeight: 'bold' }}>If changes are made in any of the following ways, a Reason for Change is required:</Typography>
+                <List disablePadding>
+                  <ListItem>Clinical Quality Measure Removed</ListItem>
+                  <ListItem>Certification Criteria Removed</ListItem>
+                  <ListItem>Editing of a non-active Certified Product</ListItem>
+                  <ListItem>Certification Status Changed from anything to &quot;Active&quot;</ListItem>
+                </List>
+              </CardContent>
+            </Card>
+          </Box>
+        </Container>
+      </Box>
     </AnalyticsContext.Provider>
   );
 }
