@@ -255,7 +255,9 @@ function ChplDeveloperView(props) {
       <CardHeader
         title={(
           <div className={classes.headerContainer}>
-            <div className={classes.developerHeaderContainer}>{isSplitting ? 'Original Developer' : developer.name}</div>
+            <div className={classes.developerHeaderContainer}>
+              {isSplitting ? 'Original Developer' : developer.name}
+            </div>
             { can('edit') && !hasAnyRole(['chpl-developer'])
               && (
                 <ChplOrganizationActivity
