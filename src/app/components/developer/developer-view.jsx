@@ -52,6 +52,9 @@ const useStyles = makeStyles({
     margin: '0',
     fontSize: '1.25em',
   },
+  developerHeaderContainer: {
+    maxWidth: '75%',
+  },
   headerContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -252,7 +255,7 @@ function ChplDeveloperView(props) {
       <CardHeader
         title={(
           <div className={classes.headerContainer}>
-            {isSplitting ? 'Original Developer' : developer.name}
+            <div className={classes.developerHeaderContainer}>{isSplitting ? 'Original Developer' : developer.name}</div>
             { can('edit') && !hasAnyRole(['chpl-developer'])
               && (
                 <ChplOrganizationActivity
