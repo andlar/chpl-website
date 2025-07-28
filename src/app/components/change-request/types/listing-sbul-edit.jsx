@@ -16,6 +16,12 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     gap: '16px',
   },
+  chplIdContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '8px',
+    marginBottom: '8px',
+  },
   detailsContainer: {
     display: 'grid',
     gap: '8px',
@@ -77,11 +83,10 @@ function ChplChangeRequestListingSbulEdit() {
   });
 
   return (
-    <div className={classes.container}>
-      <div className={classes.detailsContainer}>
-        <Typography variant="subtitle1">Current details</Typography>
-        <Typography>
-          { getCurrent() }
+    <>
+      <div className={classes.chplIdContainer}>
+        <Typography variant="subtitle1">
+          CHPL Product Number
         </Typography>
         <Typography>
           <ChplLink
@@ -98,23 +103,31 @@ function ChplChangeRequestListingSbulEdit() {
           />
         </Typography>
       </div>
-      <Divider />
-      <div className={classes.detailsContainer}>
-        <Typography variant="subtitle1">Submitted details</Typography>
-        <ChplTextField
-          id="url"
-          name="url"
-          label="url"
-          required
-          disabled={!hasAnyRole(['chpl-developer'])}
-          value={formik.values.url}
-          onChange={handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.url && !!formik.errors.url}
-          helperText={formik.touched.url && formik.errors.url}
-        />
+      <div className={classes.container}>
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle1">Current details</Typography>
+          <Typography>
+            { getCurrent() }
+          </Typography>
+        </div>
+        <Divider />
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle1">Submitted details</Typography>
+          <ChplTextField
+            id="url"
+            name="url"
+            label="url"
+            required
+            disabled={!hasAnyRole(['chpl-developer'])}
+            value={formik.values.url}
+            onChange={handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.url && !!formik.errors.url}
+            helperText={formik.touched.url && formik.errors.url}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

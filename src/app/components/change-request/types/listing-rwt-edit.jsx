@@ -21,10 +21,11 @@ const useStyles = makeStyles({
     display: 'grid',
     gap: '8px',
   },
-  detailsSubContainer: {
+  chplIdContainer: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr',
     gap: '8px',
+    marginBottom: '8px',
   },
 });
 
@@ -89,11 +90,10 @@ function ChplChangeRequestListingRwtEdit({ isAccepting, title, value }) {
   });
 
   return (
-    <div className={classes.container}>
-      <div className={classes.detailsContainer}>
-        <Typography variant="subtitle1">Current details</Typography>
-        <Typography>
-          { getCurrent() }
+    <>
+      <div className={classes.chplIdContainer}>
+        <Typography variant="subtitle1">
+          CHPL Product Number
         </Typography>
         <Typography>
           <ChplLink
@@ -110,39 +110,47 @@ function ChplChangeRequestListingRwtEdit({ isAccepting, title, value }) {
           />
         </Typography>
       </div>
-      <Divider />
-      <div className={classes.detailsContainer}>
-        <Typography variant="subtitle1">Submitted details</Typography>
-        <ChplTextField
-          id="url"
-          name="url"
-          label="url"
-          required
-          disabled={!hasAnyRole(['chpl-developer'])}
-          value={formik.values.url}
-          onChange={handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.url && !!formik.errors.url}
-          helperText={formik.touched.url && formik.errors.url}
-        />
-        { hasAnyRole(['chpl-admin', 'chpl-onc', 'chpl-onc-acb'])
-          && (
-            <ChplTextField
-              id="check-date"
-              name="checkDate"
-              label="Check Date"
-              type="date"
-              required={isAccepting}
-              disabled={!isAccepting}
-              value={formik.values.checkDate}
-              onChange={handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.checkDate && !!formik.errors.checkDate}
-              helperText={formik.touched.checkDate && formik.errors.checkDate}
-            />
-          )}
+      <div className={classes.container}>
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle2">Current details</Typography>
+          <Typography>
+            { getCurrent() }
+          </Typography>
+        </div>
+        <Divider />
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle2">Submitted details</Typography>
+          <ChplTextField
+            id="url"
+            name="url"
+            label="url"
+            required
+            disabled={!hasAnyRole(['chpl-developer'])}
+            value={formik.values.url}
+            onChange={handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.url && !!formik.errors.url}
+            helperText={formik.touched.url && formik.errors.url}
+          />
+          { hasAnyRole(['chpl-admin', 'chpl-onc', 'chpl-onc-acb'])
+            && (
+              <ChplTextField
+                id="check-date"
+                name="checkDate"
+                label="Check Date"
+                type="date"
+                required={isAccepting}
+                disabled={!isAccepting}
+                value={formik.values.checkDate}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.checkDate && !!formik.errors.checkDate}
+                helperText={formik.touched.checkDate && formik.errors.checkDate}
+              />
+            )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

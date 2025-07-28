@@ -17,6 +17,12 @@ const useStyles = makeStyles({
     display: 'grid',
     gap: '8px',
   },
+  chplIdContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '8px',
+    marginBottom: '8px',
+  },
 });
 
 function ChplChangeRequestListingSbulView() {
@@ -42,15 +48,9 @@ function ChplChangeRequestListingSbulView() {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.detailsContainer}>
+    <>
+      <div className={classes.chplIdContainer}>
         <Typography variant="subtitle1">
-          Current Service Base URL List
-        </Typography>
-        <Typography>
-          { getCurrent() }
-        </Typography>
-        <Typography variant="subtitle2">
           CHPL Product Number
         </Typography>
         <Typography>
@@ -68,22 +68,32 @@ function ChplChangeRequestListingSbulView() {
           />
         </Typography>
       </div>
-      <div className={classes.detailsContainer}>
-        <Typography variant="subtitle1">
-          Submitted Service Base URL List
-        </Typography>
-        <Typography>
-          <ChplLink
-            href={changeRequest.details.url}
-            analytics={{
-              ...analytics,
-              event: 'Navigate to Submitted SBUL',
-              label: changeRequest.details.url,
-            }}
-          />
-        </Typography>
+      <div className={classes.container}>
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle2">
+            Current Service Base URL List
+          </Typography>
+          <Typography>
+            { getCurrent() }
+          </Typography>
+        </div>
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle2">
+            Submitted Service Base URL List
+          </Typography>
+          <Typography>
+            <ChplLink
+              href={changeRequest.details.url}
+              analytics={{
+                ...analytics,
+                event: 'Navigate to Submitted SBUL',
+                label: changeRequest.details.url,
+              }}
+            />
+          </Typography>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

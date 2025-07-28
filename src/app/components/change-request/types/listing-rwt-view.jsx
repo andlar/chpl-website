@@ -18,6 +18,12 @@ const useStyles = makeStyles({
     display: 'grid',
     gap: '8px',
   },
+  chplIdContainer: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '8px',
+    marginBottom: '8px',
+  },
 });
 
 function ChplChangeRequestListingRwtView({ title, value }) {
@@ -42,19 +48,9 @@ function ChplChangeRequestListingRwtView({ title, value }) {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.detailsContainer}>
+    <>
+      <div className={classes.chplIdContainer}>
         <Typography variant="subtitle1">
-          Current RWT
-          {' '}
-          { title }
-          {' '}
-          URL
-        </Typography>
-        <Typography>
-          { getCurrent() }
-        </Typography>
-        <Typography variant="subtitle2">
           CHPL Product Number
         </Typography>
         <Typography>
@@ -72,26 +68,40 @@ function ChplChangeRequestListingRwtView({ title, value }) {
           />
         </Typography>
       </div>
-      <div className={classes.detailsContainer}>
-        <Typography variant="subtitle1">
-          Submitted RWT
-          {' '}
-          { title }
-          {' '}
-          URL
-        </Typography>
-        <Typography>
-          <ChplLink
-            href={changeRequest.details.url}
-            analytics={{
-              ...analytics,
-              event: `Navigate to Submitted RWT ${title} URL`,
-              label: changeRequest.details.url,
-            }}
-          />
-        </Typography>
+      <div className={classes.container}>
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle2">
+            Current RWT
+            {' '}
+            { title }
+            {' '}
+            URL
+          </Typography>
+          <Typography>
+            { getCurrent() }
+          </Typography>
+        </div>
+        <div className={classes.detailsContainer}>
+          <Typography variant="subtitle2">
+            Submitted RWT
+            {' '}
+            { title }
+            {' '}
+            URL
+          </Typography>
+          <Typography>
+            <ChplLink
+              href={changeRequest.details.url}
+              analytics={{
+                ...analytics,
+                event: `Navigate to Submitted RWT ${title} URL`,
+                label: changeRequest.details.url,
+              }}
+            />
+          </Typography>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

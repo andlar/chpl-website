@@ -104,9 +104,6 @@ const useStyles = makeStyles({
     display: 'grid',
     gap: '8px',
     paddingBottom: '16px',
-    [theme.breakpoints.up('sm')]: {
-      gridTemplateColumns: '2fr 1fr',
-    },
   },
   cardHeader: {
     fontWeight: '600',
@@ -601,6 +598,7 @@ function ChplChangeRequest({ changeRequest: { id }, showBreadcrumbs, dispatch })
                 <div>
                   { getChangeRequestEditDetails(changeRequest, handleDispatch, isAccepting()) }
                 </div>
+                <Divider />
                 <div className={classes.actionsContainer}>
                   <div className={classes.actionSubContainer}>
                     <Typography variant="subtitle1">Change Request change data</Typography>
