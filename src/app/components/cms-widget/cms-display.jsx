@@ -14,25 +14,28 @@ import {
   ListItem,
   Radio,
   RadioGroup,
+  Skeleton,
   Typography,
 } from '@mui/material';
-import Skeleton from '@mui/material/Skeleton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
-import { func } from 'prop-types';
+import { func, number } from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ChplCmsDisplayProgressBar from './cms-display-progress-bar';
 import createPdf from './cms-pdf';
 
 import { useFetchCmsIdAnalysis, useFetchCmsIdPdf, usePostCreateCmsId } from 'api/cms';
+import { openWidget } from 'components/action-widget/widget.slice';
+import { clearCmsListings, removeCmsListing, setCompareListings } from 'components/browser/browserInfo.slice';
 import { ChplEllipsis, ChplLink, ChplTooltip } from 'components/util';
 import { eventTrack } from 'services/analytics.service';
 import { compareStrings } from 'services/sort.service';
-import { CmsContext, CompareContext, FlagContext } from 'shared/contexts';
+import { FlagContext } from 'shared/contexts';
 import { palette, utilStyles } from 'themes';
 
 function ChplCmsEmptyStateIcon() {
@@ -124,10 +127,6 @@ const styles = {
   sectionLabelFontWeight800: {
     fontWeight: '800 !important',
     marginTop: '4px',
-  },
-  centeredWrappedBodyText: {
-    textAlign: 'center',
-    textWrap: 'wrap',
   },
   preserveWhitespacePreWrapText: {
     whiteSpace: 'pre-wrap',
@@ -255,14 +254,120 @@ const styles = {
   },
 };
 
+// Each block takes the same space as the part of ChplCmsDisplay it stands in
+// for, but only as shapes: no header border, grey year box or chip outlines
+const loadingStyles = {
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '8px',
+    minHeight: '52px',
+    marginLeft: '-8px',
+    marginRight: '-8px',
+    marginBottom: '16px',
+    padding: '4px 4px 4px 8px',
+  },
+  yearSelector: {
+    width: '100%',
+    padding: '8px 16px',
+    marginTop: '-8px',
+    marginBottom: '8px',
+  },
+  validation: {
+    marginTop: '8px',
+  },
+  // Same spacing and bar size as ChplCmsDisplayProgressBar
+  progress: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '8px',
+    paddingTop: '8px',
+    paddingBottom: '8px',
+  },
+  criteria: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+    paddingBottom: '8px',
+  },
+  chips: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    marginTop: '8px',
+    marginBottom: '8px',
+  },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '6px',
+    marginTop: '8px',
+  },
+  secondaryButtons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '8px',
+  },
+};
+
+const criteriaWidths = ['85%', '70%', '78%'];
+
+// The whole widget while the analysis for the selected products loads, so
+// nothing real appears until it can all appear together. `products` is how
+// many products are selected, which is known before the analysis is.
+function ChplCmsDisplayLoading({ products = 1 }) {
+  return (
+    <Box role="status" aria-live="polite">
+      <Box component="span" sx={utilStyles.visuallyHidden}>Loading CMS ID analysis</Box>
+      <Box aria-hidden="true">
+        <Box sx={loadingStyles.header}>
+          <Skeleton variant="text" width="70%" height="36px" />
+          <Skeleton variant="circular" width="28px" height="28px" />
+        </Box>
+        <Box sx={loadingStyles.yearSelector}>
+          <Skeleton variant="text" width="100%" height="32px" />
+        </Box>
+        <Box sx={loadingStyles.validation}>
+          <Skeleton variant="text" width="30%" height="24px" />
+        </Box>
+        <Box sx={loadingStyles.progress}>
+          <Skeleton variant="rectangular" width="150px" height="16px" sx={{ borderRadius: '8px', flexShrink: 0 }} />
+          <Skeleton variant="text" width="35%" height="28px" />
+        </Box>
+        <Box sx={loadingStyles.criteria}>
+          <Skeleton variant="text" width="60%" height="20px" />
+          {criteriaWidths.map((width) => (
+            <Skeleton key={width} variant="text" width={width} height="20px" />
+          ))}
+        </Box>
+        <Skeleton variant="text" width="40%" height="24px" />
+        <Box sx={loadingStyles.chips}>
+          {[...Array(products)].map((_product, idx) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Skeleton key={idx} variant="rounded" height="32px" sx={{ borderRadius: '16px' }} />
+          ))}
+        </Box>
+        <Box sx={loadingStyles.buttons}>
+          <Skeleton variant="rectangular" height="36px" sx={{ borderRadius: '4px' }} />
+          <Box sx={loadingStyles.secondaryButtons}>
+            <Skeleton variant="rectangular" height="36px" sx={{ borderRadius: '4px', flex: 1 }} />
+            <Skeleton variant="rectangular" height="36px" sx={{ borderRadius: '4px', flex: 1 }} />
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+ChplCmsDisplayLoading.propTypes = {
+  products: number,
+};
+
 function ChplCmsDisplay({ onClose }) {
-  const { listings, removeListing, setIsOpen } = useContext(CmsContext);
-  const {
-    listings: compareListings,
-    addListing: addCompareListing,
-    removeListing: removeCompareListing,
-    setIsOpen: setCompareIsOpen,
-  } = useContext(CompareContext);
+  const listings = useSelector((state) => state.browserInfo.cms);
+  const dispatch = useDispatch();
   const { cmsDisabledIsOn } = useContext(FlagContext);
   const [activeYear, setActiveYear] = useState('');
   const [idAnalysis, setIdAnalysis] = useState({});
@@ -299,10 +404,8 @@ function ChplCmsDisplay({ onClose }) {
       event: 'Compare Listings',
       category: 'CMS Widget',
     });
-    compareListings.forEach((l) => removeCompareListing(l));
-    listings.forEach((l) => addCompareListing(l));
-    setIsOpen(false);
-    setCompareIsOpen(true);
+    dispatch(setCompareListings(listings));
+    dispatch(openWidget('compare'));
   };
 
   const copyToClipboard = () => {
@@ -343,7 +446,7 @@ function ChplCmsDisplay({ onClose }) {
       event: 'Remove all Listings',
       category: 'CMS Widget',
     });
-    listings.forEach((l) => removeListing(l));
+    dispatch(clearCmsListings());
   };
 
   if (cmsDisabledIsOn) {
@@ -392,6 +495,16 @@ function ChplCmsDisplay({ onClose }) {
     );
   }
 
+  // Each change to the selected products is a new query, and nothing real
+  // appears until its analysis does; the analysis still in state is stale
+  if (isLoadingAnalysis) {
+    return (
+      <CardContent sx={[styles.cardcontentPadding, styles.mainCardContent]}>
+        <ChplCmsDisplayLoading products={listings.length} />
+      </CardContent>
+    );
+  }
+
   return (
     <CardContent sx={[styles.cardcontentPadding, styles.mainCardContent]}>
       <Box sx={styles.stickyWidgetHeader}>
@@ -433,13 +546,7 @@ function ChplCmsDisplay({ onClose }) {
             <Divider />
           </>
         )}
-      { isLoadingAnalysis
-        && (
-          <FormControl sx={[styles.yearSelector, styles.yearSelectorLayout]}>
-            <Skeleton variant="text" width="100%" height={32} />
-          </FormControl>
-        )}
-      { !isLoadingAnalysis && reportingYears.length > 1
+      { reportingYears.length > 1
         && (
           <FormControl sx={[styles.yearSelector, styles.yearSelectorLayout]}>
             <FormLabel sx={styles.yearLabel}>
@@ -560,7 +667,7 @@ function ChplCmsDisplay({ onClose }) {
               variant="outlined"
               key={listing.id}
               label={<ChplEllipsis text={listing.name} />}
-              onDelete={() => removeListing(listing)}
+              onDelete={() => dispatch(removeCmsListing(listing))}
             />
           ))}
       </Box>

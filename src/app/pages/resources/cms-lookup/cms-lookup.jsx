@@ -9,6 +9,7 @@ import {
   ListItem,
   ListItemIcon,
   Paper,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -19,16 +20,24 @@ import {
 import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined';
 import WarningIcon from '@mui/icons-material/Warning';
 import { ExportToCsv } from 'export-to-csv';
+import { number } from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useFetchListings } from 'api/cms';
+import { addCmsLookupId, removeCmsLookupId } from 'components/browser/browserInfo.slice';
 import ChplChips from 'components/cms/chips';
 import ChplSearchTerm from 'components/cms/search-term';
-import { ChplLink, ChplPageBody, ChplPageHeader } from 'components/util';
+import {
+  ChplLink,
+  ChplLoadingTable,
+  ChplPageBody,
+  ChplPageHeader,
+  ChplSkeletonCard,
+} from 'components/util';
 import { ChplSortableHeaders } from 'components/util/sortable-headers';
 import { eventTrack } from 'services/analytics.service';
-import { useLocalStorage as useStorage } from 'services/storage.service';
 import { FlagContext, useAnalyticsContext } from 'shared/contexts';
-import { palette } from 'themes';
+import { palette, utilStyles } from 'themes';
 
 const csvOptions = {
   filename: 'cms-id-data',
@@ -64,8 +73,44 @@ const styles = {
   },
 };
 
+const loadingStyles = {
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    padding: '16px',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+};
+
+// The results card while the CMS IDs are looked up: the download button above
+// a table of the same columns. The lookup form above it stays real, since it
+// does not wait on anything
+function ChplCmsLookupLoading({ columns, rows }) {
+  return (
+    <Box role="status" aria-live="polite">
+      <Box component="span" sx={utilStyles.visuallyHidden}>Loading CMS ID results</Box>
+      <ChplSkeletonCard>
+        <Box sx={loadingStyles.content} aria-hidden="true">
+          <Box sx={loadingStyles.header}>
+            <Skeleton variant="rectangular" width="180px" height="32px" sx={{ borderRadius: '4px' }} />
+          </Box>
+          <ChplLoadingTable columns={columns} rows={rows} showControls={false} />
+        </Box>
+      </ChplSkeletonCard>
+    </Box>
+  );
+}
+
+ChplCmsLookupLoading.propTypes = {
+  columns: number.isRequired,
+  rows: number.isRequired,
+};
+
 function ChplCmsLookup() {
-  const storageKey = 'storageKey-cmsLookupIds';
   const { cmsDisabledIsOn } = useContext(FlagContext);
   const analytics = {
     ...useAnalyticsContext().analytics,
@@ -73,7 +118,8 @@ function ChplCmsLookup() {
   };
   const [errors, setErrors] = useState([]);
   const [listings, setListings] = useState([]);
-  const [cmsIds, setCmsIds] = useStorage(storageKey, []);
+  const cmsIds = useSelector((state) => state.browserInfo.cmsLookupIds);
+  const dispatch = useDispatch();
   const queries = useFetchListings({ cmsIds });
 
   const finishedLoading = queries.every((query) => !query.isLoading);
@@ -110,7 +156,7 @@ function ChplCmsLookup() {
           event: 'Remove CMS ID Chip',
           label: payload.trim(),
         });
-        setCmsIds((previous) => previous.filter((id) => id !== payload));
+        dispatch(removeCmsLookupId(payload));
         setListings((previous) => previous.filter((listing) => listing.certificationId !== payload));
         break;
       case 'search':
@@ -119,7 +165,7 @@ function ChplCmsLookup() {
           event: 'Lookup CMS ID',
           label: payload.trim(),
         });
-        setCmsIds((previous) => [...new Set(previous.concat(payload.trim()))]);
+        dispatch(addCmsLookupId(payload));
         break;
         // no default
     }
@@ -180,7 +226,11 @@ function ChplCmsLookup() {
               </Box>
             </CardContent>
           </Card>
-          { listings.length > 0
+          { !finishedLoading
+            && (
+              <ChplCmsLookupLoading columns={headers.length} rows={Math.max(cmsIds.length, 3)} />
+            )}
+          { finishedLoading && listings.length > 0
           && (
             <Card>
               <CardContent>

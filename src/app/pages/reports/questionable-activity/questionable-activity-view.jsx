@@ -10,15 +10,18 @@ import { useSelector } from 'react-redux';
 import { useFreshAccessToken } from 'api/axios';
 import { useFetchQuestionableActivity } from 'api/questionable-activity';
 import ChplQuestionableActivityDetails from 'components/activity/questionable-activity-details';
+import { usePageState } from 'components/page-state';
 import {
   ChplLink,
   ChplLoadingCards,
-  ChplPagination,
   ChplPageBody,
   ChplPageHeader,
+  ChplPagination,
+  ChplResultsUpdating,
   ChplSearchResultCard,
   ChplSearchResultControls,
   ChplSortControls,
+  useResultsUpdating,
 } from 'components/util';
 import {
   ChplFilterLayout,
@@ -27,7 +30,6 @@ import {
 } from 'components/filter';
 import { getDisplayDateFormat } from 'services/date-util';
 import { eventTrack } from 'services/analytics.service';
-import { useSessionStorage as useStorage } from 'services/storage.service';
 import { useAnalyticsContext } from 'shared/contexts';
 
 function ChplQuestionableActivityView() {
@@ -37,20 +39,29 @@ function ChplQuestionableActivityView() {
   const storageKey = 'storageKey-questionableActivity';
   const { analytics } = useAnalyticsContext();
   const [activities, setActivities] = useState([]);
-  const [orderBy, setOrderBy] = useStorage(`${storageKey}-orderBy`, 'activity_date');
-  const [pageNumber, setPageNumber] = useStorage(`${storageKey}-pageNumber`, 0);
-  const [pageSize, setPageSize] = useStorage(`${storageKey}-pageSize`, 25);
-  const [sortDescending, setSortDescending] = useStorage(`${storageKey}-sortDescending`, true);
+  const [orderBy, setOrderBy] = usePageState(`${storageKey}-orderBy`, 'activity_date');
+  const [pageNumber, setPageNumber] = usePageState(`${storageKey}-pageNumber`, 0);
+  const [pageSize, setPageSize] = usePageState(`${storageKey}-pageSize`, 25);
+  const [sortDescending, setSortDescending] = usePageState(`${storageKey}-sortDescending`, true);
   const [recordCount, setRecordCount] = useState(0);
 
   const filterContext = useFilterContext();
-  const { data, isError, isLoading } = useFetchQuestionableActivity({
+  const {
+    data,
+    isError,
+    isFetching,
+    isLoading,
+    isPreviousData,
+  } = useFetchQuestionableActivity({
     orderBy,
     pageNumber,
     pageSize,
     sortDescending,
     query: filterContext.queryString(),
   });
+
+  // Old results stay on screen while a new sort, page or filter loads, and a sort shows as updating briefly even when it's cached
+  const isUpdating = useResultsUpdating({ isFetching, isPreviousData, sortKey: `${orderBy}-${sortDescending}` });
 
   useEffect(() => {
     if (isLoading) { return; }
@@ -104,6 +115,9 @@ function ChplQuestionableActivityView() {
   const pageStart = (pageNumber * pageSize) + 1;
   const pageEnd = Math.min((pageNumber + 1) * pageSize, recordCount);
 
+  // The filter bar and chips show their own skeletons while the filters load, so the results wait with them
+  const showLoading = isLoading || filterContext.isLoading;
+
   return (
     <>
       <ChplPageHeader
@@ -117,8 +131,8 @@ function ChplQuestionableActivityView() {
       <ChplPageBody>
         <ChplFilterSearchBar sticky />
         <ChplFilterLayout>
-          { isLoading && (<ChplLoadingCards />)}
-          { !isLoading
+          { showLoading && (<ChplLoadingCards title fieldGroups={[[{}, {}, { flex: '2 1 320px' }], [{}, {}, { flex: '2 1 320px' }]]} actions={1} />)}
+          { !showLoading
           && (
             <>
               <ChplSearchResultControls
@@ -131,6 +145,7 @@ function ChplQuestionableActivityView() {
                   orderBy={orderBy}
                   order={sortDescending ? 'desc' : 'asc'}
                   onSort={handleSort}
+                  isUpdating={isUpdating}
                 />
                 { activities.length > 0
                   && (
@@ -146,77 +161,79 @@ function ChplQuestionableActivityView() {
                     </Button>
                   )}
               </ChplSearchResultControls>
-              { activities.length > 0
-                && (
-                  <>
-                    <Box>
-                      { activities.map((item) => (
-                        <ChplSearchResultCard
-                          key={item.id}
-                          cardTitle="Developer"
-                          cardTitleValue={item.developerId
-                            ? (
-                              <ChplLink
-                                href={`#/organizations/developers/${item.developerId}`}
-                                text={item.developerName}
-                                analytics={{
-                                  ...analytics,
-                                  event: 'Go to Developer Page',
-                                  label: item.developerName,
-                                }}
-                                external={false}
-                                router={{ sref: 'organizations.developers.developer', params: { id: item.developerId } }}
-                              />
-                            )
-                            : item.developerName || 'N/A'}
-                          fieldGroups={[
-                            [
-                              { label: 'Product', value: item.productName },
-                              { label: 'Version', value: item.versionName },
-                              {
-                                label: 'CHPL ID',
-                                style: { flex: '2 1 320px' },
-                                value: item.listingId
-                                  ? (
-                                    <ChplLink
-                                      href={`#/listing/${item.listingId}`}
-                                      text={item.chplProductNumber}
-                                      analytics={{
-                                        ...analytics,
-                                        event: 'Go to Listing Details Page',
-                                        label: item.chplProductNumber,
-                                      }}
-                                      external={false}
-                                      router={{ sref: 'listing', params: { id: item.listingId } }}
-                                    />
-                                  )
-                                  : item.chplProductNumber,
-                              },
-                            ],
-                            [
-                              { label: 'Activity', value: item.triggerName },
-                              { label: 'Activity Date', value: getDisplayDateFormat(item.activityDate) },
-                              {
-                                label: 'Reason',
-                                style: { flex: '2 1 320px' },
-                                value: item.reason || item.certificationStatusChangeReason || 'N/A',
-                              },
-                            ],
-                          ]}
-                          actions={<ChplQuestionableActivityDetails activity={item} />}
-                        />
-                      ))}
-                    </Box>
-                    <ChplPagination
-                      count={recordCount}
-                      page={pageNumber}
-                      rowsPerPage={pageSize}
-                      rowsPerPageOptions={[25, 50, 100]}
-                      setPage={setPageNumber}
-                      setRowsPerPage={setPageSize}
-                    />
-                  </>
-                )}
+              <ChplResultsUpdating isUpdating={isUpdating}>
+                { activities.length > 0
+                  && (
+                    <>
+                      <Box>
+                        { activities.map((item) => (
+                          <ChplSearchResultCard
+                            key={item.id}
+                            cardTitle="Developer"
+                            cardTitleValue={item.developerId
+                              ? (
+                                <ChplLink
+                                  href={`#/organizations/developers/${item.developerId}`}
+                                  text={item.developerName}
+                                  analytics={{
+                                    ...analytics,
+                                    event: 'Go to Developer Page',
+                                    label: item.developerName,
+                                  }}
+                                  external={false}
+                                  router={{ sref: 'organizations.developers.developer', params: { id: item.developerId } }}
+                                />
+                              )
+                              : item.developerName || 'N/A'}
+                            fieldGroups={[
+                              [
+                                { label: 'Product', value: item.productName },
+                                { label: 'Version', value: item.versionName },
+                                {
+                                  label: 'CHPL ID',
+                                  style: { flex: '2 1 320px' },
+                                  value: item.listingId
+                                    ? (
+                                      <ChplLink
+                                        href={`#/listing/${item.listingId}`}
+                                        text={item.chplProductNumber}
+                                        analytics={{
+                                          ...analytics,
+                                          event: 'Go to Listing Details Page',
+                                          label: item.chplProductNumber,
+                                        }}
+                                        external={false}
+                                        router={{ sref: 'listing', params: { id: item.listingId } }}
+                                      />
+                                    )
+                                    : item.chplProductNumber,
+                                },
+                              ],
+                              [
+                                { label: 'Activity', value: item.triggerName },
+                                { label: 'Activity Date', value: getDisplayDateFormat(item.activityDate) },
+                                {
+                                  label: 'Reason',
+                                  style: { flex: '2 1 320px' },
+                                  value: item.reason || item.certificationStatusChangeReason || 'N/A',
+                                },
+                              ],
+                            ]}
+                            actions={<ChplQuestionableActivityDetails activity={item} />}
+                          />
+                        ))}
+                      </Box>
+                      <ChplPagination
+                        count={recordCount}
+                        page={pageNumber}
+                        rowsPerPage={pageSize}
+                        rowsPerPageOptions={[25, 50, 100]}
+                        setPage={setPageNumber}
+                        setRowsPerPage={setPageSize}
+                      />
+                    </>
+                  )}
+              </ChplResultsUpdating>
             </>
           )}
         </ChplFilterLayout>

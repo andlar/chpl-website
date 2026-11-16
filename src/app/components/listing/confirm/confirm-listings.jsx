@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { func } from 'prop-types';
 import {
+  Box,
   Button,
   Checkbox,
   Chip,
@@ -15,6 +16,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import FeedbackIcon from '@mui/icons-material/Feedback';
+import Skeleton from '@mui/material/Skeleton';
 import { useSnackbar } from 'notistack';
 
 import {
@@ -23,6 +25,7 @@ import {
   useRejectPendingListing,
 } from 'api/pending-listings';
 import ChplActionBarMessages from 'components/action-bar/action-bar-messages';
+import { ChplLoadingTable, ChplPageBody, ChplPageHeader } from 'components/util';
 import { ChplSortableHeaders, sortComparator } from 'components/util/sortable-headers';
 import { getDisplayDateFormat } from 'services/date-util';
 import { palette, utilStyles } from 'themes';
@@ -46,6 +49,36 @@ const styles = {
     padding: '16px 32px',
   },
 };
+
+// Same footer and table margins as the loaded queue, so the rows fill in where they will appear
+const loadingStyles = {
+  rejectFooter: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '16px 32px',
+  },
+  table: {
+    margin: '0px 32px',
+  },
+};
+
+// The queue as the page shows it: the Reject selected button over a table with
+// one column for each header
+function ChplConfirmListingsLoading() {
+  return (
+    <Box role="status" aria-live="polite">
+      <Box component="span" sx={utilStyles.visuallyHidden}>Loading products in the process of upload</Box>
+      <Box aria-hidden="true">
+        <Box sx={loadingStyles.rejectFooter}>
+          <Skeleton variant="rectangular" width="170px" height="36px" sx={{ borderRadius: '4px' }} />
+        </Box>
+        <Box sx={loadingStyles.table}>
+          <ChplLoadingTable columns={8} rows={5} showControls={false} />
+        </Box>
+      </Box>
+    </Box>
+  );
+}
 
 const getStatus = (listing) => {
   if (listing.status === 'UPLOAD_PROCESSING') {
@@ -77,7 +110,7 @@ function ChplConfirmListings({ onProcess }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('chplProductNumber');
   const [warnings, setWarnings] = useState([]);
-  const { data: modernData } = useFetchPendingListings();
+  const { data: modernData, isLoading } = useFetchPendingListings();
   const { data: processingListing } = useFetchPendingListing({ id: listingIdToLoad });
   const { mutate: rejectListing } = useRejectPendingListing();
 
@@ -160,6 +193,12 @@ function ChplConfirmListings({ onProcess }) {
     setOrder(orderDirection);
   };
 
+  // Until the effect above has copied the queue into state, the table would be
+  // empty, so the skeleton covers that render too
+  if (isLoading || (modernData?.length > 0 && listings.length === 0)) {
+    return <ChplConfirmListingsLoading />;
+  }
+
   const headers = [
     { text: 'Action', invisible: true },
     { text: 'CHPL Product Number', property: 'chplProductNumber', sortable: true },
@@ -173,96 +212,99 @@ function ChplConfirmListings({ onProcess }) {
 
   return (
     <>
-      { listings.length === 0
-        && (
-          <div>No products currently in queue</div>
-        )}
-      { listings.length > 0
-        && (
-          <>
-            <div style={styles.rejectFooter}>
-              <Button
-                id="reject-selected-pending-listings"
-                sx={styles.deleteButton}
-                variant="contained"
-                onClick={handleReject}
-                startIcon={<DeleteIcon />}
-                disabled={idsToReject.length === 0}
-              >
-                Reject
-                {' '}
-                {(idsToReject.length > 0) ? idsToReject.length : ''}
-                {' '}
-                selected
-              </Button>
-            </div>
-            <TableContainer sx={styles.tableContainer} component={Paper}>
-              <Table>
-                <ChplSortableHeaders
-                  headers={headers}
-                  onTableSort={handleTableSort}
-                  order={order}
-                  orderBy={orderBy}
-                />
-                <TableBody>
-                  { listings
-                    .map((listing) => (
-                      <TableRow key={listing.id}>
-                        <TableCell sx={styles.firstColumn}>
-                          <Button
-                            id={`process-pending-listing-${listing.chplProductNumber}`}
-                            color="primary"
-                            variant="contained"
-                            onClick={() => handleProcess(listing)}
-                            endIcon={<PlayArrowIcon />}
-                            disabled={listing.status !== 'UPLOAD_SUCCESS'}
-                          >
-                            Process Listing
-                          </Button>
-                        </TableCell>
-                        <TableCell sx={styles.linkWrap}>{listing.chplProductNumber}</TableCell>
-                        <TableCell sx={styles.linkWrap}>{listing.developer}</TableCell>
-                        <TableCell sx={styles.linkWrap}>{listing.product}</TableCell>
-                        <TableCell sx={styles.linkWrap}>{listing.version}</TableCell>
-                        <TableCell sx={styles.linkWrap}>{getDisplayDateFormat(listing.certificationDate)}</TableCell>
-                        <TableCell>
-                          { listing.displayStatus }
-                          { listing.status !== 'UPLOAD_FAILURE' && (listing.errors?.length !== 0 || listing.warnings?.length !== 0)
-                            && (
-                              <div>
-                                <Button
-                                  onClick={() => { setErrors(listing.errors); setWarnings(listing.warnings); }}
-                                  disabled={!(listing.errors?.length !== 0 || listing.warnings?.length !== 0)}
-                                  variant="text"
-                                  color="primary"
-                                  sx={styles.messageButton}
-                                >
-                                  See messages
-                                  {' '}
-                                  <FeedbackIcon color="primary" fontSize="small" sx={styles.iconSpacing} />
-                                </Button>
-                              </div>
-                            )}
-                        </TableCell>
-                        <TableCell>
-                          <Checkbox
-                            id={`reject-pending-listing-${listing.chplProductNumber}`}
-                            onChange={($event) => handleRejectCheckbox($event, listing)}
-                            inputProps={{ 'aria-label': `Reject Listing: ${listing.chplProductNumber}` }}
-                            color="primary"
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <ChplActionBarMessages
-              errors={errors}
-              warnings={warnings}
-            />
-          </>
-        )}
+      <ChplPageHeader text="View Products in the process of upload" />
+      <ChplPageBody>
+        { listings.length === 0
+          && (
+            <div>No products currently in queue</div>
+          )}
+        { listings.length > 0
+          && (
+            <>
+              <div style={styles.rejectFooter}>
+                <Button
+                  id="reject-selected-pending-listings"
+                  sx={styles.deleteButton}
+                  variant="contained"
+                  onClick={handleReject}
+                  startIcon={<DeleteIcon />}
+                  disabled={idsToReject.length === 0}
+                >
+                  Reject
+                  {' '}
+                  {(idsToReject.length > 0) ? idsToReject.length : ''}
+                  {' '}
+                  selected
+                </Button>
+              </div>
+              <TableContainer sx={styles.tableContainer} component={Paper}>
+                <Table>
+                  <ChplSortableHeaders
+                    headers={headers}
+                    onTableSort={handleTableSort}
+                    order={order}
+                    orderBy={orderBy}
+                  />
+                  <TableBody>
+                    { listings
+                      .map((listing) => (
+                        <TableRow key={listing.id}>
+                          <TableCell sx={styles.firstColumn}>
+                            <Button
+                              id={`process-pending-listing-${listing.chplProductNumber}`}
+                              color="primary"
+                              variant="contained"
+                              onClick={() => handleProcess(listing)}
+                              endIcon={<PlayArrowIcon />}
+                              disabled={listing.status !== 'UPLOAD_SUCCESS'}
+                            >
+                              Process Listing
+                            </Button>
+                          </TableCell>
+                          <TableCell sx={styles.linkWrap}>{listing.chplProductNumber}</TableCell>
+                          <TableCell sx={styles.linkWrap}>{listing.developer}</TableCell>
+                          <TableCell sx={styles.linkWrap}>{listing.product}</TableCell>
+                          <TableCell sx={styles.linkWrap}>{listing.version}</TableCell>
+                          <TableCell sx={styles.linkWrap}>{getDisplayDateFormat(listing.certificationDate)}</TableCell>
+                          <TableCell>
+                            { listing.displayStatus }
+                            { listing.status !== 'UPLOAD_FAILURE' && (listing.errors?.length !== 0 || listing.warnings?.length !== 0)
+                              && (
+                                <div>
+                                  <Button
+                                    onClick={() => { setErrors(listing.errors); setWarnings(listing.warnings); }}
+                                    disabled={!(listing.errors?.length !== 0 || listing.warnings?.length !== 0)}
+                                    variant="text"
+                                    color="primary"
+                                    sx={styles.messageButton}
+                                  >
+                                    See messages
+                                    {' '}
+                                    <FeedbackIcon color="primary" fontSize="small" sx={styles.iconSpacing} />
+                                  </Button>
+                                </div>
+                              )}
+                          </TableCell>
+                          <TableCell>
+                            <Checkbox
+                              id={`reject-pending-listing-${listing.chplProductNumber}`}
+                              onChange={($event) => handleRejectCheckbox($event, listing)}
+                              inputProps={{ 'aria-label': `Reject Listing: ${listing.chplProductNumber}` }}
+                              color="primary"
+                            />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <ChplActionBarMessages
+                errors={errors}
+                warnings={warnings}
+              />
+            </>
+          )}
+      </ChplPageBody>
     </>
   );
 }

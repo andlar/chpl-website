@@ -4,14 +4,14 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { arrayOf, string } from 'prop-types';
+import { arrayOf, bool, string } from 'prop-types';
 
 import { getDefaultValueEntry, getDateEntry, getDateTimeEntry } from './filters/value-entries';
 
+import { usePageState } from 'components/page-state';
 import { eventTrack } from 'services/analytics.service';
 import { getDisplayDateFormat } from 'services/date-util';
 import { compareStrings } from 'services/sort.service';
-import { useSessionStorage as useStorage } from 'services/storage.service';
 import { useAnalyticsContext } from 'shared/contexts';
 import { filter as filterPropType } from 'shared/prop-types';
 
@@ -177,16 +177,17 @@ const updateFilter = (category, value, setFilters, setSearchTerm) => {
 function FilterProvider(props) {
   const {
     filters: initialFilters,
+    isLoading = false,
     storageKey = '',
   } = props;
   const [filters, setFilters] = useState([]);
-  const [hasSearched, setHasSearched] = useStorage(`${storageKey}-hasSearched`, false);
-  const [operators, setOperators] = useStorage(`${storageKey}-operators`, {});
-  const [developersListingsCriteriaOptions, setDevelopersListingsCriteriaOptions] = useStorage(`${storageKey}-developersListingsCriteriaOptions`, {});
+  const [hasSearched, setHasSearched] = usePageState(`${storageKey}-hasSearched`, false);
+  const [operators, setOperators] = usePageState(`${storageKey}-operators`, {});
+  const [developersListingsCriteriaOptions, setDevelopersListingsCriteriaOptions] = usePageState(`${storageKey}-developersListingsCriteriaOptions`, {});
   const { analytics } = useAnalyticsContext();
   const [searchTerm, setSearchTerm] = useState('');
-  const [storedSearchTerm, setStoredSearchTerm] = useStorage(`${storageKey}-searchTerm`, '');
-  const [values, setValues] = useStorage(`${storageKey}-values`, {});
+  const [storedSearchTerm, setStoredSearchTerm] = usePageState(`${storageKey}-searchTerm`, '');
+  const [values, setValues] = usePageState(`${storageKey}-values`, {});
 
   useEffect(() => {
     if (!storageKey) { return; }
@@ -338,7 +339,7 @@ function FilterProvider(props) {
     .join('&');
 
   const filterData = {
-    analytics, dispatch, filters, hasSearched, queryParams, queryString, searchTerm, searchTermFilter, setSearchTerm,
+    analytics, dispatch, filters, hasSearched, isLoading, queryParams, queryString, searchTerm, searchTermFilter, setSearchTerm,
   };
 
   /* eslint-disable react/jsx-props-no-spreading */
@@ -348,7 +349,9 @@ function FilterProvider(props) {
 
 FilterProvider.propTypes = {
   filters: arrayOf(filterPropType).isRequired,
-  storageKey: string,
+  // true while the data behind the filter values is still being fetched
+  isLoading: bool,
+  storageKey: string.isRequired,
 };
 
 function useFilterContext() {

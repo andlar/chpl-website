@@ -4,12 +4,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined';
 import {
   arrayOf,
@@ -21,16 +16,19 @@ import { useSelector } from 'react-redux';
 
 import { useFetchTargetedUsers } from 'api/standards';
 import { ChplFilterLayout, ChplFilterSearchBar, useFilterContext } from 'components/filter';
+import { usePageState } from 'components/page-state';
 import {
+  ChplLoadingCards,
   ChplPagination,
+  ChplResultsUpdating,
   ChplSearchResultCard,
   ChplSearchResultControls,
   ChplSortControls,
+  useResultsUpdating,
 } from 'components/util';
 import { eventTrack } from 'services/analytics.service';
 import { getDisplayDateFormat } from 'services/date-util';
 import { certificationStatusOrder, compareCertificationStatuses, getStatusIcon } from 'services/listing.service';
-import { useSessionStorage as useStorage } from 'services/storage.service';
 import { useAnalyticsContext } from 'shared/contexts';
 import { palette, theme, utilStyles } from 'themes';
 
@@ -74,10 +72,10 @@ const getStatusKey = (status) => `status-${status.id}`;
 
 function ChplTargetedUsersView({ certificationStatuses: initialStatuses }) {
   const storageKey = 'storageKey-targetedUsersView';
-  const [orderBy, setOrderBy] = useStorage(`${storageKey}-orderBy`, 'NAME');
-  const [pageNumber, setPageNumber] = useStorage(`${storageKey}-pageNumber`, 0);
-  const [pageSize, setPageSize] = useStorage(`${storageKey}-pageSize`, 25);
-  const [sortDescending, setSortDescending] = useStorage(`${storageKey}-sortDescending`, false);
+  const [orderBy, setOrderBy] = usePageState(`${storageKey}-orderBy`, 'NAME');
+  const [pageNumber, setPageNumber] = usePageState(`${storageKey}-pageNumber`, 0);
+  const [pageSize, setPageSize] = usePageState(`${storageKey}-pageSize`, 25);
+  const [sortDescending, setSortDescending] = usePageState(`${storageKey}-sortDescending`, false);
   const [recordCount, setRecordCount] = useState(0);
   const [results, setResults] = useState([]);
   const apiKey = useSelector((state) => state.browserInfo.apiKey);
@@ -88,7 +86,11 @@ function ChplTargetedUsersView({ certificationStatuses: initialStatuses }) {
 
   // `isPreviousData`: the request changed and the old results are still on screen until it answers
   const {
-    data, isError, isLoading, isPreviousData,
+    data,
+    isError,
+    isFetching,
+    isLoading,
+    isPreviousData,
   } = useFetchTargetedUsers({
     orderBy,
     pageNumber,
@@ -96,6 +98,9 @@ function ChplTargetedUsersView({ certificationStatuses: initialStatuses }) {
     sortDescending,
     query,
   });
+
+  // Old results stay on screen while a new sort, page or filter loads, and a sort shows as updating briefly even when it's cached
+  const isUpdating = useResultsUpdating({ isFetching, isPreviousData, sortKey: `${orderBy}-${sortDescending}` });
 
   useEffect(() => {
     if (isLoading) { return; }
@@ -200,7 +205,7 @@ function ChplTargetedUsersView({ certificationStatuses: initialStatuses }) {
         fadeBackground={palette.white}
       />
       <ChplFilterLayout>
-        { isLoading && <CircularProgress /> }
+        { isLoading && (<ChplLoadingCards title fieldGroups={[4]} actions={0} />)}
         { !isLoading
           && (
             <>
@@ -215,6 +220,7 @@ function ChplTargetedUsersView({ certificationStatuses: initialStatuses }) {
                   orderBy={orderBy}
                   order={sortDescending ? 'desc' : 'asc'}
                   onSort={handleSort}
+                  isUpdating={isUpdating}
                 />
                 <Button
                   onClick={downloadTargetedUsers}
@@ -231,32 +237,34 @@ function ChplTargetedUsersView({ certificationStatuses: initialStatuses }) {
                   {`Targeted User${recordCount !== 1 ? 's' : ''}`}
                 </Button>
               </ChplSearchResultControls>
-              { targetedUsers
-                .map((item) => (
-                  <ChplSearchResultCard
-                    key={item.id}
-                    cardTitle="Targeted User"
-                    cardTitleValue={item.name}
-                    additionalTitleContent={(
-                      <Box sx={styles.narrowFields}>
-                        { getNarrowField('Total Listings', item.total) }
-                        { getNarrowField('Creation Date', getDisplayDateFormat(item.creationDate)) }
-                      </Box>
-                    )}
-                    fieldGroups={getStatusFieldGroups(item)}
-                  />
-                ))}
-              { recordCount > 0
-                && (
-                  <ChplPagination
-                    count={recordCount}
-                    page={pageNumber}
-                    rowsPerPage={pageSize}
-                    rowsPerPageOptions={[25, 50, 100]}
-                    setPage={setPageNumber}
-                    setRowsPerPage={setPageSize}
-                  />
-                )}
+              <ChplResultsUpdating isUpdating={isUpdating}>
+                { targetedUsers
+                  .map((item) => (
+                    <ChplSearchResultCard
+                      key={item.id}
+                      cardTitle="Targeted User"
+                      cardTitleValue={item.name}
+                      additionalTitleContent={(
+                        <Box sx={styles.narrowFields}>
+                          { getNarrowField('Total Listings', item.total) }
+                          { getNarrowField('Creation Date', getDisplayDateFormat(item.creationDate)) }
+                        </Box>
+                      )}
+                      fieldGroups={getStatusFieldGroups(item)}
+                    />
+                  ))}
+                { recordCount > 0
+                  && (
+                    <ChplPagination
+                      count={recordCount}
+                      page={pageNumber}
+                      rowsPerPage={pageSize}
+                      rowsPerPageOptions={[25, 50, 100]}
+                      setPage={setPageNumber}
+                      setRowsPerPage={setPageSize}
+                    />
+                  )}
+              </ChplResultsUpdating>
             </>
           )}
       </ChplFilterLayout>

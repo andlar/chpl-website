@@ -1,17 +1,13 @@
 import React from 'react';
-import { Box, Container } from '@mui/material';
 import { func, shape } from 'prop-types';
 
 import ChplLogin from 'components/login/login';
+import { ChplPageBody, ChplPageHeader } from 'components/util';
 import { goToState } from 'services/navigation.service';
-import { palette } from 'themes';
 
-const styles = {
-  fixFooterSpacing: {
-    minHeight: 'calc(100vh - 100px)',
-  },
-};
-
+// `returnTo` is a ui-router TargetState resolved by the login state. It is
+// absent when this renders as /administration's default content, in which case
+// the default here sends the user to search after logging in.
 function ChplLoginPage({
   returnTo = {
     state: () => 'search',
@@ -30,13 +26,14 @@ function ChplLoginPage({
   };
 
   return (
-    <Box py="4vh" bgcolor={palette.background}>
-      <Container sx={styles.fixFooterSpacing} maxWidth="xs">
+    <>
+      <ChplPageHeader text="Administrator Login" maxWidth="xs" />
+      <ChplPageBody maxWidth="xs">
         <ChplLogin
           dispatch={handleLogin}
         />
-      </Container>
-    </Box>
+      </ChplPageBody>
+    </>
   );
 }
 
