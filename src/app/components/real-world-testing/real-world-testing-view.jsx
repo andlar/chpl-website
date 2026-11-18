@@ -30,7 +30,7 @@ function ChplRealWorldTestingView({ developer, dispatch }) {
   const { hasAnyRole, hasAuthorityOn } = useContext(UserContext);
   const [plans, setPlans] = useState([]);
   const [results, setResults] = useState([]);
-  const plansQuery = useFetchRealWorldTestingPlans({ developer });
+  const plansQuery = useFetchRealWorldTestingPlans({ developer, hti5ErdIsOn });
   const resultsQuery = useFetchRealWorldTestingResults({ developer });
 
   useEffect(() => {
@@ -51,12 +51,12 @@ function ChplRealWorldTestingView({ developer, dispatch }) {
     dispatch('createRwtResults');
   };
 
-  // isInitialLoading, since a query disabled for want of a developer stays isLoading
+  // isInitialLoading, since a query disabled for want of a developer (or by hti5ErdIsOn) stays isLoading
   if (resultsQuery.isInitialLoading || plansQuery.isInitialLoading) {
     return <ChplLoadingSection rows={3} />;
   }
 
-  const isError = resultsQuery.isError || plansQuery.isError;
+  const isError = resultsQuery.isError || (!hti5ErdIsOn && plansQuery.isError);
 
   return (
     <Card>
@@ -98,7 +98,7 @@ function ChplRealWorldTestingView({ developer, dispatch }) {
               Real World Testing information is not currently available, please check back later
             </Typography>
           )}
-        { !isError && results.length === 0 && plans.length === 0
+        { !isError && results.length === 0 && (plans.length === 0 || hti5ErdIsOn)
           && (
             <Typography>
               No Real World Testing data is available
