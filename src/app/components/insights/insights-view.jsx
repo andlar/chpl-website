@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -15,8 +14,8 @@ import {
 } from '@mui/material';
 
 import { useFetchInsights } from 'api/developer';
-import { ChplLink } from 'components/util';
-import { UserContext } from 'shared/contexts';
+import { ChplLink, ChplLoadingSection } from 'components/util';
+import { FlagContext, UserContext } from 'shared/contexts';
 import { developer as developerPropType } from 'shared/prop-types';
 
 const styles = {
@@ -27,19 +26,25 @@ const styles = {
 };
 
 function ChplInsightsView({ developer }) {
+  const { insightsDisplayIsOn } = useContext(FlagContext);
   const { hasAnyRole, hasAuthorityOn } = useContext(UserContext);
   const {
     data,
     error,
     isError,
     isLoading,
-  } = useFetchInsights({ developer });
+  } = useFetchInsights({ developer, insightsDisplayIsOn });
   const [insights, setInsights] = useState([]);
 
   useEffect(() => {
     if (isError || isLoading || !data) { return; }
     setInsights(data);
   }, [data, isError, isLoading]);
+
+  // Stands in for the whole card, title included, rather than sitting inside it
+  if (isLoading) {
+    return <ChplLoadingSection variant="table" columns={4} rows={3} />;
+  }
 
   return (
     <Card>
@@ -56,7 +61,6 @@ function ChplInsightsView({ developer }) {
           />
           .
         </Typography>
-        { isLoading && <CircularProgress /> }
         { isError
           && (
             <Typography>
