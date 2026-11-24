@@ -54,9 +54,10 @@ describe('the listing CQM panel', () => {
     expect(screen.getAllByRole('columnheader')).toHaveLength(2);
   });
 
-  it('renders a 2015 listing with no (c)(4) result, keeping the column', () => {
+  it('hides the (c)(4) column for a 2015 listing with no (c)(4) result', () => {
     renderCqms({ certificationResults: [] });
 
-    expect(screen.getByRole('columnheader', { name: '170.315 (c)(4)' })).toBeInTheDocument();
+    expect(screen.queryByRole('columnheader', { name: '170.315 (c)(4)' })).not.toBeInTheDocument();
+    expect(screen.getAllByRole('columnheader')).toHaveLength(5);
   });
 });
