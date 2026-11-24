@@ -39,7 +39,8 @@ function ChplCqms({ cqms, edition: initialEdition = undefined, viewAll: initialV
   const { listing } = useContext(ListingContext);
   const [viewAll, setViewAll] = useState(false);
   const [edition, setEdition] = useState(undefined);
-  const isC4Removed = listing.certificationResults.filter((cr) => cr.criterion.number === '170.315 (c)(4)')[0].criterion.removed;
+  const isC4Removed = listing?.certificationResults
+    ?.find((cr) => cr.criterion.number === '170.315 (c)(4)')?.criterion.removed ?? false;
 
   useEffect(() => {
     setEdition(initialEdition);
