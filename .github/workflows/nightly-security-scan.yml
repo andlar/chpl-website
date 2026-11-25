@@ -9,13 +9,10 @@
 name: Nightly security scan
 
 on:
-  push:
-    branches:
-      [OCD-5546]
-#      schedule:
+  schedule:
     # 08:00 UTC, after the nightly image builds. Scheduled runs only fire on the default branch.
- #   - cron: '0 8 * * *'
-#  workflow_dispatch:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
 
 concurrency:
   group: nightly-security-scan
@@ -26,8 +23,7 @@ permissions: {}
 jobs:
   scan:
     # Only the upstream repository is scanned, never forks.
- #   if: github.repository == 'chpladmin/chpl-website'
-    if: github.repository == 'chpladmin/chpl-andlar'
+    if: github.repository == 'chpladmin/chpl-website'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     permissions:
